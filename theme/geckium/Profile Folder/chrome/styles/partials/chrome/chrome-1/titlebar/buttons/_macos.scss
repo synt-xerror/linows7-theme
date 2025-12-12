@@ -1,0 +1,253 @@
+& {
+    .titlebar-spacer[type="post-tabs"] {
+		margin-inline-end: var(--gap-size) !important; // Add spacing between caption buttons and tabs.
+	}
+    
+    // Give the tabs/Incognito/pfp the appropriate offset
+	#private-browsing-indicator-with-label,
+    .private-browsing-indicator-with-label /* Fix for Firefox 133+ */,
+    #gkavatar-container,
+    #gkpeople-button-container {
+        order: 998 !important; // Force to right
+    }
+    .titlebar-spacer[type="post-tabs"] {
+        order: 1000 !important; // Force to right of Incognito
+    }
+    &:not([privatebrowsingmode="temporary"]) #TabsToolbar-customization-target {
+		margin-inline-end: var(--tab-distance-from-toolbar-edge);
+	}
+    // Incognito can't use this^ spacing, so we need to set it separately for Incognito
+    &[privatebrowsingmode="temporary"] {
+        #private-browsing-indicator-with-label,
+		.private-browsing-indicator-with-label /* Fix for Firefox 133+ */ {
+            margin-inline-end: var(--tab-distance-from-toolbar-edge);
+        }
+    }
+    #gkavatar-container > #gk-firefox-account-button,
+    .private-browsing-indicator-icon {
+        margin-inline-start: var(--tab-distance-from-pfp) !important;
+        margin-inline-end: 1px !important;
+    }
+
+    // Flip Incognito and appropriate profile icons
+    #private-browsing-indicator-with-label,
+    .private-browsing-indicator-with-label /* Fix for Firefox 133+ */,
+    &:not([profilepic="firefox"], [profilepic="geckium"]) #gkavatar-container #fxa-avatar-image {
+        transform: scaleX(-1);
+    }
+
+    // Tweaks for Profile Titlebutton
+    #gkpeople-button-container {
+        margin-inline-start: 6px !important;
+    }
+
+    // Show the Google logo after the buttons if enabled
+    &[gkbranding="chrome"][geckium-chrflag-other-platforms-watermark="true"] {
+		&[privatebrowsingmode="temporary"],
+		&:not([gkpeoplestyle="titlebutton"]) {
+			.titlebar-buttonbox-container::after {
+				content: url("chrome://userchrome/content/assets/img/chrome-1/titlebar/windows/google.png");
+				margin-block-start: 2px;
+				margin-inline-start: 7px;
+			}
+			&[sizemode="maximized"],
+			&[sizemode="fullscreen"] {
+				.titlebar-buttonbox-container::after {
+					content: unset !important;
+				}
+			}
+		}
+		&:not([privatebrowsingmode="temporary"]),
+		&[gkpeoplestyle="titlebutton"] {
+			#gkpeople-button-container::before {
+				content: url("chrome://userchrome/content/assets/img/chrome-1/titlebar/windows/google.png");
+				margin-block-start: 2px;
+				margin-inline-end: 7px;
+			}
+			&[sizemode="maximized"],
+			&[sizemode="fullscreen"] {
+				#gkpeople-button-container::before {
+					content: unset !important;
+				}
+			}
+		}
+    }
+
+    //NOTE: macOS and Mac OS X BLOCK native titlebars
+
+    // Titlebar button box (force onto left side)
+    .titlebar-buttonbox-container {
+        order: -1 !important;
+        align-items: unset !important;
+        margin-inline-start: 8px; // left margin
+        margin-block-start: 6px; // top margin
+    }
+    // Linux quirk: Counteract exclusive menubar padding
+    @media (-moz-platform: linux) {
+        #toolbar-menubar .titlebar-buttonbox-container {
+            margin-block-start: 5px;
+        }
+    }
+
+    .titlebar-buttonbox {
+        align-items: unset !important;
+        gap: 6px;
+    }
+    .titlebar-button::before { // macOS WILL NOT have its buttons filled
+		content: unset !important;
+	}
+
+    @media (-moz-platform: macos) { // In macOS, we just let the server-side buttons do the job as they match the needed artstyle/functionality.
+        .titlebar-buttonbox {
+            appearance: auto !important; // ...which means we need to turn them on again.
+        }
+        .titlebar-button {
+            display: none !important;
+        }
+    }
+    @media not (-moz-platform: macos) {
+        // Shared titlebar button code
+        .titlebar-button {
+            height: 12px;
+            width: 12px;
+            margin: 1px !important;
+            border-radius: 100% !important;
+            background-clip: padding-box !important;
+            border: 0.5px solid;
+            transition: none; // macOS lacks an animation for titlebar button-hover
+            display: flex !important;
+            list-style-image: unset !important;
+            
+            image {
+                -moz-context-properties: fill, fill-opacity !important;
+            }
+        }
+
+        // Close button
+        .titlebar-close:not([disabled]) {
+            order: 0 !important;
+            background: #ff6058 !important;
+            border-color: #e34740;
+            fill: #4d0000 !important;
+            
+            &:hover,
+            &:active {
+                list-style-image: url(chrome://userchrome/content/assets/img/chrome-47/titlebar/macos/close.svg) !important;
+            }
+
+            &:active {
+                background: #bf4943 !important;
+                border-color: #ae3a35;
+                fill: #1a0000 !important;
+            }
+        }
+
+        // Minimise button
+        .titlebar-min:not([disabled]) {
+            order: 1 !important;
+            background: #ffbd2e !important;
+            border-color: #e2a217;
+            fill: #995800 !important;
+            
+            &:hover,
+            &:active {
+                list-style-image: url(chrome://userchrome/content/assets/img/chrome-47/titlebar/macos/min.svg) !important;
+            }
+
+            &:active {
+                background: #bf8f23 !important;
+                border-color: #b18320;
+                fill: #592800 !important;
+            }
+        }
+
+        // Maximise and Restore buttons
+        .titlebar-max:not([disabled]) {
+            &:hover,
+            &:active {
+                list-style-image: url(chrome://userchrome/content/assets/img/chrome-47/titlebar/macos/zoom.svg) !important;
+            }
+        }
+        &[sizemode="maximized"],
+        &[sizemode="fullscreen"] {
+            .titlebar-max {
+                display: none !important;
+            }
+        }
+        .titlebar-restore:not([disabled]) {
+            &:hover,
+            &:active {
+                list-style-image: url(chrome://userchrome/content/assets/img/chrome-47/titlebar/macos/zoom.svg) !important;
+            }
+        }
+        &[sizemode="fullscreen"] .titlebar-restore:not([disabled]) { // Transform into Exit Fullscreen button
+			&:hover,
+			&:active {
+				list-style-image: url(chrome://userchrome/content/assets/img/chrome-47/titlebar/macos/exitfs.svg) !important;
+			}
+		}
+        &:not([sizemode="maximized"]):not([sizemode="fullscreen"]) .titlebar-restore {
+			display: none !important;
+		}
+        .titlebar-max:not([disabled]),
+        .titlebar-restore:not([disabled]) {
+            order: 2 !important;
+            background: #28ca41 !important;
+            border-color: #13ad29;
+            fill: #006300;
+            
+            &:active {
+                background: #1f9a31 !important;
+                border-color: #138723;
+                fill: #003100 !important;
+            }
+        }
+
+        // Graphite
+        &[gkmacgraphite="true"] {
+            .titlebar-close:not([disabled]),
+            .titlebar-min:not([disabled]),
+            .titlebar-max:not([disabled]),
+            .titlebar-restore:not([disabled]) {
+                background-color: #8D8D92 !important;
+                border-color: #707075;
+                fill: #444446 !important;
+
+                &:active {
+                    background: #646468 !important;
+                    border-color: #555558;
+                    fill: #363638 !important;
+                }
+            }
+            @media (prefers-color-scheme: dark) {
+                .titlebar-close:not([disabled]),
+                .titlebar-min:not([disabled]),
+                .titlebar-max:not([disabled]),
+                .titlebar-restore:not([disabled]) {
+                    background-color: #A9A8A8 !important;
+                    border-color: #3F3F3F;
+                    fill: #515151 !important;
+    
+                    &:active {
+                        background: #817E7E !important;
+                        border-color: #3F3F3F;
+                        fill: #464444 !important;
+                    }
+                }
+            }
+        }
+        // Inactive / Disabled
+        &:-moz-window-inactive .titlebar-button:not(:hover, :active),
+        .titlebar-button[disabled] {
+            background: #cecece !important;
+            border-color: #acacac;
+        }
+        @media (prefers-color-scheme: dark) {
+            &:-moz-window-inactive .titlebar-button:not(:hover, :active),
+            .titlebar-button[disabled] {
+                background: #515151 !important;
+                border-color: #2d2d2d;
+            }
+        }
+    }
+}

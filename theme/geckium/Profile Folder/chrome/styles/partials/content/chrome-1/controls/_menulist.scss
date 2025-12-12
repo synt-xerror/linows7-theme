@@ -1,0 +1,26 @@
+@-moz-document 	url-prefix(about:preferences),
+				url-prefix(about:addons) {
+	& {
+		--menulist-border-color-normal: rgb(192,192,192);
+
+		@media (prefers-color-scheme: dark) {
+			--menulist-border-color-normal: rgb(87, 87, 87);
+		}
+	}
+	
+	menulist {
+		padding: 0 !important;
+		padding-inline-start: 6px !important;
+		padding-inline-end: 3px !important;
+		border-color: var(--menulist-border-color-normal) !important;
+	}
+
+	[part="label-box"] > [part="icon"],
+	#defaultEngine .menu-iconic-left {
+		display: none !important;
+	}
+
+	link[href="chrome://global/skin/dropmarker.css"] + image[part="icon"] {
+		list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAICAQAAACxSAwfAAAAUklEQVQY02P4z0AMRGZGMaShwCisyhITmb8huMzfEhOxKvuvsGAh208Ik+3ngoX/FbBbClcIUcSAw21QhXxfIIrwKAMpfNsEUYRXGVCEFc6CQwBqq4CCCtU4VgAAAABJRU5ErkJggg==) !important;
+	}
+}

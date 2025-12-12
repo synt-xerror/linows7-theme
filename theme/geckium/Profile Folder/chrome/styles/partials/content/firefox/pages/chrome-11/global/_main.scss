@@ -1,0 +1,110 @@
+& {
+	--main-pane-width-final: 888px;
+
+	--header-color: rgb(83,99,125);
+
+	--pane-border-block-end-color: #EEE;
+
+	@media (prefers-color-scheme: dark) {
+		--header-color: rgb(187, 201, 224);
+
+		--pane-border-block-end-color: rgba(255, 255, 255, .3);
+	}
+
+	&:not([geckium-twentyone]) {
+		.main-content > .pane-container,
+		#content > #main {
+			groupbox h2:not(#fxaDisplayNameHeading) {
+				position: absolute;
+				left: 0;
+				width: 140px;
+				margin: 0 !important;
+			}
+		}
+	}
+}
+
+.sticky-container {
+	.sticky-inner-container {
+		display: none !important;
+	}
+
+	#policies-container {
+		padding: 0 !important;
+		align-items: center;
+		background-color: transparent !important;
+		margin: 0 !important;
+
+		.info-icon-container {
+			margin-inline-end: 5px;
+		}
+	}
+}
+
+#content {
+	width: var(--main-pane-width);
+}
+
+.main-content {
+	padding: 0 !important;
+}
+
+.main-content > .pane-container,
+#content > #main {
+	padding: 0 !important;
+	margin-inline: 0 !important;
+
+	padding-inline: 24px !important;
+
+	&:not([current-view="detail"]) {
+		margin-block: 0 !important;
+	}
+
+	.subcategory {
+		padding: 0 !important;
+		margin: 0 !important;
+		border: 0 !important;
+
+		&:not(
+			#generalCategory,
+			#firefoxHomeCategory,
+			#searchCategory,
+			#browserPrivacyCategory,
+			#firefoxAccountCategory,
+			#moreFromMozillaCategory-header,
+			#aboutCategory-header
+		) {
+			h1 {
+				display: none !important;
+			}
+		}
+	}
+
+	groupbox {
+		position: relative;
+		margin: 0 !important;
+		margin-block-start: 17px !important;
+		padding-inline-start: 148px !important;
+		padding-block-end: 20px !important;
+		border-block-end: 1px solid var(--pane-border-block-end-color) !important;
+	}
+}
+
+h1[data-l10n-id="pane-general-title"],
+h1[data-l10n-id="pane-home-title"],
+h1[data-l10n-id="pane-search-title"],
+h1[data-l10n-id="privacy-header"],
+h1[data-l10n-id="pane-sync-title3"],
+h1[data-l10n-id="more-from-moz-title"],
+#aboutCategory-header > h1,
+.main-heading > .header-name {
+	color: var(--header-color) !important;
+	font-weight: 500 !important;
+	font-size: 19pt !important;
+	margin: 0 !important;
+	padding-block-start: 13px !important;
+	padding-block-end: 4px !important;
+	border-block-end: 1px solid var(--pane-border-block-end-color) !important;
+	flex: 1 !important;
+	white-space: nowrap !important;
+}

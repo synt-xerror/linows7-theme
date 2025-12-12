@@ -1,0 +1,81 @@
+& {
+	--menu_fullScreen-icon: url("chrome://userchrome/content/assets/img/chrome-11/menu/fullscreen_menu_button.png");
+}
+
+menupopup {
+	button {
+		appearance: none !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		padding-inline: 5px !important;
+		min-height: 22px !important;
+		min-width: 21px !important;
+		background-color: rgb(245, 245, 245) !important;
+		border-radius: 3px !important;
+		border: 1px solid rgb(205, 205, 205) !important;
+		color: black !important;
+
+		&:not([disabled="true"]):hover {
+			background-color: rgb(251, 251, 251) !important;
+			border-color: rgb(171, 171, 171) !important;
+			color: rgb(6, 45, 117) !important;
+			z-index: 1 !important;
+		}
+
+		&#menu_cut6,
+		&#menu_smaller6 {
+			border-top-right-radius: 0 !important;
+			border-bottom-right-radius: 0 !important;
+			margin-right: -1px !important;
+		}
+
+		&#menu_copy6,
+		&#menu_normal6 {
+			border-radius: 0 !important;
+		}
+
+		&#menu_normal6 {
+			width: 40px !important;
+		}
+
+		&#menu_paste6,
+		&#menu_larger6 {
+			border-top-left-radius: 0 !important;
+			border-bottom-left-radius: 0 !important;
+			margin-left: -1px !important;
+		}
+
+		&#menu_fullScreen6 {
+			list-style-image: var(--menu_fullScreen-icon) !important;
+		}
+	}
+
+	separator {
+		width: 6px;
+	}
+
+	> .menuitemitems,
+	> .menuitemitems + menuseparator {
+		display: flex !important;
+	}
+	> .menuitemitems {
+		padding: 0 6px !important;
+	}
+}
+
+#menu_extensions5,
+#menu_bookmarkManager5,
+#menu_fullScreen5,
+#menu_alwaysShowBookmarksBar5,
+#menu_options5 {
+	display: none;
+}
+
+#menu_find6,
+#menu_savePage6,
+#menu_print6,
+#tools6-menu,
+#menu_settings6,
+#bookmarks-menu {
+	display: flex !important;
+}

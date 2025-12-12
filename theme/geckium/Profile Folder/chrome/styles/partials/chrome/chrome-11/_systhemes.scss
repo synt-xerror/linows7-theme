@@ -1,0 +1,118 @@
+@import "systhemes-chromium";
+& {
+	//Classic (Default/Fallback)
+	// Navbar
+	--default-toolbarbutton-border-color-normal: transparent;
+	--default-toolbarbutton-texture-hot: rgb(255, 255, 255, 80%);
+	--default-toolbarbutton-border-color-hot: rgb(172, 172, 172);
+	--default-toolbarbutton-shadow-normal: inset 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+	--default-toolbarbutton-shadow-hot: 0 1px 0 0 rgba(255, 255, 255, 0.3);
+	--default-toolbarbutton-inner-shadow-active: inner 0 1px 0 0 rgba(255, 255, 255, 1);
+	--default-toolbarbutton-icon-drop-shadow: drop-shadow(0 1px 0 rgba(255, 255, 255, 1));
+	--default-toolbarbutton-icon-color: rgb(87, 102, 128);
+
+    @media (prefers-color-scheme: dark) {
+		// Navbar
+		--default-toolbarbutton-icon-color: rgb(166,177,196);
+		--default-toolbarbutton-texture-hot: rgb(255, 255, 255, 15%);
+		--default-toolbarbutton-shadow-hot: 0 1px 0 0 rgba(255, 255, 255, 0.2);
+	}
+
+	// GTK+
+	&[gksystheme="gtk"]:not([gkthemed], [gkchrthemed]) {
+		// Navbar
+		--default-toolbarbutton-icon-color: color-mix(in srgb, AccentColor 28%, -moz-dialogtext);
+	}
+
+	&:not([geckium-sixtyeight]) {
+		// Mac OS X
+		&[gksystheme="macosx"] {
+			--macosx-window-color: #cfcfcf;
+			&:-moz-window-inactive {
+				--macosx-window-color: #ededed;
+			}
+			@media (prefers-color-scheme: dark) {
+				--macosx-window-color: #282828;
+				&:-moz-window-inactive {
+					--macosx-window-color: #0B0B0B;
+				}
+			}
+		}
+		&[gksystheme="macosx"],
+		&[gksystheme="macos"] {
+			@include macosx-src();
+			// Tabs
+			--default-inactive-tab-background: linear-gradient(
+				to bottom,
+				#dcdddc,
+				#cfd0cf
+			);
+
+			// Navbar
+			--default-toolbarbutton-icon-color: black;
+
+			// Personal Toolbar (Bookmarks)
+			--default-personal-toolbar-border-bottom: rgb(103, 103, 103);
+			&:-moz-window-inactive {
+				--default-personal-toolbar-border-bottom: rgb(123, 123, 123);
+			}
+
+			@media (prefers-color-scheme: dark) {
+				// Tabs
+				--default-inactive-tab-background: linear-gradient(
+					to bottom,
+					#232423,
+					#171717
+				);
+				--default-selected-tab-background: linear-gradient(
+					to bottom,
+					#{gtmColorAdjForDark("GTMColorationLightHighlight", #333)},
+					#{gtmColorAdjForDark("GTMColorationLightMidtone", #333)}
+				);
+
+				// Navbar
+				--default-nav-bar: linear-gradient(
+					to bottom,
+					#{gtmColorAdjForDark("GTMColorationLightMidtone", #333)},
+					#{gtmColorAdjForDark("GTMColorationLightShadow", #333)}
+				);
+				--default-toolbarbutton-icon-color: white;
+
+				// Personal Toolbar (Bookmarks)
+				--default-personal-toolbar: linear-gradient(
+					to bottom,
+					#{gtmColorAdjForDark("GTMColorationLightShadow", #333)},
+					#{gtmColorAdjForDark("GTMColorationLightPenumbra", #333)}
+				);
+				--default-personal-toolbar-border-bottom: rgb(103, 103, 103);
+				&:-moz-window-inactive {
+					--default-personal-toolbar-border-bottom: rgb(83, 83, 83);
+				}
+			}
+
+			&[privatebrowsingmode="temporary"] {
+				--macosx-window-color: #536c8c;
+				&:-moz-window-inactive {
+					--macosx-window-color: #86898d;
+				}
+				@media (prefers-color-scheme: dark) {
+					--macosx-window-color: #2A3747;
+					&:-moz-window-inactive {
+						--macosx-window-color: #1E1E20;
+					}
+				}
+			}
+		}
+
+		// Geckium You
+		&[gksystheme="you"]:not([gkthemed], [gkchrthemed]):not([geckium-seventeen]) {
+			// Navbar
+			--default-toolbarbutton-icon-color: hsl(var(--you-h), calc(var(--you-s) - 37%), calc(var(--you-l) - 10%));
+
+			@media (prefers-color-scheme: dark) {
+				// Navbar
+				--default-toolbarbutton-icon-color: hsl(var(--you-h), calc(var(--you-s) - 36%), calc(var(--you-l) + 19%));
+			}
+		}
+	}
+}

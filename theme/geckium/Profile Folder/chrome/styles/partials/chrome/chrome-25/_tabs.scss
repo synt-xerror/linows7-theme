@@ -1,0 +1,25 @@
+& {
+	--tab-close-button-margin-inline-end: -2px;
+
+	--tab-close-button-normal: 				url("chrome://userchrome/content/assets/img/chrome-25/tabbar/tab_close_mask.svg");
+	--tab-close-button-hot: 				url("chrome://userchrome/content/assets/img/chrome-25/tabbar/tab_close_hover.png");
+	--tab-close-button-pressed: 			url("chrome://userchrome/content/assets/img/chrome-25/tabbar/tab_close_pressed.png");
+    
+	--default-theme-newtab-hover: rgba(255, 255, 255, 0.25) !important;
+	--default-theme-newtab-pressed: rgb(0, 0, 0, 0.08) !important;
+
+	--newtab-button-mask:				url("chrome://userchrome/content/assets/img/chrome-25/tabbar/newtab_button_mask.png");
+	--newtab-button-texture-normal:		url("chrome://userchrome/content/assets/img/chrome-25/tabbar/newtab_normal.png");
+	--newtab-button-texture-hot:		url("chrome://userchrome/content/assets/img/chrome-25/tabbar/newtab_hover.png");
+	--newtab-button-texture-pressed:	url("chrome://userchrome/content/assets/img/chrome-25/tabbar/newtab_pressed.png");
+
+	@media not (resolution: 96dpi) {
+		--tab-close-button-hot: 				url("chrome://userchrome/content/assets/img/chrome-25/tabbar/tab_close_hover.svg");
+		--tab-close-button-pressed: 			url("chrome://userchrome/content/assets/img/chrome-25/tabbar/tab_close_pressed.svg");
+
+		--newtab-button-mask:				url("chrome://userchrome/content/assets/img/chrome-25/tabbar/newtab_button_mask.svg");
+		--newtab-button-texture-normal:		url("chrome://userchrome/content/assets/img/chrome-25/tabbar/newtab_normal.svg");
+		--newtab-button-texture-hot:		url("chrome://userchrome/content/assets/img/chrome-25/tabbar/newtab_hover.svg");
+		--newtab-button-texture-pressed:	url("chrome://userchrome/content/assets/img/chrome-25/tabbar/newtab_pressed.svg");
+	}
+}

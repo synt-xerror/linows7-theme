@@ -1,0 +1,98 @@
+& {
+	--tab-normal-width: 192px;
+	--tab-pinned-width: 35px;
+	--tab-selected-min-width: 27px;
+	--tab-inner-margin-start: 16px;
+
+	--tab-inline-start-mask: 				url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_alpha_left.png");
+	--tab-inline-start-inactive-texture: 	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive_left.png");
+	--tab-inline-start-inactive2-mask: 		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive2_alpha_left.png");
+	--tab-inline-start-inactive2-texture: 	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive2_left.png");
+	--tab-inline-start-active-texture: 		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_active_left.png");
+	--tab-inline-center-mask: 				url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_alpha_center.png");
+	--tab-inline-center-inactive-texture: 	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive_center.png");
+	--tab-inline-center-active-texture: 	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_active_center.png");
+	--tab-inline-end-mask: 					url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_alpha_right.png");
+	--tab-inline-end-inactive-texture: 		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive_right.png");
+	--tab-inline-end-active-texture: 		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_active_right.png");
+
+	--tab-container-left:	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_container_left.svg");
+	--tab-container2-left:	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_container2_left.svg");
+	--tab-container-center:	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_container_center.svg");
+	--tab-container-right:	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_container_right.svg");
+
+	--tab-gap-between-favicon-and-title: 4px;
+	--tab-pinned-icon-offset-x: -1px;
+
+	--tab-close-button-margin-inline-end: 0;
+
+	--newtab-width: 34px;
+
+    --default-theme-newtab: var(--inactive-tab-background, var(--default-inactive-tab-background)) !important;
+	--default-theme-newtab-hover: rgba(255, 255, 255, 0.34) !important;
+	--default-theme-newtab-pressed: rgb(0, 0, 0, 0.13) !important;
+	
+	--newtab-button-mask:				url("chrome://userchrome/content/assets/img/chrome-21/tabbar/newtab_button_mask_views.png");
+	--newtab-button-texture-normal:		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/newtab_views.png");
+	--newtab-button-texture-hot:		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/newtab_views.png"); // Remove hot texture.
+	--newtab-button-texture-pressed:	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/newtab_p_views.png");
+
+	@media not (resolution: 96dpi) {
+		--tab-inline-start-mask: 				url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_alpha_left.svg");
+		--tab-inline-start-inactive-texture: 	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive_left.svg");
+		--tab-inline-start-inactive2-mask: 		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive2_alpha_left.svg");
+		--tab-inline-start-inactive2-texture: 	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive2_left.svg");
+		--tab-inline-start-active-texture: 		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_active_left.svg");
+		--tab-inline-center-mask: 				url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_alpha_center.svg");
+		--tab-inline-center-inactive-texture: 	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive_center.svg");
+		--tab-inline-center-active-texture: 	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_active_center.svg");
+		--tab-inline-end-mask: 					url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_alpha_right.svg");
+		--tab-inline-end-inactive-texture: 		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_inactive_right.svg");
+		--tab-inline-end-active-texture: 		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/tab_active_right.svg");
+
+		--newtab-button-mask:				url("chrome://userchrome/content/assets/img/chrome-21/tabbar/newtab_button_mask_views.svg");
+		--newtab-button-texture-normal:		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/newtab_views.svg");
+		--newtab-button-texture-hot:		url("chrome://userchrome/content/assets/img/chrome-21/tabbar/newtab_views.svg"); // Remove hot texture.
+		--newtab-button-texture-pressed:	url("chrome://userchrome/content/assets/img/chrome-21/tabbar/newtab_p_views.svg");
+	}
+
+	// else if chrtheme
+	&[gkthemed][gkchrthemed] {
+		--theme-newtab: var(--inactive-tab-background, var(--default-inactive-tab-background)) !important;
+	}
+
+	//Tab styles
+	// Linux and Mac OS X / macOS
+	&[gktabstyle="1"],
+	&[gktabstyle="2"] {
+		@import "tabs/unix";
+	}
+}
+
+// Add hover/pressed fills
+#tabs-newtab-button,
+#TabsToolbar #new-tab-button {
+	&:hover::before {
+		background: linear-gradient(var(--default-theme-newtab-hover), var(--default-theme-newtab-hover)),
+				var(--theme-newtab, var(--default-theme-newtab));
+	}
+	&:hover:active::before {
+		background: linear-gradient(var(--default-theme-newtab-pressed), var(--default-theme-newtab-pressed)),
+				var(--theme-newtab, var(--default-theme-newtab));
+	}
+}
+
+.tabbrowser-tab[visuallyselected][minwidthreached="true"] {
+	.tab-content {
+		justify-content: end !important;
+	}
+
+	.tab-label-container {
+		visibility: hidden !important;
+		position: absolute !important;
+	}
+
+	.tab-close-button {
+		transform: translateX(1.5px);
+	}
+}

@@ -1,0 +1,23 @@
+:root {
+	--modal-background: white;
+
+	@media (prefers-color-scheme: dark) {
+		--modal-background: rgb(29,29,29);
+	}
+}
+
+:is(panel:not(.autoscroller, #PopupSearchAutoComplete))::part(content) {
+	background-color: var(--modal-background) !important;
+	border: 1px solid rgb(0,0,0,.3) !important;
+	border-radius: 5px !important;
+	box-shadow: 0 2px 1px 0 rgba(0,0,0,.2) !important;
+	padding-block: 6px !important;
+	padding-inline: 7px !important;
+	position: relative !important;
+}
+
+menupopup {
+	/* This has to have "px" otherwise dropdown
+	   menus (<select />) won't have a scrollbar. */
+	--panel-shadow-margin: 0px !important;
+}

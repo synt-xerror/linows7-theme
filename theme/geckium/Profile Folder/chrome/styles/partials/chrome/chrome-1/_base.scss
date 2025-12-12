@@ -1,0 +1,38 @@
+:root {
+	/**
+	 *	Fix weird aero fog in the whole window due to the lack of `-moz-win-exclude-glass`
+	 *	in `#appcontent` or the lack of the element entirely.
+	 */
+	@media (-moz-windows-glass) {
+		&[is117Plus] #tabbrowser-tabbox {
+			-moz-default-appearance: -moz-win-exclude-glass;
+			will-change: unset !important;
+		}
+	}
+	
+	&[lwtheme-image] {
+		text-shadow: none !important;
+	}
+}
+
+tooltip {
+	-moz-default-appearance: tooltip !important;
+	appearance: auto !important;
+	border: 1px solid InfoText;
+	padding: 2px 3px;
+	max-width: 40em;
+	background-color: InfoBackground;
+	color: InfoText;
+	font: message-box;
+}
+
+#tabbrowser-tabbox {
+	position: relative !important;
+}
+
+// Since Mozilla can't do this super basic three-liner anymore, starting 131
+@media #{'not (-moz-bool-pref: "browser.tabs.tabmanager.enabled")'} {
+	#alltabs-button {
+		display: none !important;
+	}
+}

@@ -1,0 +1,11 @@
+#editBMPanel_folderMenuList::part(icon) {
+	display: none !important;
+}
+
+#editBMPanel_folderTreeRow {
+	grid-column: span 2;
+}
+
+#editBookmarkPanelBottomButtons {
+	min-width: 0 !important;
+}

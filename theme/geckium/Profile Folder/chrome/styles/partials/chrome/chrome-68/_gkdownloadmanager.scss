@@ -1,0 +1,72 @@
+& {
+	--gkdownload-shelf-height: 48px;
+
+	--gkdownload-shelf-list-margin-inline: 4px;
+	--gkdownload-shelf-list-margin-block-start: 0;
+	--gkdownload-shelf-list-margin-block-end: 0;
+	--gkdownload-shelf-list-gap: 1px;
+
+	--gkdownload-item-box-shadow-normal: none;
+	--gkdownload-item-box-shadow-hot: var(--gkdownload-item-box-shadow-normal);
+	--gkdownload-item-box-shadow-active: var(--gkdownload-item-box-shadow-normal);
+	--gkdownload-item-height: var(--gkdownload-shelf-height);
+	--gkdownload-item-max-width: 227px;
+	--gkdownload-item-border-width: 0;
+	--gkdownload-item-inset-border-width: 0;
+	--gkdownload-item-background-normal: transparent;
+	--gkdownload-item-background-hot: rgba(0,0,0,.1);
+	--gkdownload-item-main-background-active: rgba(0,0,0,.3);
+	--gkdownload-item-progress-pie-width: 27px;
+	--gkdownload-item-progress-pie-background: url("chrome://userchrome/content/assets/img/chrome-68/downloadshelf/progress_bg.svg");
+	--gkdownload-item-progress-pie-mask: url("chrome://userchrome/content/assets/img/chrome-68/downloadshelf/progress_mask.svg");
+	--gkdownload-item-separator-border-inline-start-color-normal: transparent;
+	--gkdownload-item-separator-border-inline-start-color-hot: var(--gkdownload-item-separator-border-inline-start-color-normal);
+	--gkdownload-item-separator-border-inline-start-color-active: var(--gkdownload-item-separator-border-inline-start-color-normal);
+	--gkdownload-item-separator-border-inline-end-color-normal: var(--gkdownload-item-separator-border-inline-start-color-normal);
+	--gkdownload-item-separator-border-inline-end-color-hot: var(--gkdownload-item-separator-border-inline-start-color-normal);
+	--gkdownload-item-separator-border-inline-end-color-active: var(--gkdownload-item-separator-border-inline-start-color-normal);
+	--gkdownload-item-more-width: 32px;
+	--gkdownload-item-more-height: var(--gkdownload-item-more-width);
+}
+
+#gkDownloadShelfShowAll {
+	list-style-image: none;
+	text-decoration: none;
+	height: 28px;
+	background-color: white;
+	border: 1px solid #707070;
+	border-radius: 2px;
+	padding-inline: 10px !important;
+	cursor: default;
+}
+
+#gkDownloadList > .item {	
+	.more {
+		margin-inline-end: 4px !important;
+		list-style-image: url("chrome://userchrome/content/assets/img/chrome-68/downloadshelf/arrow.svg");
+		overflow: visible !important;
+		box-shadow: none;
+
+		> .separator {
+			left: unset;
+			right: -5px;
+			top: -2px;
+			height: calc(100% + 4px);
+			border-inline-start-width: 1px;
+			border-inline-start-style: solid;
+			border-inline-start-color: #C5C7C8;
+			border-inline-end-width: 0;
+		}
+	}
+
+	.main,
+	.warning {
+		align-items: center;
+	}
+}
+
+#gkDownloadShelfToggle {
+	width: 10px;
+	height: 10px;
+	list-style-image: url("chrome://userchrome/content/assets/img/chrome-68/downloadshelf/close.svg");
+}

@@ -1,0 +1,50 @@
+@-moz-document url-prefix(about:addons) {
+	// Chromium 11 and older only.
+	&:not([geckium-twentyone]) {
+		.sticky-container {
+			position: static !important;
+		}
+	
+		.sticky-container,
+		.main-heading,
+		.main-search {
+			background: transparent !important;
+		}
+
+		.main-search,
+		.main-heading {
+			padding-bottom: 0 !important;
+		}
+	
+		.main-heading {
+			> *:not(.back-button,
+				  .page-options-menu) {
+				display: none !important;
+			}
+
+			.page-options-menu {
+				margin-inline-start: auto !important;
+			}
+		}
+	}
+
+	#main[current-view="detail"] {
+		margin-block: .83em !important;
+	}
+
+	.sticky-container {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.more-options-button {
+		background-image: url("chrome://userchrome/content/assets/img/chrome-21/toolbar/settings.svg") !important;
+	}
+
+	.card-heading-image {
+		width: calc(100% + (16px * 2)) !important;
+		height: unset !important;
+		object-fit: unset !important;
+	}
+}

@@ -1,0 +1,1078 @@
+:root {
+	--chrome-content-separator-color: transparent !important; // Firefox's top toolbar separator
+	--toolbar-start-end-padding: 1px !important; // Margin before and after first and last toolbar item
+
+	--nav-bar-height: 37px; // Used in Geckium's size calculations
+
+	--toolbarbutton-width: 29px;
+	--toolbarbutton-menu-width: 36px;
+	--toolbarbutton-height: 27px;
+	--toolbarbutton-inner-padding: 5px !important; // Firefox's toolbar button size
+	--toolbarbutton-active-background: rgb(0, 0, 0, .05) !important; // Firefox's selected button background?
+	--toolbarbutton-outer-padding: 3px !important; // Firefox's toolbar button spacing
+
+	--toolbarbutton-shadow-normal: inset 0 0 0 1px var(--toolbarbutton-inner-border-color-normal, var(--default-toolbarbutton-inner-border-color-normal));
+	--toolbarbutton-shadow-hot:	0 2px 3px 0 rgba(140,140,140,.35),
+								inset 0 0 0 1px var(--toolbarbutton-inner-border-color-hot, var(--default-toolbarbutton-inner-border-color-hot));
+	//--toolbarbutton-active-background: transparent !important;
+	--toolbarbutton-border-radius: 6px !important;
+	--toolbarbutton-disabled-opacity: 1 !important;
+	--toolbarbutton-icon-drop-shadow-color: var(--default-toolbarbutton-icon-drop-shadow-color);
+	--toolbarbutton-icon-drop-shadow: drop-shadow(0 0 1px var(--toolbarbutton-icon-drop-shadow-color, var(--default-toolbarbutton-icon-drop-shadow-color)))
+		drop-shadow(0 0 1.5px var(--toolbarbutton-icon-drop-shadow-color, var(--default-toolbarbutton-icon-drop-shadow-color)));
+
+	--navigation-buttons-separator: var(--default-navigation-buttons-separator);
+
+	--personal-toolbar-floating-height: 56px;
+	--personal-toolbar-floating-bg-height: 34px;
+	--personal-toolbar-floating-bg-margin-inline: 7px;
+	--personal-toolbar-floating-bg-padding-inline: 4px;
+	--personal-toolbar-floating-radius: 6px;
+	--personal-toolbar-floating-items-height: 28px;
+	--personal-toolbar-floating-border-block-start-width: 1px;
+	--personal-toolbar-floating-border-block-end-width: var(--personal-toolbar-floating-border-block-start-width);
+	--personal-toolbar-floating-border-inline-start-width: var(--personal-toolbar-floating-border-block-start-width);
+	--personal-toolbar-floating-border-inline-end-width: var(--personal-toolbar-floating-border-block-start-width);
+	--personal-toolbar-gap: 2px;
+	--personal-toolbar-height: 25px;
+	--personal-toolbar-item-shadow: inset 0 0 0 1px transparent,
+		0 0 0 1px transparent, 0 1px 1px 2px transparent,
+		inset 0 0 1px 1px transparent;
+	--personal-toolbar-item-hover-shadow: inset 0 0 0 1px
+			rgb(255, 255, 255, 30%),
+		0 1px 1px 2px rgb(0, 0, 0, 6%), inset 0 0 1px 1px transparent;
+	--personal-toolbar-item-hover-bg: rgba(255, 255, 255, 0.5) !important;
+
+	--bookmark-item-color: var(--default-bookmark-item-color);
+
+	--placed-chevron-width: 15px;
+
+	&[customizing] {
+		#wrapper-gkavatar-container,
+		#gkpeople-button-container {
+			pointer-events: none;
+		}
+	}
+
+
+	/*
+		Tabs toolbar
+	*/
+	#TabsToolbar {
+		--toolbarbutton-inner-padding: 0 !important; // Removes padding around buttons in the top toolbar
+		position: relative; // Required by tab shadow (the below ::before)
+	}
+
+
+	/*
+		Full Screen
+	*/
+	//FIXME: Instead of this, replicate Chrome's fullscreen status popup
+	// &[sizemode="fullscreen"] {
+	// 	#fullscr-toggler {
+	// 		display: none !important;
+	// 	}
+	// }
+
+	//FIXME: why does this need `[urlbar-exceeds-toolbar-bounds]`?
+	&:not([sizemode="fullscreen"]) #nav-bar:not([urlbar-exceeds-toolbar-bounds]) {
+		overflow: visible !important; //Required for the pseudos
+	}
+
+	#nav-bar,
+	#PersonalToolbar {
+		-moz-window-dragging: no-drag !important;
+	}
+
+	/*
+		Navigation (the main) toolbar
+	*/
+	#nav-bar {
+		background: var(--nav-bar, var(--default-nav-bar)) !important;
+		align-items: center; // important for URL/search bar
+		padding-inline: var(--toolbar-start-end-padding) !important;
+		height: var(--nav-bar-height);
+		box-shadow: none !important;
+		border-top: 0 !important;
+
+		//FIXME: what is this for?
+		// &[unifiedextensionsbuttonshown] #urlbar-container {
+		// 	width: calc(24px + 2 * var(--toolbarbutton-inner-padding)) !important;
+		// }
+
+		> .titlebar-spacer {
+			display: none !important; // Why is this a thing in #nav-bar now, Mozilla?
+		}
+	}
+	toolbar[overflowable][customizing] > .customization-target {
+		overflow: visible !important;
+	}
+
+	// Generic toolbarbuttons
+	// Terrible temporary fix for toolbarbuttons affecting titlebar height in maximised.
+	:not(#TabsToolbar-customization-target, .widget-overflow-list) > .toolbarbutton-1:not(
+		#gkavatar-container > #gk-firefox-account-button,
+		#tabs-newtab-button,
+		#new-tab-button,
+		.subviewbutton) {
+		height: var(--toolbarbutton-height) !important;
+	}
+	:not(.widget-overflow-list) > .toolbarbutton-1:not(
+		#gkavatar-container > #gk-firefox-account-button,
+		#tabs-newtab-button,
+		#new-tab-button,
+		.subviewbutton) {
+		position: relative;
+		padding: 0 !important;
+		background: var(--toolbarbutton-texture, var(--default-toolbarbutton-texture)) !important;
+		background-clip: padding-box !important;
+		fill: var(--toolbarbutton-icon-color, var(--default-toolbarbutton-icon-color)) !important;
+		margin: 0 var(--toolbarbutton-outer-padding) !important;
+		width: var(--toolbarbutton-width) !important;
+		align-items: center;
+		justify-content: center;
+		transition: border 150ms linear, box-shadow 150ms linear;
+		border: 1px solid var(--toolbarbutton-border-color-normal, var(--default-toolbarbutton-border-color-normal));
+		border-radius: var(--toolbarbutton-border-radius);
+		flex-shrink: 0 !important;
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			transition: box-shadow 100ms linear;
+			pointer-events: none !important;
+			border-radius: var(--toolbarbutton-border-radius) !important;
+		}
+
+		&::before {
+			opacity: 0;
+			background: linear-gradient(
+				to bottom,
+				rgba(255, 255, 255, 0.3),
+				rgba(255, 255, 255, 0.3),
+				color-mix(
+					in srgb,
+					color-mix(
+						in srgb,
+						var(--toolbarbutton-icon-color, var(--default-toolbarbutton-icon-color)) 80%,
+						#747474
+					) 25%, 
+					transparent
+				)
+			);
+			transition: opacity 100ms linear;
+		}
+
+		&::after {
+			box-shadow: var(--toolbarbutton-shadow-normal);
+		}
+
+		&:not([disabled]) {
+			&:hover {
+				border: 1px solid var(--toolbarbutton-border-color-hot, var(--default-toolbarbutton-border-color-hot));
+	
+				&::before {
+					opacity: 1;
+				}
+				&::after {
+					box-shadow: var(--toolbarbutton-shadow-hot);
+				}
+	
+				.toolbarbutton-badge-stack,
+				.toolbarbutton-icon,
+				image:first-of-type {
+					background-color: transparent !important;
+					filter: saturate(1.5)
+							var(--toolbarbutton-icon-drop-shadow);
+				}
+			}
+
+			&:active,
+			&[open] {
+				border: 1px solid var(--toolbarbutton-border-color-active, var(--default-toolbarbutton-border-color-active));
+				box-shadow: inset 0 0 0px 1px rgba(0, 0, 0, 0.05),
+							inset 0 0 6px 1px rgba(0, 0, 0, 0.1) !important;
+				transition: none !important;
+	
+				&::before {
+					opacity: 1;
+					background: var(--toolbarbutton-active-background);
+					transition: none;
+				}
+				&::after {
+					box-shadow: none;
+				}
+	
+				.toolbarbutton-badge-stack,
+				.toolbarbutton-icon,
+				image:first-of-type {
+					filter: unset;
+				}
+			}
+		}
+
+		.toolbarbutton-icon,
+		&:not(.menu-right) > image:first-of-type {
+			border-radius: 0 !important;
+			padding: 0 !important;
+			fill: var(--toolbarbutton-icon-color, var(--default-toolbarbutton-icon-color)) !important;
+			filter: saturate(1)
+					var(--toolbarbutton-icon-drop-shadow);
+			transition: 100ms filter linear;
+		}
+
+		.toolbarbutton-icon {
+			width: auto !important;
+			height: auto !important;
+			max-height: 19px !important;
+			background: transparent !important;
+		}
+
+		.toolbarbutton-badge-stack {
+			border-radius: 0 !important;
+			height: inherit;
+			width: inherit;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.toolbarbutton-badge {
+			height: 11px !important;
+			min-width: 11px !important;
+			margin: 0 !important;
+			margin-block-end: calc((var(--toolbarbutton-inner-padding) * -1) + 1px) !important;
+			margin-inline-end: calc(var(--toolbarbutton-inner-padding) * -1 + 3px) !important;
+			padding-block: 0 !important;
+			padding-inline: 2px !important;
+			align-self: end !important;
+			justify-self: end !important;
+			font-weight: bold !important;
+			text-align: center !important;
+			background-image: linear-gradient(
+				to bottom,
+				transparent 1px,
+				rgba(255,255,255,.85) 1px,
+				transparent 2px,
+				rgba(0,0,0,.40) calc(100% - 1px),
+				transparent 100%
+			);
+			background-size: calc(100% - 2px);
+			background-position: 1px 0px;
+			background-repeat: no-repeat;
+			box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.30) !important;
+			border-radius: 2.5px !important;
+			z-index: 1;
+		}
+
+		.toolbarbutton-arrow {
+			display: none !important;
+		}
+	}
+
+	.urlbar-page-action {
+		width: var(--urlbar-height-definitive) !important;
+  		height: var(--urlbar-height-definitive) !important;
+		align-items: center !important;
+		justify-content: center !important;
+	}
+
+	&[gkcanupdate="true"] :not(.widget-overflow-list) > .toolbarbutton-1#chrome-button:not(
+		#gkavatar-container > #gk-firefox-account-button,
+		#tabs-newtab-button,
+		#new-tab-button,
+		.subviewbutton) {
+		&:not(.menu-right) > image:first-of-type,
+		.toolbarbutton-icon {
+			fill: rgb(237,66,62) !important;
+		}
+	}
+
+
+	// Special toolbarbuttons
+	&:not([geckium-eleven]) :not(.widget-overflow-list) > .toolbarbutton-1:not(
+		#gkavatar-container > #gk-firefox-account-button,
+		#tabs-newtab-button,
+		#new-tab-button,
+		.subviewbutton) {
+		&#unified-extensions-button,
+		&#searchmode-switcher-button,
+		&[type="menu"]:not(#back-button, #forward-button),
+		&#PanelUI-menu-button,
+		&[class*="webextension"],
+		&#gsettings-button,
+		&#nav-bar-overflow-button,
+		&#developer-button {
+			border: 1px solid transparent !important;
+			background: transparent !important;
+			margin: 0 1px !important;
+			transition: border-color 100ms linear, background-color 100ms linear;
+
+			&::before,
+			&::after {
+				content: unset !important;
+			}
+
+			&:not([class*="webextension"], #gsettings-button, #PlacesChevron, #nav-bar-overflow-button) {
+				width: var(--toolbarbutton-menu-width) !important;
+			}
+
+			&:not([disabled]) {
+				&:hover {
+					border: 1px solid rgba(0, 0, 0, .15) !important;
+					background-color: rgba(255, 255, 255, 0.6) !important;
+					
+					.toolbarbutton-badge-stack,
+					.toolbarbutton-icon,
+					image:first-of-type {
+						filter: unset;
+					}
+				}
+
+				&:active,
+				&[open] {
+					border: 1px solid rgba(0, 0, 0, .2) !important;
+					background-color: rgba(240, 240, 240, 0.5) !important;
+				}
+			}
+		}
+
+		&#searchmode-switcher-button {
+			.toolbarbutton-icon {
+				width: 15px !important;
+				height: 15px !important;
+			}
+	
+			.toolbarbutton-arrow {
+				display: flex !important;
+				list-style-image: url("chrome://userchrome/content/assets/img/chrome-1/toolbar/dropdown-arrow.svg") !important;
+				margin-inline-start: 3.5px;
+			}
+		}
+	}
+
+	:not(.widget-overflow-list) > .toolbarbutton-1:not(
+		#gkavatar-container > #gk-firefox-account-button,
+		#tabs-newtab-button,
+		#new-tab-button,
+		.subviewbutton) {
+		&#unified-extensions-button,
+		&#searchmode-switcher-button,
+		&[type="menu"]:not(#back-button, #forward-button),
+		&#PanelUI-menu-button,
+		&[class*="webextension"],
+		&#gsettings-button,
+		&#nav-bar-overflow-button,
+		&#developer-button {
+			&#gsettings-button,
+			&[class*="webextension"] {
+				.toolbarbutton-icon {
+					width: 19px !important;
+					height: 19px !important;
+				}
+			}
+
+			&[class*="webextension"] {
+				overflow: visible !important;
+			} 
+		}
+	}
+	
+	// Misc. toolbar button tweaks
+	:not(.widget-overflow-list) > .toolbarbutton-1:not(
+		#gkavatar-container > #gk-firefox-account-button,
+		#tabs-newtab-button,
+		#new-tab-button,
+		.subviewbutton) {
+		// Overflow toolbar button styling
+		&#nav-bar-overflow-button {
+			width: 18px !important;
+			margin-inline-start: calc(6px - .5px) !important;
+			margin-inline-end: 4px !important;
+			margin-block-start: -1px !important;
+
+			&:not([disabled], :hover, :active, [open]) {
+				border-inline-end: rgba(0,0,0,.3) 1px solid !important;
+				mask-image: linear-gradient(
+					to bottom,
+					transparent,
+					white,
+					white,
+					transparent
+				) !important;
+
+				&::before {
+					content: "";
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: -1px;
+					background: transparent !important;
+					border-inline-end: rgba(255,255,255,.5) 1px solid !important;
+					opacity: 1;
+				}
+			}
+		}
+		
+		// Back and forward buttons
+		&#back-button,
+		&#forward-button {
+			width: calc(var(--toolbarbutton-width) - 1px) !important;
+		}
+		/* bruni: Navigation buttons needs some rethinking. */
+		&#back-button {
+			border-top-right-radius: 0 !important;
+			border-bottom-right-radius: 0 !important;
+			border-right: 1px solid transparent;
+
+			&::before,
+			&::after {
+				border-top-right-radius: 0 !important;
+				border-bottom-right-radius: 0 !important;
+			}
+			&::after {
+				border-right: 1px solid var(--navigation-buttons-separator);
+				z-index: 1;
+			}
+		}
+		&#forward-button {
+			margin-inline-start: -4px !important;
+			border-top-left-radius: 0 !important;
+			border-bottom-left-radius: 0 !important;
+			border-left: 1px solid transparent;
+
+			&::before,
+			&::after {
+				border-top-left-radius: 0 !important;
+				border-bottom-left-radius: 0 !important;
+			}
+		}
+		&#star-button-box {
+			margin: 0 !important;
+			border-top-right-radius: 0 !important;
+  			border-bottom-right-radius: 0 !important;
+
+			&::before,
+			&::after {
+				border-top-right-radius: 0 !important;
+				border-bottom-right-radius: 0 !important;
+			}
+		}
+		
+		//Personal Toolbar: Overflow button
+		&#PlacesChevron {
+			width: var(--placed-chevron-width) !important;
+
+			.toolbarbutton-icon {
+				width: 12px !important;
+				height: 8px !important;
+			}
+		}
+		
+		// Disabled buttons
+		&[disabled] {
+			.toolbarbutton-badge-stack,
+			.toolbarbutton-icon,
+			image:first-of-type {
+				// This needs `!important` because for some reason when the windows is inactive in some buttons the opacity is set to 1...
+				opacity: 0.5 !important;
+			}
+		}
+	}
+
+	// Disable stop/reload button animation
+	#stop-reload-button {
+		margin: 0 !important;
+		
+		.toolbarbutton-animatable-box {
+			display: none !important;
+		}
+	}
+		
+	// Remove the Firefox menu
+	#PanelUI-menu-button {
+		display: none !important;
+	}
+
+	// Center-align all toolbar items in their containers
+	#nav-bar-customization-target,
+	#PanelUI-button {
+		align-items: center;
+		margin-top: -1px;
+	}
+
+	// Combined toolbarbuttons
+	.toolbaritem-combined-buttons {
+		margin-inline: 0 !important;
+	
+		> separator {
+			display: none !important;
+		}
+	}
+
+	// Hide Extensions button if disabled
+	#nav-bar[unifiedextensions="hide"] #unified-extensions-button {
+		position: absolute !important;
+		left: 0;
+		top: var(--urlbar-height-definitive);
+		border: 0 !important;
+		width: 0 !important;
+		height: 0 !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		opacity: 0 !important;
+	}
+
+
+	// Special toolbar icons
+	#bookmarks-menu-button {
+		list-style-image: var(--bookmarks-menu-button-icon) !important;
+	}
+	#gsettings-button {
+		list-style-image: var(--gsettings-button-icon);
+	}
+	#nav-bar-overflow-button {
+		list-style-image: var(--nav-bar-overflow-button-icon) !important;
+	}
+	#page-button {
+		list-style-image: var(--page-button-icon) !important;
+	}
+	#PanelUI-menu-button,
+	#chrome-button {
+		list-style-image: var(--chrome-button-icon) !important;
+		background-position: center;
+	}
+	#unified-extensions-button {
+		list-style-image: var(--unified-extensions-button-icon) !important;
+	}
+	// Remove Customise Toolbar from Overflow Menu
+	#overflowMenu-customize-button {
+		display: none !important;
+	}
+
+
+	/*
+		Personal (the bookmarks) toolbar
+	*/
+	#PersonalToolbar,
+	.notificationbox-stack {
+		position: relative !important; //Required for the pseudos
+	}
+
+	#PersonalToolbar {
+		overflow: visible !important; // Prevents sides getting clipped
+		padding-inline: 0 !important;
+		max-height: unset !important;
+
+		#personal-toolbar-bg,
+		#personal-toolbar-floating-bg {
+			position: absolute;
+			pointer-events: none;
+		}
+
+		#personal-toolbar-empty {
+			z-index: 0;
+			
+			> #personal-toolbar-empty-description {
+				display: flex !important;
+				align-items: center;
+				margin: 0 !important;
+				color: var(--bookmark-item-color);
+
+				[data-l10n-name="manage-bookmarks"] {
+					margin-inline-start: 4px !important;
+				}
+			}
+		}
+	}
+
+	&[personalbar="newtab"] #PersonalToolbar {
+		height: var(--personal-toolbar-floating-height) !important;
+
+		> *:not(
+			#personal-toolbar-bg,
+			#personal-toolbar-floating-bg
+		) {
+			margin-block: auto !important;
+			height: var(--personal-toolbar-floating-items-height) !important;
+		}
+
+		#personal-toolbar-bg {
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			
+			background-color: white;
+
+			@media (prefers-color-scheme: dark) {
+				background-color: rgb(32, 32, 32);
+			}
+
+			background-attachment: fixed;
+			background-size: unset;
+		}
+
+		#personal-toolbar-floating-bg {
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			height: var(--personal-toolbar-floating-bg-height);
+			width: calc(100% - (var(--personal-toolbar-floating-bg-margin-inline) * 2));
+			background: var(--personal-toolbar-floating, var(--default-personal-toolbar-floating));
+			border-block-start-width: var(--personal-toolbar-floating-border-block-start-width);
+			border-block-end-width: var(--personal-toolbar-floating-border-block-end-width);
+			border-inline-start-width: var(--personal-toolbar-floating-border-inline-start-width);
+			border-inline-end-width: var(--personal-toolbar-floating-border-inline-end-width);
+			border-style: solid;
+			border-color: var(--personal-toolbar-floating-border, var(--default-personal-toolbar-floating-border));
+			border-radius: var(--personal-toolbar-floating-radius);
+			box-sizing: border-box;
+		}
+
+		#personal-toolbar-empty {
+			padding-inline: calc(var(--personal-toolbar-floating-bg-margin-inline) + var(--personal-toolbar-floating-bg-padding-inline)) !important;
+		}
+
+		#personal-toolbar-empty + #import-button:not(:last-child),
+		#personal-toolbar-empty + toolbarpaletteitem,
+		#personal-bookmarks {
+			margin-inline-start: calc(var(--personal-toolbar-floating-bg-margin-inline) + var(--personal-toolbar-floating-bg-padding-inline)) !important;
+		}
+
+		toolbarpaletteitem > #personal-bookmarks,
+		#import-button + #personal-bookmarks {
+			margin-inline-start: 0 !important;
+		}
+
+		> :last-child {
+			margin-inline-end: calc(var(--personal-toolbar-floating-bg-margin-inline) + var(--personal-toolbar-floating-bg-padding-inline) - 2px) !important;
+		}
+	}
+	&:not([personalbar="newtab"]) #PersonalToolbar {
+		height: var(--personal-toolbar-height) !important;
+		padding: 3px !important;
+		background: var(--personal-toolbar, var(--default-personal-toolbar)) !important;
+		gap: var(--personal-toolbar-gap);
+	
+		&::before,
+		&::after {
+			top: 0px;
+			height: var(--personal-toolbar-height);
+		}
+
+		> * {
+			margin-top: -3px !important;
+		}
+	}
+
+	&[personalbar="never"],
+	&[personalbar="newtab"] {
+		#nav-bar {
+			height: calc(var(--nav-bar-height) + 1px);
+			border-bottom: 1px solid var(--personal-toolbar-border-bottom, var(--default-personal-toolbar-border-bottom)) !important;
+		}
+	}
+
+	&[personalbar="always"] #PersonalToolbar {
+		border-bottom: 1px solid var(--personal-toolbar-border-bottom, var(--default-personal-toolbar-border-bottom)) !important;
+	}
+
+	#PlacesToolbarItems,
+	#personal-bookmarks /* Fix for Firefox ~120+ */ {
+		gap: var(--personal-toolbar-gap);
+
+		toolbarbutton.bookmark-item:not(.menu-iconic, .menuitem-iconic) {
+			margin-top: 0 !important;
+		}
+	}
+	
+	toolbarbutton.bookmark-item {
+		position: relative !important;
+		border: 1px solid transparent !important;
+		background: transparent !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		margin-bottom: 0 !important;
+		color: var(--bookmark-item-color) !important;		
+		transition: border-color 100ms linear, color 100ms linear, background-color 100ms linear;
+
+		&:not([disabled]) {
+			&:hover {
+				border: 1px solid rgba(0, 0, 0, .15) !important;
+				background-color: rgba(255, 255, 255, 0.6) !important;
+
+				&:not(
+					:active,
+					[open]
+				) {
+					color: var(--bookmark-item-color) !important;
+				}
+			}
+
+			&:active,
+			&[open] {
+				border: 1px solid rgba(0, 0, 0, .2) !important;
+				background-color: rgba(240, 240, 240, 0.5) !important;
+			}
+		}
+
+		&#OtherBookmarks::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			width: 1px;
+			height: 100%;
+			background-image: var(--test) linear-gradient(to bottom, rgba(222, 234, 248, 1) 50%, rgba(222, 234, 248, 0));
+		}
+	}
+	
+	#PlacesToolbarDropIndicator {
+		list-style-image: url("chrome://userchrome/content/assets/img/chrome-1/toolbar/toolbar_drag_indicator.svg") !important;
+	}
+
+
+	/*
+		Chromium Themes
+	*/
+	&[gkthemed][gkchrthemed] {
+		&[style*="--chrtheme-toolbar-button-icon"] {
+			--toolbarbutton-border-color-normal: color-mix(
+				in srgb,
+				var(--toolbarbutton-icon-color, var(--default-toolbarbutton-icon-color)) 24.4%,
+				transparent
+			) !important;
+			--toolbarbutton-border-color-hot: color-mix(
+				in srgb,
+				var(--toolbarbutton-icon-color, var(--default-toolbarbutton-icon-color)) 70%,
+				transparent
+			) !important;
+		}
+		--toolbarbutton-border-color-active: var(--toolbarbutton-border-color-hot) !important;
+		--toolbarbutton-texture: var(--chrtheme-theme-button-background, var(--chrtheme-button-background, transparent)) !important;
+		--toolbarbutton-shadow-normal: inset 1px 1px 0 0 var(--toolbarbutton-inner-border-color-normal) !important;
+		--toolbarbutton-inner-border-color-hot: rgba(255, 255, 255, 0.8) !important;
+		--toolbarbutton-shadow-hot: inset 1px 1px 1px 0 var(--toolbarbutton-inner-border-color-hot) !important;
+		--toolbarbutton-icon-color: var(--chrtheme-toolbar-button-icon);
+		--navigation-buttons-separator: rgba(255,255,255,.2) !important;
+		
+		--bookmark-item-color: var(--chrtheme-bookmark-text, var(--default-bookmark-item-color)) !important;
+		
+		&[gkchrthemehastoolbar] {
+			--nav-bar: var(--chrtheme-theme-toolbar, var(--chrtheme-toolbar)) !important;
+			--personal-toolbar: var(--chrtheme-theme-toolbar, var(--chrtheme-toolbar)) !important;
+			--personal-toolbar-floating: var(--chrtheme-downloadshelf, var(--default-personal-toolbar-floating));
+			--personal-toolbar-floating-border: var(--chrtheme-downloadshelf, var(--default-personal-toolbar-floating-border));
+
+			// Default chrtheme-ntp values.
+			--chrtheme-ntp-background-alignment: 50% 100%;
+			--chrtheme-ntp-background-repeat: no-repeat;
+
+			&[personalbar="newtab"] #PersonalToolbar > #personal-toolbar-bg {
+				background-color: var(--chrtheme-ntp-background);
+				background-image: var(--chrtheme-theme-ntp-background);
+				background-repeat: var(--chrtheme-ntp-background-repeat);
+				background-position: var(--chrtheme-ntp-background-alignment);
+			}
+
+			#nav-bar,
+			#PersonalToolbar {
+				background-attachment: fixed !important;
+			}
+
+			#nav-bar {
+				background-position-y: calc(var(--tab-distance-from-top) + var(--toolbar-background-y-pos) + var(--gktabbar-y, 0px)) !important;
+			}
+
+			&:not([personalbar="newtab"]) #PersonalToolbar {
+				background-position-y: calc(var(--tab-distance-from-top) + var(--toolbar-background-y-pos) + var(--gktabbar-y, 0px)) !important;
+			}
+		}
+	}
+
+
+	/*
+		LightWeight (aka Firefox) Themes
+	*/
+	&[gkthemed]:not([gkchrthemed]) {
+		&:not([customthememode="none"]) {
+			--bookmark-item-color: var(--toolbar-color, var(--lwt-text-color, var(--arrowpanel-color))) !important;
+
+			--personal-toolbar-floating: var(--gktoolbar-bgcolor, var(--toolbar-bgcolor, var(--default-personal-toolbar-floating)));
+			--personal-toolbar-floating-border: var(--gktoolbar-bgcolor, var(--toolbar-bgcolor, var(--default-personal-toolbar-floating-border)));
+
+			&[personalbar="newtab"] #PersonalToolbar > #personal-toolbar-bg {
+				// TODO: expose LwTheme NTP images to chrome.
+
+				background-color: var(--tabpanel-background-color, white);
+				background-image: var(--lwt-gknewtab-background-image, var(--lwt-gknewtab-image));
+				@media (prefers-color-scheme: dark) {
+					background-image: var(--lwt-gknewtab-background-image-dark, var(--lwt-gknewtab-background-image, var(--lwt-gknewtab-image)));
+				}
+
+				background-repeat: var(--lwt-gknewtab-background-repeat);
+				background-position: var(--lwt-gknewtab-background-position);
+			}
+
+			--toolbarbutton-border-color-normal: color-mix(
+				in srgb,
+				var(--toolbar-bgcolor, var(--lwt-accent-color)) 80%,
+				white
+			) !important;
+			--toolbarbutton-border-color-hot: color-mix(
+				in srgb,
+				var(--toolbar-bgcolor, var(--lwt-accent-color)) 60%,
+				white
+			) !important;
+			--toolbarbutton-border-color-active: color-mix(
+				in srgb,
+				var(--toolbar-bgcolor, var(--lwt-accent-color)) 50%,
+				white
+			) !important;
+			--toolbarbutton-inner-border-color-normal: color-mix(
+				in srgb,
+				var(--toolbarbutton-icon-color, var(--default-toolbarbutton-icon-color)) 30%,
+				transparent
+			) !important;
+			--toolbarbutton-inner-border-color-hot: color-mix(
+				in srgb,
+				var(--toolbarbutton-icon-color, var(--default-toolbarbutton-icon-color)) 50%,
+				transparent
+			) !important;
+
+			--toolbarbutton-icon-color: var(--toolbarbutton-icon-fill);
+
+			&[style*="--toolbar-color"] {
+				&:not([style*="--toolbarbutton-icon-fill"]) {
+					--toolbarbutton-icon-color: var(--toolbar-color);
+				}
+
+				--toolbarbutton-inner-border-color-normal: color-mix(
+					in srgb,
+					var(--toolbarbutton-icon-color, var(--toolbar-color)) 30%,
+					transparent
+				) !important;
+				--toolbarbutton-inner-border-color-hot: color-mix(
+					in srgb,
+					var(--toolbarbutton-icon-color, var(--toolbar-color)) 50%,
+					transparent
+				) !important;
+			}
+
+			--toolbarbutton-texture: linear-gradient(
+				to bottom,
+				color-mix(
+					in srgb,
+					var(--toolbar-bgcolor, var(--lwt-accent-color)) 80%,
+					white
+				),
+				color-mix(
+					in srgb,
+					var(--toolbar-bgcolor, var(--lwt-accent-color)) 90%,
+					white
+				)
+			) !important;
+
+			--navigation-buttons-separator: color-mix(
+				in srgb,
+				var(--toolbar-bgcolor, var(--lwt-accent-color)) 80%,
+				white
+			) !important;
+
+			#urlbar-background,
+			.urlbar-background {
+				color: var(--lwt-text-color) !important;
+			}
+
+			--urlbar-border: var(--toolbarbutton-border-color-normal, var(--default-toolbarbutton-border-color-normal)) !important;
+		}
+
+		// if Geckium or FXChrome-like
+		&[customthememode="geckium"],
+		&[customthememode="fxchrome"] {
+			&[toolbar-bgcolor-transparent="true"] {
+				--personal-toolbar: var(--toolbar-bgcolor) !important;
+			}
+		}
+		// if Geckium
+		&[customthememode="geckium"] {
+			--nav-bar: var(--toolbar-bgcolor, var(--lwt-accent-color)) !important;
+			--personal-toolbar: var(--toolbar-bgcolor, var(--lwt-accent-color)) !important;
+
+			&[toolbar-bgcolor-transparent="true"] {
+				--nav-bar: linear-gradient(
+					to bottom,
+					var(--gktoolbar-bgcolor) 3px,
+					var(--toolbar-bgcolor) 75%
+				) !important;
+
+				&[style*="--gktoolbar-bgcolor-opacity-percentage: 0%"] {
+					--nav-bar: linear-gradient(
+						to bottom,
+						var(--lwt-accent-color) 3px,
+						transparent 75%
+					) !important;
+
+
+					&[tab-selected-bgcolor-transparent="true"] {
+						--nav-bar: linear-gradient(
+							to bottom,
+							var(--lwt-accent-color) 3px,
+							transparent 75%
+						) !important;
+					}
+				}
+			}
+		}
+		// if FXChrome-like
+		&[customthememode="fxchrome"] {
+			--nav-bar: linear-gradient(
+				to bottom,
+				var(--toolbar-bgcolor) 3px,
+				color-mix(
+					in srgb,
+					var(--toolbar-bgcolor),
+					transparent 50%
+				) 50%
+			) !important;
+			--personal-toolbar: color-mix(
+				in srgb,
+				var(--toolbar-bgcolor),
+				transparent 50%
+			) !important;
+
+			&[toolbar-bgcolor-transparent="true"] {
+				--nav-bar: linear-gradient(
+					to bottom,
+					var(--gktoolbar-bgcolor) 3px,
+					var(--toolbar-bgcolor) 50%
+				) !important;
+			}
+		}
+		// if Silverfox
+		&[customthememode="silverfox"] {
+			--nav-bar: linear-gradient(
+					to bottom,
+					var(--toolbar-bgcolor) 25%,
+					transparent
+				) !important;
+
+			&[toolbar-bgcolor-transparent="true"] {
+				--nav-bar: linear-gradient(
+					to bottom,
+					var(--gktoolbar-bgcolor) 25%,
+					transparent
+				) !important;
+				--personal-toolbar: transparent !important;
+			}
+		}
+	}
+
+
+	/*
+		GTK+ SysTheme - exclusive toolbarbutton styling
+	*/
+	&[gksystheme="gtk"]:not([gkthemed], [gkchrthemed], [geckium-sixtyeight]) {
+		// Toolbar buttons
+		:not(.widget-overflow-list)
+		> .toolbarbutton-1:not(
+			#gkavatar-container > #gk-firefox-account-button,
+			#tabs-newtab-button,
+			#new-tab-button,
+			.subviewbutton
+		) {
+			appearance: toolbarbutton !important;
+			background: unset !important;
+			background-clip: unset !important;
+			border: none !important;
+			border-radius: unset !important;
+			box-shadow: unset !important;
+
+			&::before,
+			&::after {
+				content: unset !important;
+			}
+
+			.toolbarbutton-badge-stack,
+			.toolbarbutton-icon,
+			image:first-of-type {
+				filter: unset !important;
+			}
+			
+			// Visibility fix for #nav-bar-overflow-button
+			&#nav-bar-overflow-button {
+				mask-image: unset !important;
+			}
+
+			// Revert width for back/forward
+			&#back-button,
+			&#forward-button {
+				width: var(--toolbarbutton-width) !important;
+			}
+			// Remove spacing from forward
+			&#forward-button {
+				margin-inline-start: var(--toolbarbutton-outer-padding) !important;
+			}
+		}
+
+		// Pinned bookmarks
+		toolbarbutton.bookmark-item {
+			appearance: toolbarbutton !important;
+		}
+		
+		// Because of a bug in Firefox on Linux, that surprisingly doesn't exist on non-Linux,
+		//  buttons are forcedly given a border despite any CSS - the button icon sizes of custom
+		//  icons have to be forced.
+		@media (-moz-platform: linux) {
+			// Fix issue with extension icons getting cropped
+			:not(.widget-overflow-list) > .unified-extensions-item > .toolbarbutton-1 {
+				overflow: visible !important;
+			}
+			
+			&:not([gtkicons="2"]) :not(.widget-overflow-list) > .toolbarbutton-1 {
+				&#back-button,
+				&#forward-button,
+				&#reload-button,
+				&#stop-button,
+				&#home-button {
+					.toolbarbutton-icon {
+						height: 20px !important;
+						width: 20px !important;
+						max-height: unset !important;
+					}
+				}
+				// Fix issue with gsettings becoming erroneously small
+				&#gsettings-button > .toolbarbutton-icon {
+					height: 19px !important;
+					width: 19px !important;
+				}
+			}
+			&[gtkicons="1"] :not(.widget-overflow-list) > .toolbarbutton-1 {
+				&#bookmarks-menu-button,
+				&#page-button,
+				&#PanelUI-menu-button,
+				&#unified-extensions-button,
+				&#searchmode-switcher-button,
+				&#chrome-button,
+				&#logins-button,
+				&#developer-button,
+				&#preferences-button,
+				&#fullscreen-button,
+				&#new-window-button,
+				&#save-page-button,
+				&#open-file-button {
+					.toolbarbutton-icon {
+						height: 20px !important;
+						width: 20px !important;
+						max-height: unset !important;
+					}
+				}
+			}
+		}
+	}
+}

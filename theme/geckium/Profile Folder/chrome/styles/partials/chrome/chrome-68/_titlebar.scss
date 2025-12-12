@@ -1,0 +1,38 @@
+& {
+	--toolbar-background-y-pos: 0px;
+
+	&[sizemode="maximized"],
+	&[sizemode="fullscreen"] {
+		#private-browsing-indicator-with-label,
+		.private-browsing-indicator-with-label /* Fix for Firefox 133+ */ {
+			margin-inline-start: 0;
+			margin-block-end: 1px;
+			margin-inline-start: 7px !important;
+			margin-inline-end: 2px !important;
+		}
+	}
+
+	#private-browsing-indicator-with-label,
+	.private-browsing-indicator-with-label /* Fix for Firefox 133+ */ {
+		height: var(--tab-height);
+		margin-block-end: 2px;
+		margin-inline-start: 8px !important;
+		margin-inline-end: 1px !important;
+		align-items: center !important;
+	}
+
+	// Updated titlebar styles
+	&[chromemargin]:not([macOSNativeFullscreen]),
+	&[customtitlebar]:not([macOSNativeFullscreen]) {
+		// Chromium OS
+		&[gktitstyle="chromiumos"] {
+			@import "titlebar/borders/chromiumos";
+		}
+	}
+
+	// Updated titlebutton styles
+	// Chromium OS
+	&[gktitbuttons="chromiumos"] {
+		@import "titlebar/buttons/chromiumos";
+	}
+}

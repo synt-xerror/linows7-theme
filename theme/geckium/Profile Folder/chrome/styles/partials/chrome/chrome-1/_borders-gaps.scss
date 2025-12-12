@@ -1,0 +1,273 @@
+:root {
+	--content-border-width: 			3px;
+	--gap-size:							0px;
+	--content-border-top-left-image: 	url("chrome://userchrome/content/assets/img/chrome-1/toolbar/content_top_left_corner.png");
+	--content-border-top-image:			url("chrome://userchrome/content/assets/img/chrome-1/tabbar/tabstoolbar_shadow_modified.png");
+	--content-border-top-right-image: 	url("chrome://userchrome/content/assets/img/chrome-1/toolbar/content_top_right_corner.png");
+	--content-border-left-image: 		url("chrome://userchrome/content/assets/img/chrome-1/toolbar/content_bookmark_left.png");
+	--content-border-right-image: 		url("chrome://userchrome/content/assets/img/chrome-1/toolbar/content_bookmark_right.png");
+
+	--default-browser-background-color: rgb(216,228,246);
+	--browser-background-color: var(--default-browser-background-color);
+
+	@media (prefers-color-scheme: dark) {
+		--default-browser-background-color: rgb(10, 25, 46);
+	}
+
+	@media not (resolution: 96dpi) {
+		--content-border-top-left-image: 	url("chrome://userchrome/content/assets/img/chrome-1/toolbar/content_top_left_corner.svg");
+		--content-border-top-image:			url("chrome://userchrome/content/assets/img/chrome-1/tabbar/tabstoolbar_shadow_modified.svg");
+		--content-border-top-right-image: 	url("chrome://userchrome/content/assets/img/chrome-1/toolbar/content_top_right_corner.svg");
+		--content-border-left-image: 		url("chrome://userchrome/content/assets/img/chrome-1/toolbar/content_bookmark_left.svg");
+		--content-border-right-image: 		url("chrome://userchrome/content/assets/img/chrome-1/toolbar/content_bookmark_right.svg");
+	}
+
+	&[windowtype="navigator:browser"] > body {
+		box-sizing: border-box; //Required fix for Windows
+	}
+
+	#TabsToolbar::before {
+		width: calc(100% - (var(--gap-size) * 2)) !important;
+		left: var(--gap-size);
+	}
+
+	.titlebar-spacer { // Prepare for usage as tabbar borders
+		display: flex !important;
+		width: 0 !important;
+	}
+	//NOTE: Tab and Incognito offsets are handled by titlebar button styles.
+
+	//Add padding to window-contents (requires gaps allowed)
+	&[gkhasgaps="true"]:not([sizemode="maximized"]):not([sizemode="fullscreen"]) {
+		--gap-size: calc(var(--content-border-width) - 1px);
+		
+		#TabsToolbar::before {
+			width: calc(100% - ((var(--gap-size) + 1px) * 2)) !important;
+			left: calc(var(--gap-size) + 1px);
+		}
+
+		&[gktitnative="false"],
+		&[gktitnative="true"][isWindows10] {
+			--gap-size: var(--content-border-width);
+		}
+		@media (-moz-platform: windows) {
+			// See Geckium_titlebar.uc.js: getTitleBordersRemovable for more information
+			&[gktitnative="false"][gkcompactsquared] {
+				--gap-size: 0px !important;
+			}
+		}
+		@media (-moz-platform: linux) {
+			// In Linux with CSDs, we physically CANNOT have gaps, however custom titlebar styles which add borders
+			// to alleviate this limitation should still be able to have gaps, hence rather than restricting it at the
+			// header level, we override --gap-size so that Firefox's own (lack of) borders simply never shows.
+			&[gktitnative="true"] {
+				--gap-size: 0px !important;
+			}
+		}
+		.titlebar-spacer[type="pre-tabs"] {
+			margin-inline-start: var(--gap-size);
+		}
+
+		#nav-bar,
+		#PersonalToolbar,
+		.notificationbox-stack,
+		#customization-container,
+		#browser {
+			margin: 0 var(--gap-size) 0 var(--gap-size);
+		}
+		#customization-container,
+		#browser {
+			margin-bottom: var(--gap-size);
+		}
+		//Ensure notification bars use the correct width
+		.notificationbox-stack {
+			width: calc(100% - var(--gap-size) - var(--gap-size)) !important; //Firefox will REFUSE to use it without an !important
+		}
+	}
+
+	//Round the navigation bar (requires gaps allowed)
+	&[gkhasgaps="true"] {
+		#nav-bar {
+			border-top-left-radius: 3px !important;
+			border-top-right-radius: 3px !important;
+		}
+		&[sizemode="maximized"],
+		&[sizemode="fullscreen"] {
+			#nav-bar {
+				border-top-left-radius: 0 !important;
+				border-top-right-radius: 0 !important;
+			}
+		}
+	}
+
+	#TabsToolbar::before {
+		content: "";
+		position: absolute;
+		top: unset !important; // Chinese Win7 Firefox - fog
+		bottom: -1px;
+		height: 23px !important;
+		background: var(--content-border-top-image) bottom !important;
+		pointer-events: none;
+		z-index: 100 !important;
+	}
+
+	//Page bodies - top 1px border
+	#navigator-toolbox {
+		border-bottom: unset !important;
+	}
+
+	#browser,
+	#customization-container {
+		position: relative; // Required for all borders
+	}
+
+	#browser {
+		background-color: var(--browser-background-color);
+	}
+
+	&:not([personalbar="newtab"]) {
+		#browser,
+		#customization-container {
+			border-top: 1px solid var(--personal-toolbar-border-bottom, var(--default-personal-toolbar-border-bottom)) !important;
+			margin-top: -1px !important; // Required for top border
+		}
+	}
+
+	//Page bodies - all borders (requires Windows decorations)
+	&[gktitstyle="win"] {
+		#browser,
+		#customization-container {
+			padding-block-end: 1px;
+			padding-inline-start: 1px;
+			padding-inline-end: 1px;
+		}
+		&[sizemode="maximized"],
+		&[sizemode="fullscreen"] {
+			#browser,
+			#customization-container {
+				padding-block-end: 0px;
+				padding-inline-start: 0px;
+				padding-inline-end: 0px;
+			}
+		}
+	}
+
+	//Window shadows (requires gaps allowed)
+	&[gkhasgaps="true"] {
+		// Toolbar corner shadows
+		#nav-bar {
+			&::before,
+			&::after {
+				content: "";
+				position: absolute;
+				width: 3px;
+				top: calc(var(--content-border-width) * -1 + 1px);
+				height: calc(var(--nav-bar-height) + 2px);
+				background-repeat: no-repeat !important;
+			}
+			&::before {
+				background: var(--content-border-top-left-image);
+			}
+			&::after {
+				background: var(--content-border-top-right-image);
+			}
+		}
+
+		// Toolbar and page side-shadows
+		#PersonalToolbar,
+		#browser,
+		#customization-container,
+		.notificationbox-stack {
+			&::before,
+			&::after {
+				content: "";
+				position: absolute;
+				width: var(--content-border-width);
+				height: 100%;
+				top: 0;
+			}
+			&::before {
+				background: var(--content-border-left-image);
+			}
+			&::after {
+				background: var(--content-border-right-image);
+			}
+		}
+		#nav-bar,
+		#PersonalToolbar,
+		.notificationbox-stack {
+			&::before {
+				left: calc(var(--content-border-width) * -1 + 1px);
+			}
+			&::after {
+				right: calc(var(--content-border-width) * -1 + 1px);
+			}
+		}
+		#browser,
+		#customization-container {
+			&::before {
+				left: calc(var(--content-border-width) * -1 + 1px);
+			}
+			&::after {
+				right: calc(var(--content-border-width) * -1 + 1px);
+			}
+		}
+
+		// Page shadows - bottom
+		#tabbrowser-tabbox::after {
+			content: "";
+			position: absolute;
+			width: 100%;
+			bottom: calc(var(--content-border-width) * -1 + 1px);
+			height: var(--content-border-width);
+			background: var(--content-border-top-image) bottom;
+			transform: scaleY(-100%);
+		}
+
+		// Page corner shadows
+		#appcontent {
+			&::before,
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: calc(var(--content-border-width) * -1 + 1px);
+				transform: scaleY(-100%);
+				width: var(--content-border-width);
+				height: var(--content-border-width);
+			}
+			&::before {
+				left: calc(var(--content-border-width) * -1 + 1px);
+				background: var(--content-border-top-left-image) top left;
+			}
+			&::after {
+				right: calc(var(--content-border-width) * -1 + 1px);
+				background: var(--content-border-top-right-image) top right;
+			}
+		}
+
+		// Disable all shadows when maximised
+		&[sizemode="maximized"],
+		&[sizemode="fullscreen"] {
+			#nav-bar {
+				&::before,
+				&::after {
+					content: unset;
+				}
+			}
+			#nav-bar,
+			#PersonalToolbar,
+			#browser,
+			#customization-container,
+			.notificationbox-stack,
+			#appcontent {
+				&::before,
+				&::after {
+					content: unset;
+				}
+			}
+			#tabbrowser-tabbox::after {
+				content: unset;
+			}
+		}
+	}
+}

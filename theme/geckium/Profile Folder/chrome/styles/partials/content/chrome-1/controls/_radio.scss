@@ -1,0 +1,80 @@
+@-moz-document 	url-prefix(about:preferences),
+				url-prefix(about:addons),
+				url-prefix(chrome://browser/content/preferences/dialogs) {
+
+	.web-appearance-choice-footer{
+		align-items: center;
+	}
+
+	input[type="checkbox"],
+	input[type="radio"],
+	.checkbox-check,
+	.radio-check {
+		all: unset !important;
+		position: relative !important;
+		margin-block: 0 !important;
+		width: 13px !important;
+		height: 13px !important;
+		border-radius: 0 !important;
+		background-repeat: no-repeat !important;
+		background-position: center !important;
+		box-sizing: border-box !important;
+		margin-inline-end: 5px !important;
+	}
+
+	input[type="checkbox"],
+	.checkbox-check {
+		background-image: url("chrome://userchrome/content/assets/img/chrome-1/controls/linux-checkbox-off.svg") !important;
+
+		&:checked,
+		&[checked],
+		&[selected="true"] {
+			background-image: url("chrome://userchrome/content/assets/img/chrome-1/controls/linux-checkbox-on.svg") !important;
+		}
+	}
+
+	input[type="radio"],
+	.radio-check {
+		background-image: url("chrome://userchrome/content/assets/img/chrome-1/controls/linux-radio-off.svg") !important;
+
+		&:checked,
+		&[checked],
+		&[selected="true"] {
+			background-image: url("chrome://userchrome/content/assets/img/chrome-1/controls/linux-radio-on.svg") !important;
+		}
+	}
+
+	checkbox,
+	radio {
+		&.tail-with-learn-more + a {
+			margin-block: 0 !important;
+		}
+	}
+
+	@media (-moz-ev-native-controls-patch) {
+		checkbox,
+		radio {
+			margin-block: 0 !important;
+		}
+
+		.checkbox-check,
+		.radio-check,
+		input[type="checkbox"],
+		input[type="radio"] {
+			all: unset !important;
+			margin-inline-end: 4px !important;
+		}
+
+		.checkbox-check,
+		input[type="checkbox"] {
+			appearance: checkbox !important;
+			-moz-default-appearance: checkbox !important;
+		}
+
+		.radio-check,
+		input[type="radio"] {
+			appearance: radio !important;
+			-moz-default-appearance: radio !important;
+		}
+	}
+}

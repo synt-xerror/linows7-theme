@@ -1,0 +1,34 @@
+& {
+	--tab-glare-opacity: .2;
+	--tab-glare-color: white;
+	--tab-glare: linear-gradient(
+		90deg,
+		color-mix(
+			in srgb,
+			var(--tab-glare-color) 40%,
+			transparent
+		) 30%,
+		var(--tab-glare-color) 50%,
+		color-mix(
+			in srgb,
+			var(--tab-glare-color) 40%,
+			transparent
+		) 70%
+	);
+	--tab-glare-unhover-timer: .5s;
+
+	&[customthemecolorizetabglare="true"] {
+		/* bruni: This entire code takes care of custom themes support for tabs */
+
+		// Custom theme support
+		// lwtheme
+		&[gkthemed]:not([gkchrthemed]) {
+			--tab-glare-color: var(--tabbrowser-tab-color);
+		}
+	}
+
+	// else if chrtheme
+	&[gkthemed][gkchrthemed] {
+		--tab-glare-opacity: .1 !important;
+	}
+}

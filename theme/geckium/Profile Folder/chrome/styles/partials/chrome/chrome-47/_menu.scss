@@ -1,0 +1,38 @@
+menupopup {
+	button {
+		padding: 0 !important;
+		padding-inline: 15px !important;
+		border-radius: 0 !important;
+		border-block: 0 !important;
+		border-inline: 1px solid var(--gk-menusep-color) !important;
+
+		&:not([disabled="true"]):hover {
+			border-color: var(--gk-menusep-color) !important;
+		}
+
+		&#menu_normal6 {
+			border: 0 !important;
+			padding: 0 !important;
+			width: 34px !important;
+		}
+
+		&#menu_larger6,
+		&#menu_fullScreen6 {
+			border-left: 0 !important;
+		}
+	}
+
+	menuseparator {
+		margin-block: 2px !important;
+	}
+
+	.menuitem-right-items {
+		height: calc(var(--gk-menuitem-minheight) + 6px);
+		margin-block: -3px !important;
+		margin-inline-end: -7px !important;
+	}
+
+	separator {
+		display: none !important;
+	}
+}

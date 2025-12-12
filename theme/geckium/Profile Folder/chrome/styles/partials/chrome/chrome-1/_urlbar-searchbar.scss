@@ -1,0 +1,659 @@
+:root {
+	--default-urlbar-background-color: white;
+	--urlbar-background-color: var(--default-urlbar-background-color) !important;
+	--default-urlbar-focused-background-color: white;
+	--urlbar-focused-background-color: var(--default-urlbar-focused-background-color) !important;
+	--default-urlbar-color: black;
+	--urlbar-color: var(--default-urlbar-color) !important;
+	--urlbar-focused-color: black !important;
+
+	--identity-icon-invalid:			 						 var(--search-favicon);
+	--identity-icon-valid-n-chromeUI-or-valid-n-unknownIdentity: var(--default-favicon);
+	--identity-icon-secure-or-ev: 		 						 url("chrome://userchrome/content/assets/img/chrome-5/toolbar/lock_small.png");
+	--identity-icon-warning-or-insecure: 						 url("chrome://userchrome/content/assets/img/chrome-5/toolbar/infobar_insecure.png");
+	--identity-icon-valid-n-notSecure:	 						 url("chrome://userchrome/content/assets/img/chrome-5/toolbar/o2_globe.png");
+
+	--searchbar-icon: var(--identity-icon-invalid);
+
+	--protocol-background-color: var(--urlbar-background-color);
+	--protocol-color:			 var(--urlbar-color);
+
+	--urlbar-border:										var(--toolbarbutton-border-color-normal, var(--default-toolbarbutton-border-color-normal));
+	--default-urlbar-background-verified-proxystate-valid:	rgb(255, 245, 196);
+	--urlbar-background-verified-proxystate-valid: 			var(--default-urlbar-background-verified-proxystate-valid);
+	--urlbar-verified-proxystate-valid:						rgb(10, 155, 38);
+	--urlbar-verified-proxystate-valid-overridden:			rgb(210, 0, 0);
+
+	--urlbar-height-definitive: var(--toolbarbutton-height);
+	--urlbar-min-height: var(--urlbar-height-definitive) !important;
+
+	--autocomplete-popup-hover-background: color-mix(
+		in srgb,
+		-moz-menuhover 20%,
+		white 20%
+	) !important;
+	@media (-moz-platform: linux) {
+		--autocomplete-popup-hover-background: color-mix(
+			in srgb,
+			AccentColor 20%,
+			white 20%
+		) !important;
+		--autocomplete-popup-highlight-background: AccentColor !important;
+	}
+	--autocomplete-popup-highlight-background: -moz-menuhover !important;
+	--autocomplete-popup-highlight-color: rgb(255, 255, 255, 70%) !important;
+
+	@media (prefers-color-scheme: dark) {
+		--autocomplete-popup-highlight-background: -moz-menuhover !important;
+	}
+
+	&[forceColorizeAddressBar="true"] {
+		&[customthememode="geckium"] {
+			@media (prefers-color-scheme: dark) {
+				--default-urlbar-background-color:	black;
+				--default-urlbar-color:				white;
+				--urlbar-border:					rgba(127, 127, 127, 0.4);
+
+				--default-urlbar-background-verified-proxystate-valid:	rgb(61, 51, 0);
+				--urlbar-verified-proxystate-valid: 		   			rgb(102, 245, 130);
+				--urlbar-verified-proxystate-valid-overridden: 			rgb(255, 46, 46);
+			}
+		}
+
+		// if lwtheme
+		&[gkthemed]:not([gkchrthemed]):not([customthememode="none"]) {
+			// if Geckium
+			&[customthememode="geckium"] {		
+				--urlbar-background-color: var(--toolbar-field-background-color, var(--default-urlbar-background-color)) !important;
+				--urlbar-color: var(--toolbar-field-color, var(--default-urlbar-color)) !important;
+				--urlbar-border: rgba(127, 127, 127, 0.4);
+				--protocol-background-color: transparent;
+
+				&[toolbar-field-background-color-transparent="true"] {
+					--urlbar-background-verified-proxystate-valid: color-mix(
+						in srgb,
+						var(--default-urlbar-background-verified-proxystate-valid) var(--gktoolbar-field-background-color-opacity-percentage),
+						transparent
+					);
+
+					&[style*="--gktoolbar-field-background-color-opacity-percentage: 0%"] {
+						--urlbar-background-color: color-mix(
+							in srgb,
+							var(--gktoolbar-field-background-color) 20%,
+							transparent
+						) !important;
+
+						--urlbar-background-verified-proxystate-valid: color-mix(
+							in srgb,
+							var(--default-urlbar-background-verified-proxystate-valid) 50%,
+							transparent
+						);
+					}
+
+					#urlbar #urlbar-protocol {
+						background: transparent !important;
+					}
+				}
+			}
+		}
+		// else if chrtheme
+		&[gkthemed][gkchrthemed] {
+			--urlbar-background-color: var(--chrtheme-omnibox-background, var(--default-urlbar-background-color)) !important;
+			--urlbar-color: var(--chrtheme-omnibox-text, var(--default-urlbar-color)) !important;
+		}
+	}
+
+	// Force black text if URL bar is yellow.
+	&:not([geckium-six]) #nav-bar {
+		&[securestate="secure"],
+		&[securestate="ev"],
+		.verifiedDomain ~ .urlbar-input-box {
+			--urlbar-color: var(--default-urlbar-color);
+		}
+	}
+
+	#star-button-box {
+		display: flex !important;
+	}
+
+	:not(.widget-overflow-list) {
+		> .toolbarbutton-1:not(
+			#gkavatar-container > #gk-firefox-account-button,
+			#tabs-newtab-button,
+			#new-tab-button,
+			.subviewbutton
+		) {
+			&#go-button-box {
+				margin: 0 !important;
+				border-top-left-radius: 0 !important;
+				border-bottom-left-radius: 0 !important;
+				margin-left: auto !important;
+
+				&::before,
+				&::after {
+					border-top-left-radius: 0 !important;
+					border-bottom-left-radius: 0 !important;
+				}
+			}
+
+			&#star-button-box > #star-button,
+			&#go-button {
+				transform: translateX(1px);
+			}
+		}
+	}
+
+	&:not([customizing]) #urlbar {
+		position: absolute !important;
+	}
+
+	#star-button-box > #star-button {
+		width: fit-content !important;
+		height: fit-content !important;
+	}
+
+	&:not([chromehidden~="toolbar"]) #urlbar-container {
+		margin-inline-start: var(--toolbarbutton-outer-padding) !important;
+
+		&:not(:last-child) {
+			margin-inline-end: 2px !important;
+		}
+	}
+
+	&[is133Plus] {
+		// Fix URL bar being too short in popups.
+		&[chromehidden~="toolbar"] #urlbar {
+			position: relative !important;
+		}
+
+		#urlbar {
+			&[breakout],
+			&[breakout][breakout-extend] {
+				width: calc(var(--urlbar-width) - (var(--toolbarbutton-width) * 2)) !important;
+				margin-left: var(--toolbarbutton-width) !important;
+			}
+		}
+
+		#urlbar-searchmode-switcher {
+			display: none !important;
+		}
+	}
+	&:not([is133Plus]) #urlbar {
+		&[breakout],
+		&[breakout][breakout-extend] {
+			width: calc(100% - (var(--toolbarbutton-width) * 2)) !important;
+			left: var(--toolbarbutton-width) !important;
+		}
+
+		&[breakout] {
+			--top: 0px;
+			top: var(--top) !important;
+	
+			&[breakout-extend] {
+				top: var(--top) !important;
+			}
+		}
+	}
+
+	&[is134Plus] #urlbar:not([breakout-extend]) {
+		top: unset !important;
+	}
+}
+
+.verifiedDomain {
+	position: relative;
+}
+
+#urlbar {
+	--urlbar-height: var(--urlbar-height-definitive) !important;
+	--urlbar-toolbar-height: var(--urlbar-height-definitive) !important;
+
+	font-size: 10pt !important;
+
+	&[focused] {
+		&:not([supress-focus-border]) > #urlbar-background,
+		&:not([supress-focus-border]) > .urlbar-background {
+			outline: 0 !important;
+		}
+
+		// If text is selected but textbox is inactive
+		&:not([open]) #urlbar-protocol {
+			display: none !important;
+		}
+	}
+
+	&[textoverflow="left"],
+	&[textoverflow="both"] {
+		#urlbar-protocol {
+			display: none !important;
+		}
+	}
+
+	&:not([pageproxystate="valid"], [open]) #urlbar-protocol {
+		display: none !important;
+	}
+
+	// If text is selected but window is inactive
+	&:not([domaindir]) {
+		&:-moz-window-inactive {
+			#urlbar-protocol {
+				display: none !important;
+			}
+		}
+	}
+
+	&:not([focused="true"]) .verifiedDomain[pageproxystate="valid"] {
+		&::before,
+		&::after {
+			position: absolute;
+			pointer-events: none !important;
+		}
+
+		&::before {
+			content: "";
+		}
+	}
+
+	&:not(.searchButton) {
+		> #urlbar-input-container,
+		> .urlbar-input-container /* Fix for Firefox ~120+ */ {
+			> #identity-box {
+				/* Search icon */
+				&[pageproxystate="invalid"] #identity-icon {
+					list-style-image: var(--identity-icon-invalid) !important;
+				}
+
+				/* Grayfolder Icon */
+				&[pageproxystate="valid"].chromeUI #identity-icon {
+					list-style-image: var(--identity-icon-valid-n-chromeUI-or-valid-n-unknownIdentity) !important;
+				}
+			}
+		}
+	}
+
+	#urlbar-protocol {
+		position: absolute;
+		height: calc(100% - 2px);
+		display: flex;
+		align-items: center;
+		align-self: center;
+		margin: 0 !important;
+		pointer-events: none;
+		background: var(--protocol-background-color) !important;
+		color: var(--protocol-color);
+		z-index: 1;
+
+		&::before {
+			content: "";
+			position: absolute;
+			height: 2px;
+			top: 11px;
+			left: -1px;
+			rotate: 160deg;
+			width: 35px;
+			z-index: 100;
+		}
+	}
+
+	&[breakout][breakout-extend] {
+		#urlbar-protocol {
+			display: none;
+		}
+
+		> #urlbar-background,
+		.urlbar-background {
+			animation: none !important;
+		}
+	}
+}
+
+#nav-bar {
+	&[securestate="chrome"] #identity-box {
+		display: none !important;
+	}
+
+	#identity-box[pageproxystate="valid"] {
+		&.verifiedDomain,
+		&.mixedActiveBlocked {
+			#identity-icon {
+				list-style-image: var(--identity-icon-secure-or-ev) !important;
+			}
+		}
+
+		&.notSecure #identity-icon {
+			list-style-image: var(--identity-icon-valid-n-notSecure) !important;
+		}
+	}
+
+	&[securestate="secure"],
+	&[securestate="ev"],
+	.verifiedDomain ~ .urlbar-input-box {
+		--urlbar-background-color: var(--urlbar-background-verified-proxystate-valid) !important;
+		--protocol-color: var(--urlbar-verified-proxystate-valid);
+		--protocol-background-color: var(--urlbar-background-verified-proxystate-valid);
+
+		#identity-icon {
+			list-style-image: var(--identity-icon-secure-or-ev) !important;
+		}
+	}
+
+	&[securestate="warning"],
+	&[securestate="insecure"] {
+		--protocol-color: var(--urlbar-verified-proxystate-valid-overridden);
+
+		#urlbar-protocol::before {
+			background: var(--urlbar-verified-proxystate-valid-overridden);
+		}
+
+		#identity-icon {
+			list-style-image: var(--identity-icon-warning-or-insecure) !important;
+			max-width: 20px;
+			max-height: 20px;
+			margin-inline-end: 5px;
+		}
+
+		#custom-identity-label {
+			display: none !important;
+		}
+	}
+}
+
+#custom-identity-label {
+	margin-block: 0 !important;
+	margin-inline-start: 4px !important;
+	margin-inline-end: 6px !important;
+	color: var(--protocol-color);
+	font-size: 11pt !important;
+}
+
+#searchbar:focus-within {
+	outline: transparent !important;
+}
+
+#urlbar,
+#searchbar {
+	color: var(--urlbar-color) !important;
+}
+
+#urlbar:is([focused], [open]),
+#searchbar:focus-within {
+	color: var(--urlbar-focused-color) !important;
+}
+
+#urlbar:is([focused], [open]) > #urlbar-background,
+#urlbar:is([focused], [open]) > .urlbar-background,
+#searchbar:focus-within {
+	background-color: var(--urlbar-focused-background-color) !important;
+}
+
+#urlbar[breakout][breakout-extend] > #urlbar-background,
+#urlbar[breakout][breakout-extend] > .urlbar-background,
+#urlbar[focused="true"] > #urlbar-background #searchbar:focus-within,
+#urlbar[focused="true"] > .urlbar-background #searchbar:focus-within {
+	box-shadow: none !important;
+}
+
+#urlbar-label-box {
+	margin-inline-end: 4px !important;
+	background: transparent !important;
+	color: rgb(0, 0, 0, 50%) !important;
+	padding-inline: 0 !important;
+}
+
+#identity-icon-box {
+	padding: 0 !important;
+	min-height: 19px !important;
+	min-width: 19px !important;
+	justify-content: center !important;
+}
+
+#identity-permission-box {
+	display: none !important;
+}
+
+#identity-box {
+	margin: 0 !important;
+	height: calc(var(--urlbar-height-definitive) - 1px) !important;
+
+	&[pageproxystate="valid"] {
+		#identity-icon {
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		&.notSecureText,
+		&.chromeUI,
+		&.extensionPage {
+			> #identity-icon-box {
+				background: transparent !important;
+			}
+		}
+	}
+
+	.unknownIdentity #identity-icon {
+		list-style-image: var(--identity-icon-valid-n-chromeUI-or-valid-n-unknownIdentity) !important;
+	}
+}
+#identity-icon-box,
+#tracking-protection-icon-container {
+	&:hover:not([open="true"]),
+	&:hover:active,
+	&[open="true"] {
+		background: transparent !important;
+	}
+}
+
+#permissions-granted-icon {
+	list-style-image: url(chrome://userchrome/content/assets/img/chrome-5/toolbar/wrench.png) !important;
+	margin-left: 2px;
+}
+.blocked-permission-icon {
+	display: none !important;
+}
+
+#urlbar-background,
+.urlbar-background,
+#searchbar { // As of Firefox 143, urlbar-background is now a class.
+	background-color: var(--urlbar-background-color) !important;
+	border-inline: 0 !important;
+	border-block: 1px solid var(--urlbar-border) !important;
+	border-radius: 0 !important;
+	height: var(--urlbar-height-definitive);
+}
+#urlbar-background,
+.urlbar-background {
+	background-clip: content-box !important;
+	box-shadow: none !important;
+}
+
+.searchbar-search-button {
+	justify-content: center !important;
+	margin-inline-end: 3px !important;
+
+	.searchbar-search-icon {
+		list-style-image: var(--searchbar-icon) !important;
+	}
+
+	.searchbar-search-icon-overlay {
+		display: none !important;
+	}
+}
+
+.searchbar-search-icon {
+	margin: 0 !important;
+}
+
+#urlbar-search-mode-indicator {
+	padding-inline: 0 !important;
+	color: rgb(0, 0, 0, 60%) !important;
+
+	#urlbar-search-mode-indicator-title {
+		display: block !important;
+	}
+}
+
+#identity-icon {
+	height: auto !important;
+	width: auto !important;
+}
+
+#identity-icon-label {
+	display: none;
+}
+
+#tracking-protection-icon-container {
+	display: none !important;
+}
+
+.urlbar-input-box {
+	height: var(--urlbar-height-definitive) !important;
+	font-size: 11pt !important;
+	margin-inline: 3px;
+	overflow: hidden;
+}
+
+#urlbar-input::placeholder {
+	opacity: 1 !important;
+	color: rgb(127, 127, 127);
+	text-align: end;
+}
+
+#urlbar-container,
+#search-container {
+	padding: 0 !important;
+	box-shadow: 0 0 0 1px var(--toolbarbutton-inner-border-color-normal, var(--default-toolbarbutton-inner-border-color-normal)) !important;
+	border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+#urlbar-container {
+	--urlbar-container-height: var(--urlbar-height-definitive) !important;
+
+	position: relative !important;
+
+	&:not([starpos="start"]) #go-button-box {
+		display: none;
+	}
+
+	#urlbar-go-button,
+	.urlbar-go-button /* Fix for Firefox ~120+ */ {
+		display: none !important;
+	}
+}
+
+#search-container {
+	margin-inline-start: 2px !important;
+	margin-inline-end: 2px !important;
+}
+
+#urlbar-search-splitter {
+	height: var(--toolbarbutton-height) !important;
+	min-width: 5px !important;
+	margin-inline: -4px -2px !important;
+}
+
+#urlbar-input-container,
+.urlbar-input-container /* Fix for Firefox ~120+ */,
+#searchbar {
+	min-height: var(--urlbar-height-definitive) !important;
+	height: var(--urlbar-height-definitive) !important;
+	padding: 0 !important;
+	padding-inline-start: 4px !important;
+	border: 0 !important;
+}
+
+#notification-popup-box {
+	height: var(--urlbar-height-definitive) !important;
+	fill: rgb(112,112,112) !important;
+
+	&:not([disabled]) {
+		&:hover,
+		&:active,
+		&[open] {
+			background: transparent !important;
+		}
+
+		&:active,
+		&[open] {
+			fill: rgb(69,132,246) !important;
+		}
+	}
+
+	> #password-notification-icon {
+		padding-block: 4px !important;
+		padding-inline: 0 !important;
+	}
+}
+
+#notification-popup-box > * {
+	padding: 2px !important;
+	margin: 0 !important;
+	width: calc(var(--urlbar-height-definitive) - 4px) !important;
+	height: calc(var(--urlbar-height-definitive) - 4px) !important;
+}
+
+
+/*
+	GTK+ SysTheme - exclusive urlbar styling
+*/
+[gksystheme="gtk"]:not([gkthemed], [gkchrthemed], [geckium-sixtyeight]) {
+	#urlbar-container::before {
+		-moz-default-appearance: textarea;
+		content: "";
+		appearance: textarea;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+	}
+
+	#urlbar-container,
+	#search-container {
+		box-shadow: unset !important;
+	}
+
+	#urlbar-background,
+	.urlbar-background {
+		visibility: hidden !important;
+	}
+
+	#urlbar-input {
+		color: FieldText !important;
+
+		&::placeholder {
+			color: inherit !important;
+			opacity: 0.5 !important;
+		}
+	}
+
+	// Make the fake https fit in better
+	#urlbar #urlbar-protocol {
+		--protocol-background-color: transparent !important;
+		-webkit-text-stroke: 2px Field !important;
+		paint-order: stroke fill;
+		height: calc(100% - 8px);
+	}
+
+	// Make GTK document icon not overflow
+	#identity-icon {
+		max-width: 19px;
+		max-height: 19px;
+	}
+
+	// Shrink icon sizes in the side-buttons in more icons enabled
+	&[gtkicons="1"] {
+		:not(.widget-overflow-list) > .toolbarbutton-1:not(
+			#gkavatar-container > #gk-firefox-account-button,
+			#tabs-newtab-button,
+			#new-tab-button,
+			.subviewbutton
+		) {
+			&#star-button-box > #star-button,
+			&#go-button-box > #go-button {
+				width: 16px !important;
+				height: 16px !important;
+				transform: unset !important;
+			}
+		}
+	}
+}

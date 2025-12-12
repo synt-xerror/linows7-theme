@@ -1,0 +1,120 @@
+@-moz-document 	url-prefix(about:preferences),
+				url-prefix(about:addons),
+				url-prefix(chrome://browser/content/preferences/dialogs) {
+	checkbox,
+	radio {
+		margin-block: 2.5px !important;
+		margin-inline: 0 !important;
+
+		&:not([disabled]):hover {
+			.checkbox-check,
+			.radio-check {
+				background: linear-gradient(
+					to top,
+					#e0e0e0,
+					#f5f4f4
+				);
+				box-shadow: 0 1px 1px rgb(0, 0, 0, 14%),
+					inset 0 1px 2px rgb(255, 255, 255, 75%) !important;
+				color: rgb(0, 0, 0) !important;
+
+				@media (prefers-color-scheme: dark) {
+					color: white !important;
+				}
+			}
+
+			.checkbox-label,
+			.radio-label {
+				color: rgb(0, 0, 0) !important;
+
+				@media (prefers-color-scheme: dark) {
+					color: white !important;
+				}
+			}
+		}
+		&:not([disabled]):active {
+			.checkbox-check,
+			.radio-check {
+				background: linear-gradient(
+					to top,
+					#e0e0e0,
+					#eeeeee
+				);
+				box-shadow: 0 1px 1px transparent, inset 0 1px 2px transparent !important;
+				color: rgb(0, 0, 0) !important;
+
+				@media (prefers-color-scheme: dark) {
+					color: white !important;
+				}
+			}
+		}
+		&[focused] .radio-check {
+			outline: none !important;
+		}
+	}
+
+	input[type="checkbox"],
+	input[type="radio"],
+	.checkbox-check,
+	.radio-check {
+		appearance: unset !important;
+		-moz-default-appearance: unset !important;
+		background: linear-gradient(
+			to top,
+			#e0e0e0,
+			#f0f0f0
+		) !important;
+		border: 1px solid rgb(0, 0, 0, 30%) !important;
+		box-shadow: 0 1px 1px rgb(0, 0, 0, 8%),
+					inset 0 1px 2px rgb(255, 255, 255, 75%) !important;
+		box-sizing: border-box !important;
+	}
+
+	input[type="checkbox"],
+	.checkbox-check {
+		border-radius: 2px !important;
+		height: 13px !important;
+		width: 13px !important;
+	}
+
+	input[type="radio"],
+	.radio-check {
+		border-radius: 50% !important;
+		height: 15px !important;
+		width: 15px !important;
+	}
+
+	.checkbox-label,
+	.radio-label {
+		font-size: 9pt !important;
+		color: var(--header-color);
+	}
+
+	input[type="checkbox"]:checked,
+	.checkbox-check[checked] {
+		background-image:
+		url(chrome://userchrome/content/assets/img/pages/check.png),
+		linear-gradient(
+			to top,
+			#e0e0e0,
+			#f0f0f0
+		) !important;
+		background-color: transparent !important;
+		background-repeat: no-repeat !important;
+		background-position: center !important;
+	}
+	
+	input[type="radio"]:checked,
+	.radio-check[selected] {
+		background-image:
+		url(chrome://userchrome/content/assets/img/pages/radio.png),
+		linear-gradient(
+			to top,
+			#e0e0e0,
+			#f0f0f0
+		) !important;
+		background-color: transparent !important;
+		background-repeat: no-repeat !important;
+		background-position: center !important;
+	}
+}

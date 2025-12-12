@@ -1,0 +1,99 @@
+/* ==UserScript==
+// @stylemode		author_sheet
+// @name  			Aero Button Glow
+// ==/UserScript==*/
+
+@media (not (-moz-bool-pref: "aero-userchrome.force-css-glow")),
+       (not (-moz-pref("aero-userchrome.force-css-glow")))
+{
+:root
+{
+    --aero-titlebuttons-js-glow-visibility: initial;
+    /* Disable userchrome glow */
+    --aero-titlebuttons-glow-visibility: hidden !important;
+}
+}
+
+@media (-moz-bool-pref: "aero-userchrome.force-css-glow"),
+       (-moz-pref("aero-userchrome.force-css-glow"))
+{
+:root
+{
+    --aero-titlebuttons-js-glow-visibility: none;
+}
+}
+
+#jsMinimizeButtonGlow
+{
+    --w:  calc(var(--aero-titlebuttons-glow-minimize-w)  / var(--aero-hidpi-scale)) !important;
+    --h:  calc(var(--aero-titlebuttons-glow-minimize-h)  / var(--aero-hidpi-scale)) !important;
+    --mr: calc(var(--aero-titlebuttons-glow-minimize-mr) / var(--aero-hidpi-scale)) !important;
+    --mt: calc(var(--aero-titlebuttons-glow-minimize-mt) / var(--aero-hidpi-scale)) !important;
+}
+
+#jsMaximizeButtonGlow
+{
+    --w:  calc(var(--aero-titlebuttons-glow-maximize-w)  / var(--aero-hidpi-scale)) !important;
+    --h:  calc(var(--aero-titlebuttons-glow-maximize-h)  / var(--aero-hidpi-scale)) !important;
+    --mr: calc(var(--aero-titlebuttons-glow-maximize-mr) / var(--aero-hidpi-scale)) !important;
+    --mt: calc(var(--aero-titlebuttons-glow-maximize-mt) / var(--aero-hidpi-scale)) !important;
+}
+
+#jsCloseButtonGlow
+{
+    --w:  calc(var(--aero-titlebuttons-glow-close-w)  / var(--aero-hidpi-scale)) !important;
+    --h:  calc(var(--aero-titlebuttons-glow-close-h)  / var(--aero-hidpi-scale)) !important;
+    --mr: calc(var(--aero-titlebuttons-glow-close-mr) / var(--aero-hidpi-scale)) !important;
+    --mt: calc(var(--aero-titlebuttons-glow-close-mt) / var(--aero-hidpi-scale)) !important;
+}
+
+#jsMinimizeButtonGlow,
+#jsMaximizeButtonGlow,
+#jsCloseButtonGlow
+{
+    display: var(--aero-titlebuttons-js-glow-visibility) !important;
+    appearance: none !important;
+    position: absolute !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    transition: opacity 0.05s linear !important;
+    background-repeat: no-repeat !important;
+
+    width:      var(--w) !important;
+    min-width:  var(--w) !important;
+    max-width:  var(--w) !important;
+
+    height:     var(--h) !important;
+    min-height: var(--h) !important;
+    max-height: var(--h) !important;
+
+    background-size: var(--w) var(--h) !important;
+
+    margin-right: var(--mr) !important;
+    margin-top:   var(--mt) !important;
+}
+
+#jsMinimizeButtonGlow[glow="true"],
+#jsMaximizeButtonGlow[glow="true"],
+#jsCloseButtonGlow[glow="true"]
+{
+    opacity: 1 !important;
+}
+
+#jsMinimizeButtonGlow::part(content),
+#jsMaximizeButtonGlow::part(content),
+#jsCloseButtonGlow::part(content)
+{
+    display: none !important;
+    appearance: none !important;
+    pointer-events: none !important;
+}
+
+#jsMinimizeButtonGlow::part(content)::before,
+#jsMaximizeButtonGlow::part(content)::before,
+#jsCloseButtonGlow::part(content)::before
+{
+    display: none !important;
+    appearance: none !important;
+    pointer-events: none !important;
+}

@@ -1,0 +1,19 @@
+@import "sidebar";
+@import "main";
+
+& {
+	--in-content-font-body-size-base: 9pt !important;
+	--main-pane-width: var(--main-pane-width-final) !important;
+	--section-width: var(--main-pane-width-final) !important;
+}
+
+body {
+	--main-pane-width: var(--main-pane-width-final) !important;
+
+	font-family: Helvetica, Arial, sans-serif !important;
+	font-size: 9pt !important;
+	
+	@media (-moz-platform: linux) {
+		font: message-box !important;
+	}
+}

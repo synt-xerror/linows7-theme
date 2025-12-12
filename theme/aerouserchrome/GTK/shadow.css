@@ -1,0 +1,30 @@
+/*
+ * This stylesheet modifies the box-shadow property
+ * of CSD decorations, overriding the GTK theme.
+ * Add this to ~/.config/gtk-3.0/gtk.css
+ */
+
+decoration,
+decoration:backdrop
+{
+  transition: none;
+}
+
+decoration
+{
+  border-radius: unset;
+  border-width: unset;
+  margin: 6px; /* drag space */
+  box-shadow:
+    2px 2px 5px 2px rgba(0, 0, 0, 0.8),
+    2px 6px 7px 0px rgba(0, 0, 0, 0.4),
+    1px 1px 6px 1px transparent;
+}
+
+decoration:backdrop
+{
+  box-shadow:
+    2px 2px 5px 2px transparent,
+    2px 6px 7px 0px transparent,
+    1px 1px 6px 1px rgba(0, 0, 0, 0.5);
+}

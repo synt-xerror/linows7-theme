@@ -1,0 +1,4575 @@
+:root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+  /* This file is auto-generated */
+  /*
+   * Draws the side glow and frame corner shadow adjustments
+   */
+  /*
+   * Button glow
+   */
+  /*
+   * Firefox has two elements with class "titlebar-buttonbox-container",
+   * one is a child of "#toolbar-menubar" and the other a child of "#TabsToolbar".
+   *
+   * We'll only be using the latter, so hide the former.
+   */
+  /*
+   * Add "&" and "[skipintoolbarset="true"]" to increase CSS specificity.
+   */
+  /*
+   * Make the element remain visible when the menubar is shown.
+   */
+  /*
+   * Rudimentary lightweight theme compat
+   */
+  /* Active window */
+  /* Inactive window */
+  /*
+  @keyframes fadeInFromNone
+  {
+      from
+      {
+          opacity: 0;
+      }
+
+      to
+      {
+          opacity: 1;
+      }
+  }
+
+  @keyframes fadeOutFromNone
+  {
+      from
+      {
+          opacity: 1;
+      }
+
+      to
+      {
+          opacity: 0;
+      }
+  }
+
+
+  .titlebar-min::before,
+  .titlebar-min:hover::after,
+  .titlebar-max::before,
+  .titlebar-max:hover::after,
+  .titlebar-restore::before,
+  .titlebar-restore:hover::after,
+  .titlebar-close::before,
+  .titlebar-close:hover::after
+  {
+    animation: fadeInFromNone 0.01s $timing-function-1 forwards;
+  }
+
+  .titlebar-min:hover::before,
+  .titlebar-min::after,
+  .titlebar-max:hover::before,
+  .titlebar-max::after,
+  .titlebar-restore:hover::before,
+  .titlebar-restore::after,
+  .titlebar-close:hover::before,
+  .titlebar-close::after
+  {
+    animation: fadeOutFromNone 0.1s $timing-function-2 forwards;
+  }
+
+  .titlebar-min:active::before,
+  .titlebar-max:active::before,
+  .titlebar-restore:active::before,
+  .titlebar-close:active::before
+  {
+    animation: fadeInFromNone 1s $timing-function-1 forwards;
+  }
+
+  .titlebar-min:active::after,
+  .titlebar-max:active::after,
+  .titlebar-restore:active::after,
+  .titlebar-close:active::after
+  {
+    animation: fadeOutFromNone 1s $timing-function-1 forwards;
+  }
+  */
+  /* @import "innerBorder"; */
+  /*
+   * Create fake window borders by adding padding to the left, right and bottom of the body element.
+   * We also have to adjust the width and height to accommodate.
+   *
+   * We want the fake borders only when:
+   * 1) the window is not maximized
+   * 2) tabs in titlebar is enabled
+   *
+   */
+  /* #toolbar-menubar.browser-toolbar[type="menubar"] */
+  /* { */
+  /*     position: fixed !important; */
+  /* } */
+  /*
+   * Control the amount of vertical space above the tabs
+   *
+   * Use lots of class specifiers here to increase CSS specificity to better override themes
+   * https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
+   *
+   */
+}
+:root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+  --aero-padding: 7px;
+  --aero-border: 1px;
+  --aero-highlight: 1px;
+  --aero-top-padding-windowed: 16px;
+  --aero-top-padding-maximized: 0px;
+  --aero-top-padding-windowed-menu-add: 0px;
+  --aero-top-padding-maximized-menu-add: 0px;
+  --aero-titlebuttons-top-offset: 1px;
+  --aero-titlebuttons-right-offset: var(--aero-padding);
+  --aero-titlebuttons-glow-visibility: visible;
+  --aero-color: AccentColor;
+  --aero-color-strength: 0%;
+  --aero-inner-border-source: url("Assets/aero-inner-border-no-top.png");
+  --aero-inner-border-width-left: 2px;
+  --aero-inner-border-width-right: 2px;
+  --aero-inner-border-width-top: 0px;
+  --aero-inner-border-width-bottom: 2px;
+  --aero-inner-border-inset-left: var(--aero-padding);
+  --aero-inner-border-inset-right: var(--aero-padding);
+  --aero-inner-border-inset-top: calc(var(--windowed-top-padding, 0px) + var(--menubar-extra, 0px) + 50px);
+  --aero-inner-border-inset-bottom: calc(var(--aero-padding) - 1px);
+  --aero-hidpi-image-rendering: auto;
+  --aero-tab-maximized-offset: 30px;
+  --aero-titlebuttons-glow-visibility: visible;
+  /* Firefox Variables */
+  --inactive-titlebar-opacity: 1 !important;
+}
+@media not (-moz-bool-pref: "aero-userchrome.alternative"), not (-moz-pref("aero-userchrome.alternative")) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-titlebuttons-bitmap-minimize: url("Assets/minimize.png");
+    --aero-titlebuttons-bitmap-minimize-hover: url("Assets/minimize-hover.png");
+    --aero-titlebuttons-bitmap-minimize-active: url("Assets/minimize-active.png");
+    --aero-titlebuttons-bitmap-maximize: url("Assets/maximize.png");
+    --aero-titlebuttons-bitmap-maximize-hover: url("Assets/maximize-hover.png");
+    --aero-titlebuttons-bitmap-maximize-active: url("Assets/maximize-active.png");
+    --aero-titlebuttons-bitmap-restore: url("Assets/restore.png");
+    --aero-titlebuttons-bitmap-restore-hover: url("Assets/restore-hover.png");
+    --aero-titlebuttons-bitmap-restore-active: url("Assets/restore-active.png");
+    --aero-titlebuttons-bitmap-close: url("Assets/close.png");
+    --aero-titlebuttons-bitmap-close-hover: url("Assets/close-hover.png");
+    --aero-titlebuttons-bitmap-close-active: url("Assets/close-active.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus: url("Assets/minimize-unfocus.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-hover: url("Assets/minimize-unfocus-hover.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-active: url("Assets/minimize-unfocus-active.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus: url("Assets/maximize-unfocus.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-hover: url("Assets/maximize-unfocus-hover.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-active: url("Assets/maximize-unfocus-active.png");
+    --aero-titlebuttons-bitmap-restore-unfocus: url("Assets/restore-unfocus.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-hover: url("Assets/restore-unfocus-hover.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-active: url("Assets/restore-unfocus-active.png");
+    --aero-titlebuttons-bitmap-close-unfocus: url("Assets/close-unfocus.png");
+    --aero-titlebuttons-bitmap-close-unfocus-hover: url("Assets/close-unfocus-hover.png");
+    --aero-titlebuttons-bitmap-close-unfocus-active: url("Assets/close-unfocus-active.png");
+    --aero-titlebuttons-glow-min: url("Assets/minimize-glow.png");
+    --aero-titlebuttons-glow-max: url("Assets/maximize-glow.png");
+    --aero-titlebuttons-glow-close: url("Assets/close-glow.png");
+    --aero-glow-left: url("Assets/sidebar.png");
+    --aero-glow-right: url("Assets/sidebar.png");
+    --aero-frame-border-image: url("Assets/frame-focus.png");
+    --aero-shadow-adjust-nw: url("Assets/shadow-adjust-nw.png");
+    --aero-shadow-adjust-ne: url("Assets/shadow-adjust-ne.png");
+    --aero-shadow-adjust-sw: url("Assets/shadow-adjust-sw.png");
+    --aero-shadow-adjust-se: url("Assets/shadow-adjust-se.png");
+    --aero-titlebuttons-global-height: 20px;
+    --aero-titlebuttons-minimize-width: 29px;
+    --aero-titlebuttons-minimize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-maximize-width: 27px;
+    --aero-titlebuttons-maximize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-restore-width: 27px;
+    --aero-titlebuttons-restore-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-close-width: 49px;
+    --aero-titlebuttons-close-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-glow-minimize-w: 47px;
+    --aero-titlebuttons-glow-minimize-h: 35px;
+    --aero-titlebuttons-glow-minimize-mr: -9px;
+    --aero-titlebuttons-glow-minimize-mt: -8px;
+    --aero-titlebuttons-glow-maximize-w: 45px;
+    --aero-titlebuttons-glow-maximize-h: 35px;
+    --aero-titlebuttons-glow-maximize-mr: -9px;
+    --aero-titlebuttons-glow-maximize-mt: -8px;
+    --aero-titlebuttons-glow-close-w: 66px;
+    --aero-titlebuttons-glow-close-h: 35px;
+    --aero-titlebuttons-glow-close-mr: -8px;
+    --aero-titlebuttons-glow-close-mt: -8px;
+  }
+  :root:is([tabsintitlebar]):-moz-window-inactive, :root:is([customtitlebar]):-moz-window-inactive {
+    --aero-glow-left: url("Assets/sidebar_unfocus.png");
+    --aero-glow-right: url("Assets/sidebar_unfocus.png");
+    --aero-frame-border-image: url("Assets/frame-unfocus.png");
+    --aero-shadow-adjust-nw: url("Assets/shadow-adjust-nw-unfocus.png");
+    --aero-shadow-adjust-ne: url("Assets/shadow-adjust-ne-unfocus.png");
+    --aero-shadow-adjust-sw: url("Assets/shadow-adjust-sw-unfocus.png");
+    --aero-shadow-adjust-se: url("Assets/shadow-adjust-se-unfocus.png");
+  }
+}
+@media (-moz-bool-pref: "aero-userchrome.alternative"), (-moz-pref("aero-userchrome.alternative")) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-titlebuttons-bitmap-minimize: url("AssetsAlt/minimize.png");
+    --aero-titlebuttons-bitmap-minimize-hover: url("AssetsAlt/minimize-hover.png");
+    --aero-titlebuttons-bitmap-minimize-active: url("AssetsAlt/minimize-active.png");
+    --aero-titlebuttons-bitmap-maximize: url("AssetsAlt/maximize.png");
+    --aero-titlebuttons-bitmap-maximize-hover: url("AssetsAlt/maximize-hover.png");
+    --aero-titlebuttons-bitmap-maximize-active: url("AssetsAlt/maximize-active.png");
+    --aero-titlebuttons-bitmap-restore: url("AssetsAlt/restore.png");
+    --aero-titlebuttons-bitmap-restore-hover: url("AssetsAlt/restore-hover.png");
+    --aero-titlebuttons-bitmap-restore-active: url("AssetsAlt/restore-active.png");
+    --aero-titlebuttons-bitmap-close: url("AssetsAlt/close.png");
+    --aero-titlebuttons-bitmap-close-hover: url("AssetsAlt/close-hover.png");
+    --aero-titlebuttons-bitmap-close-active: url("AssetsAlt/close-active.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus: url("AssetsAlt/minimize-unfocus.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-hover: url("AssetsAlt/minimize-unfocus-hover.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-active: url("AssetsAlt/minimize-unfocus-active.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus: url("AssetsAlt/maximize-unfocus.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-hover: url("AssetsAlt/maximize-unfocus-hover.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-active: url("AssetsAlt/maximize-unfocus-active.png");
+    --aero-titlebuttons-bitmap-restore-unfocus: url("AssetsAlt/restore-unfocus.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-hover: url("AssetsAlt/restore-unfocus-hover.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-active: url("AssetsAlt/restore-unfocus-active.png");
+    --aero-titlebuttons-bitmap-close-unfocus: url("AssetsAlt/close-unfocus.png");
+    --aero-titlebuttons-bitmap-close-unfocus-hover: url("AssetsAlt/close-unfocus-hover.png");
+    --aero-titlebuttons-bitmap-close-unfocus-active: url("AssetsAlt/close-unfocus-active.png");
+    --aero-titlebuttons-glow-min: url("AssetsAlt/minimize-glow.png");
+    --aero-titlebuttons-glow-max: url("AssetsAlt/maximize-glow.png");
+    --aero-titlebuttons-glow-close: url("AssetsAlt/close-glow.png");
+    --aero-glow-left: url("AssetsAlt/sidebar.png");
+    --aero-glow-right: url("AssetsAlt/sidebar.png");
+    --aero-frame-border-image: url("AssetsAlt/frame-focus.png");
+    --aero-shadow-adjust-nw: url("AssetsAlt/shadow-adjust-nw.png");
+    --aero-shadow-adjust-ne: url("AssetsAlt/shadow-adjust-ne.png");
+    --aero-shadow-adjust-sw: url("AssetsAlt/shadow-adjust-sw.png");
+    --aero-shadow-adjust-se: url("AssetsAlt/shadow-adjust-se.png");
+    --aero-titlebuttons-global-height: 18px;
+    --aero-titlebuttons-minimize-width: 26px;
+    --aero-titlebuttons-minimize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-maximize-width: 25px;
+    --aero-titlebuttons-maximize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-restore-width: 25px;
+    --aero-titlebuttons-restore-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-close-width: 44px;
+    --aero-titlebuttons-close-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-glow-minimize-w: 44px;
+    --aero-titlebuttons-glow-minimize-h: 33px;
+    --aero-titlebuttons-glow-minimize-mr: -9px;
+    --aero-titlebuttons-glow-minimize-mt: -8px;
+    --aero-titlebuttons-glow-maximize-w: 43px;
+    --aero-titlebuttons-glow-maximize-h: 33px;
+    --aero-titlebuttons-glow-maximize-mr: -9px;
+    --aero-titlebuttons-glow-maximize-mt: -8px;
+    --aero-titlebuttons-glow-close-w: 61px;
+    --aero-titlebuttons-glow-close-h: 33px;
+    --aero-titlebuttons-glow-close-mr: -8px;
+    --aero-titlebuttons-glow-close-mt: -8px;
+  }
+  :root:is([tabsintitlebar]):-moz-window-inactive, :root:is([customtitlebar]):-moz-window-inactive {
+    --aero-glow-left: url("AssetsAlt/sidebar_unfocus.png");
+    --aero-glow-right: url("AssetsAlt/sidebar_unfocus.png");
+    --aero-frame-border-image: url("AssetsAlt/frame-unfocus.png");
+    --aero-shadow-adjust-nw: url("AssetsAlt/shadow-adjust-nw-unfocus.png");
+    --aero-shadow-adjust-ne: url("AssetsAlt/shadow-adjust-ne-unfocus.png");
+    --aero-shadow-adjust-sw: url("AssetsAlt/shadow-adjust-sw-unfocus.png");
+    --aero-shadow-adjust-se: url("AssetsAlt/shadow-adjust-se-unfocus.png");
+  }
+}
+:root:is([tabsintitlebar])[sizemode=maximized], :root:is([customtitlebar])[sizemode=maximized] {
+  --aero-titlebuttons-top-offset: -1px;
+  --aero-titlebuttons-right-offset: 2px;
+  --aero-tab-maximized-offset: 128px;
+  --aero-shadow-adjust-nw: none !important;
+  --aero-shadow-adjust-ne: none !important;
+  --aero-shadow-adjust-sw: none !important;
+  --aero-shadow-adjust-se: none !important;
+}
+@media (min-resolution: 96dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.00000;
+  }
+}
+@media (min-resolution: 97dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.01041;
+  }
+}
+@media (min-resolution: 98dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.02083;
+  }
+}
+@media (min-resolution: 99dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.03125;
+  }
+}
+@media (min-resolution: 100dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.04166;
+  }
+}
+@media (min-resolution: 101dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.05208;
+  }
+}
+@media (min-resolution: 102dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.06250;
+  }
+}
+@media (min-resolution: 103dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.07291;
+  }
+}
+@media (min-resolution: 104dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.08333;
+  }
+}
+@media (min-resolution: 105dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.09375;
+  }
+}
+@media (min-resolution: 106dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.10416;
+  }
+}
+@media (min-resolution: 107dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.11458;
+  }
+}
+@media (min-resolution: 108dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.12500;
+  }
+}
+@media (min-resolution: 109dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.13541;
+  }
+}
+@media (min-resolution: 110dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.14583;
+  }
+}
+@media (min-resolution: 111dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.15625;
+  }
+}
+@media (min-resolution: 112dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.16666;
+  }
+}
+@media (min-resolution: 113dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.17708;
+  }
+}
+@media (min-resolution: 114dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.18750;
+  }
+}
+@media (min-resolution: 115dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.19791;
+  }
+}
+@media (min-resolution: 116dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.20833;
+  }
+}
+@media (min-resolution: 117dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.21875;
+  }
+}
+@media (min-resolution: 118dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.22916;
+  }
+}
+@media (min-resolution: 119dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.23958;
+  }
+}
+@media (min-resolution: 120dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.25000;
+  }
+}
+@media (min-resolution: 121dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.26041;
+  }
+}
+@media (min-resolution: 122dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.27083;
+  }
+}
+@media (min-resolution: 123dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.28125;
+  }
+}
+@media (min-resolution: 124dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.29166;
+  }
+}
+@media (min-resolution: 125dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.30208;
+  }
+}
+@media (min-resolution: 126dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.31250;
+  }
+}
+@media (min-resolution: 127dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.32291;
+  }
+}
+@media (min-resolution: 128dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.33333;
+  }
+}
+@media (min-resolution: 129dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.34375;
+  }
+}
+@media (min-resolution: 130dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.35416;
+  }
+}
+@media (min-resolution: 131dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.36458;
+  }
+}
+@media (min-resolution: 132dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.37500;
+  }
+}
+@media (min-resolution: 133dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.38541;
+  }
+}
+@media (min-resolution: 134dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.39583;
+  }
+}
+@media (min-resolution: 135dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.40625;
+  }
+}
+@media (min-resolution: 136dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.41666;
+  }
+}
+@media (min-resolution: 137dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.42708;
+  }
+}
+@media (min-resolution: 138dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.43750;
+  }
+}
+@media (min-resolution: 139dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.44791;
+  }
+}
+@media (min-resolution: 140dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.45833;
+  }
+}
+@media (min-resolution: 141dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.46875;
+  }
+}
+@media (min-resolution: 142dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.47916;
+  }
+}
+@media (min-resolution: 143dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.48958;
+  }
+}
+@media (min-resolution: 144dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.50000;
+  }
+}
+@media (min-resolution: 145dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.51041;
+  }
+}
+@media (min-resolution: 146dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.52083;
+  }
+}
+@media (min-resolution: 147dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.53125;
+  }
+}
+@media (min-resolution: 148dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.54166;
+  }
+}
+@media (min-resolution: 149dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.55208;
+  }
+}
+@media (min-resolution: 150dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.56250;
+  }
+}
+@media (min-resolution: 151dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.57291;
+  }
+}
+@media (min-resolution: 152dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.58333;
+  }
+}
+@media (min-resolution: 153dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.59375;
+  }
+}
+@media (min-resolution: 154dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.60416;
+  }
+}
+@media (min-resolution: 155dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.61458;
+  }
+}
+@media (min-resolution: 156dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.62500;
+  }
+}
+@media (min-resolution: 157dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.63541;
+  }
+}
+@media (min-resolution: 158dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.64583;
+  }
+}
+@media (min-resolution: 159dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.65625;
+  }
+}
+@media (min-resolution: 160dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.66666;
+  }
+}
+@media (min-resolution: 161dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.67708;
+  }
+}
+@media (min-resolution: 162dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.68750;
+  }
+}
+@media (min-resolution: 163dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.69791;
+  }
+}
+@media (min-resolution: 164dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.70833;
+  }
+}
+@media (min-resolution: 165dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.71875;
+  }
+}
+@media (min-resolution: 166dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.72916;
+  }
+}
+@media (min-resolution: 167dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.73958;
+  }
+}
+@media (min-resolution: 168dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.75000;
+  }
+}
+@media (min-resolution: 169dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.76041;
+  }
+}
+@media (min-resolution: 170dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.77083;
+  }
+}
+@media (min-resolution: 171dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.78125;
+  }
+}
+@media (min-resolution: 172dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.79166;
+  }
+}
+@media (min-resolution: 173dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.80208;
+  }
+}
+@media (min-resolution: 174dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.81250;
+  }
+}
+@media (min-resolution: 175dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.82291;
+  }
+}
+@media (min-resolution: 176dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.83333;
+  }
+}
+@media (min-resolution: 177dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.84375;
+  }
+}
+@media (min-resolution: 178dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.85416;
+  }
+}
+@media (min-resolution: 179dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.86458;
+  }
+}
+@media (min-resolution: 180dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.87500;
+  }
+}
+@media (min-resolution: 181dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.88541;
+  }
+}
+@media (min-resolution: 182dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.89583;
+  }
+}
+@media (min-resolution: 183dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.90625;
+  }
+}
+@media (min-resolution: 184dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.91666;
+  }
+}
+@media (min-resolution: 185dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.92708;
+  }
+}
+@media (min-resolution: 186dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.93750;
+  }
+}
+@media (min-resolution: 187dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.94791;
+  }
+}
+@media (min-resolution: 188dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.95833;
+  }
+}
+@media (min-resolution: 189dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.96875;
+  }
+}
+@media (min-resolution: 190dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.97916;
+  }
+}
+@media (min-resolution: 191dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 1.98958;
+  }
+}
+@media (min-resolution: 192dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.00000;
+  }
+}
+@media (min-resolution: 193dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.01041;
+  }
+}
+@media (min-resolution: 194dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.02083;
+  }
+}
+@media (min-resolution: 195dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.03125;
+  }
+}
+@media (min-resolution: 196dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.04166;
+  }
+}
+@media (min-resolution: 197dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.05208;
+  }
+}
+@media (min-resolution: 198dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.06250;
+  }
+}
+@media (min-resolution: 199dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.07291;
+  }
+}
+@media (min-resolution: 200dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.08333;
+  }
+}
+@media (min-resolution: 201dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.09375;
+  }
+}
+@media (min-resolution: 202dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.10416;
+  }
+}
+@media (min-resolution: 203dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.11458;
+  }
+}
+@media (min-resolution: 204dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.12500;
+  }
+}
+@media (min-resolution: 205dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.13541;
+  }
+}
+@media (min-resolution: 206dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.14583;
+  }
+}
+@media (min-resolution: 207dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.15625;
+  }
+}
+@media (min-resolution: 208dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.16666;
+  }
+}
+@media (min-resolution: 209dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.17708;
+  }
+}
+@media (min-resolution: 210dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.18750;
+  }
+}
+@media (min-resolution: 211dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.19791;
+  }
+}
+@media (min-resolution: 212dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.20833;
+  }
+}
+@media (min-resolution: 213dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.21875;
+  }
+}
+@media (min-resolution: 214dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.22916;
+  }
+}
+@media (min-resolution: 215dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.23958;
+  }
+}
+@media (min-resolution: 216dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.25000;
+  }
+}
+@media (min-resolution: 217dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.26041;
+  }
+}
+@media (min-resolution: 218dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.27083;
+  }
+}
+@media (min-resolution: 219dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.28125;
+  }
+}
+@media (min-resolution: 220dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.29166;
+  }
+}
+@media (min-resolution: 221dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.30208;
+  }
+}
+@media (min-resolution: 222dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.31250;
+  }
+}
+@media (min-resolution: 223dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.32291;
+  }
+}
+@media (min-resolution: 224dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.33333;
+  }
+}
+@media (min-resolution: 225dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.34375;
+  }
+}
+@media (min-resolution: 226dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.35416;
+  }
+}
+@media (min-resolution: 227dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.36458;
+  }
+}
+@media (min-resolution: 228dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.37500;
+  }
+}
+@media (min-resolution: 229dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.38541;
+  }
+}
+@media (min-resolution: 230dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.39583;
+  }
+}
+@media (min-resolution: 231dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.40625;
+  }
+}
+@media (min-resolution: 232dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.41666;
+  }
+}
+@media (min-resolution: 233dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.42708;
+  }
+}
+@media (min-resolution: 234dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.43750;
+  }
+}
+@media (min-resolution: 235dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.44791;
+  }
+}
+@media (min-resolution: 236dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.45833;
+  }
+}
+@media (min-resolution: 237dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.46875;
+  }
+}
+@media (min-resolution: 238dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.47916;
+  }
+}
+@media (min-resolution: 239dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.48958;
+  }
+}
+@media (min-resolution: 240dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.50000;
+  }
+}
+@media (min-resolution: 241dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.51041;
+  }
+}
+@media (min-resolution: 242dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.52083;
+  }
+}
+@media (min-resolution: 243dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.53125;
+  }
+}
+@media (min-resolution: 244dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.54166;
+  }
+}
+@media (min-resolution: 245dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.55208;
+  }
+}
+@media (min-resolution: 246dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.56250;
+  }
+}
+@media (min-resolution: 247dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.57291;
+  }
+}
+@media (min-resolution: 248dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.58333;
+  }
+}
+@media (min-resolution: 249dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.59375;
+  }
+}
+@media (min-resolution: 250dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.60416;
+  }
+}
+@media (min-resolution: 251dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.61458;
+  }
+}
+@media (min-resolution: 252dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.62500;
+  }
+}
+@media (min-resolution: 253dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.63541;
+  }
+}
+@media (min-resolution: 254dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.64583;
+  }
+}
+@media (min-resolution: 255dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.65625;
+  }
+}
+@media (min-resolution: 256dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.66666;
+  }
+}
+@media (min-resolution: 257dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.67708;
+  }
+}
+@media (min-resolution: 258dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.68750;
+  }
+}
+@media (min-resolution: 259dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.69791;
+  }
+}
+@media (min-resolution: 260dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.70833;
+  }
+}
+@media (min-resolution: 261dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.71875;
+  }
+}
+@media (min-resolution: 262dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.72916;
+  }
+}
+@media (min-resolution: 263dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.73958;
+  }
+}
+@media (min-resolution: 264dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.75000;
+  }
+}
+@media (min-resolution: 265dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.76041;
+  }
+}
+@media (min-resolution: 266dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.77083;
+  }
+}
+@media (min-resolution: 267dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.78125;
+  }
+}
+@media (min-resolution: 268dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.79166;
+  }
+}
+@media (min-resolution: 269dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.80208;
+  }
+}
+@media (min-resolution: 270dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.81250;
+  }
+}
+@media (min-resolution: 271dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.82291;
+  }
+}
+@media (min-resolution: 272dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.83333;
+  }
+}
+@media (min-resolution: 273dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.84375;
+  }
+}
+@media (min-resolution: 274dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.85416;
+  }
+}
+@media (min-resolution: 275dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.86458;
+  }
+}
+@media (min-resolution: 276dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.87500;
+  }
+}
+@media (min-resolution: 277dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.88541;
+  }
+}
+@media (min-resolution: 278dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.89583;
+  }
+}
+@media (min-resolution: 279dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.90625;
+  }
+}
+@media (min-resolution: 280dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.91666;
+  }
+}
+@media (min-resolution: 281dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.92708;
+  }
+}
+@media (min-resolution: 282dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.93750;
+  }
+}
+@media (min-resolution: 283dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.94791;
+  }
+}
+@media (min-resolution: 284dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.95833;
+  }
+}
+@media (min-resolution: 285dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.96875;
+  }
+}
+@media (min-resolution: 286dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.97916;
+  }
+}
+@media (min-resolution: 287dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 2.98958;
+  }
+}
+@media (min-resolution: 288dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.00000;
+  }
+}
+@media (min-resolution: 289dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.01041;
+  }
+}
+@media (min-resolution: 290dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.02083;
+  }
+}
+@media (min-resolution: 291dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.03125;
+  }
+}
+@media (min-resolution: 292dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.04166;
+  }
+}
+@media (min-resolution: 293dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.05208;
+  }
+}
+@media (min-resolution: 294dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.06250;
+  }
+}
+@media (min-resolution: 295dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.07291;
+  }
+}
+@media (min-resolution: 296dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.08333;
+  }
+}
+@media (min-resolution: 297dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.09375;
+  }
+}
+@media (min-resolution: 298dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.10416;
+  }
+}
+@media (min-resolution: 299dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.11458;
+  }
+}
+@media (min-resolution: 300dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.12500;
+  }
+}
+@media (min-resolution: 301dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.13541;
+  }
+}
+@media (min-resolution: 302dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.14583;
+  }
+}
+@media (min-resolution: 303dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.15625;
+  }
+}
+@media (min-resolution: 304dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.16666;
+  }
+}
+@media (min-resolution: 305dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.17708;
+  }
+}
+@media (min-resolution: 306dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.18750;
+  }
+}
+@media (min-resolution: 307dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.19791;
+  }
+}
+@media (min-resolution: 308dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.20833;
+  }
+}
+@media (min-resolution: 309dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.21875;
+  }
+}
+@media (min-resolution: 310dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.22916;
+  }
+}
+@media (min-resolution: 311dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.23958;
+  }
+}
+@media (min-resolution: 312dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.25000;
+  }
+}
+@media (min-resolution: 313dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.26041;
+  }
+}
+@media (min-resolution: 314dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.27083;
+  }
+}
+@media (min-resolution: 315dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.28125;
+  }
+}
+@media (min-resolution: 316dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.29166;
+  }
+}
+@media (min-resolution: 317dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.30208;
+  }
+}
+@media (min-resolution: 318dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.31250;
+  }
+}
+@media (min-resolution: 319dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.32291;
+  }
+}
+@media (min-resolution: 320dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.33333;
+  }
+}
+@media (min-resolution: 321dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.34375;
+  }
+}
+@media (min-resolution: 322dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.35416;
+  }
+}
+@media (min-resolution: 323dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.36458;
+  }
+}
+@media (min-resolution: 324dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.37500;
+  }
+}
+@media (min-resolution: 325dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.38541;
+  }
+}
+@media (min-resolution: 326dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.39583;
+  }
+}
+@media (min-resolution: 327dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.40625;
+  }
+}
+@media (min-resolution: 328dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.41666;
+  }
+}
+@media (min-resolution: 329dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.42708;
+  }
+}
+@media (min-resolution: 330dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.43750;
+  }
+}
+@media (min-resolution: 331dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.44791;
+  }
+}
+@media (min-resolution: 332dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.45833;
+  }
+}
+@media (min-resolution: 333dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.46875;
+  }
+}
+@media (min-resolution: 334dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.47916;
+  }
+}
+@media (min-resolution: 335dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.48958;
+  }
+}
+@media (min-resolution: 336dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.50000;
+  }
+}
+@media (min-resolution: 337dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.51041;
+  }
+}
+@media (min-resolution: 338dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.52083;
+  }
+}
+@media (min-resolution: 339dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.53125;
+  }
+}
+@media (min-resolution: 340dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.54166;
+  }
+}
+@media (min-resolution: 341dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.55208;
+  }
+}
+@media (min-resolution: 342dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.56250;
+  }
+}
+@media (min-resolution: 343dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.57291;
+  }
+}
+@media (min-resolution: 344dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.58333;
+  }
+}
+@media (min-resolution: 345dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.59375;
+  }
+}
+@media (min-resolution: 346dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.60416;
+  }
+}
+@media (min-resolution: 347dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.61458;
+  }
+}
+@media (min-resolution: 348dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.62500;
+  }
+}
+@media (min-resolution: 349dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.63541;
+  }
+}
+@media (min-resolution: 350dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.64583;
+  }
+}
+@media (min-resolution: 351dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.65625;
+  }
+}
+@media (min-resolution: 352dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.66666;
+  }
+}
+@media (min-resolution: 353dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.67708;
+  }
+}
+@media (min-resolution: 354dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.68750;
+  }
+}
+@media (min-resolution: 355dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.69791;
+  }
+}
+@media (min-resolution: 356dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.70833;
+  }
+}
+@media (min-resolution: 357dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.71875;
+  }
+}
+@media (min-resolution: 358dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.72916;
+  }
+}
+@media (min-resolution: 359dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.73958;
+  }
+}
+@media (min-resolution: 360dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.75000;
+  }
+}
+@media (min-resolution: 361dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.76041;
+  }
+}
+@media (min-resolution: 362dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.77083;
+  }
+}
+@media (min-resolution: 363dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.78125;
+  }
+}
+@media (min-resolution: 364dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.79166;
+  }
+}
+@media (min-resolution: 365dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.80208;
+  }
+}
+@media (min-resolution: 366dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.81250;
+  }
+}
+@media (min-resolution: 367dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.82291;
+  }
+}
+@media (min-resolution: 368dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.83333;
+  }
+}
+@media (min-resolution: 369dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.84375;
+  }
+}
+@media (min-resolution: 370dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.85416;
+  }
+}
+@media (min-resolution: 371dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.86458;
+  }
+}
+@media (min-resolution: 372dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.87500;
+  }
+}
+@media (min-resolution: 373dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.88541;
+  }
+}
+@media (min-resolution: 374dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.89583;
+  }
+}
+@media (min-resolution: 375dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.90625;
+  }
+}
+@media (min-resolution: 376dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.91666;
+  }
+}
+@media (min-resolution: 377dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.92708;
+  }
+}
+@media (min-resolution: 378dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.93750;
+  }
+}
+@media (min-resolution: 379dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.94791;
+  }
+}
+@media (min-resolution: 380dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.95833;
+  }
+}
+@media (min-resolution: 381dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.96875;
+  }
+}
+@media (min-resolution: 382dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.97916;
+  }
+}
+@media (min-resolution: 383dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 3.98958;
+  }
+}
+@media (min-resolution: 384dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.00000;
+  }
+}
+@media (min-resolution: 385dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.01041;
+  }
+}
+@media (min-resolution: 386dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.02083;
+  }
+}
+@media (min-resolution: 387dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.03125;
+  }
+}
+@media (min-resolution: 388dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.04166;
+  }
+}
+@media (min-resolution: 389dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.05208;
+  }
+}
+@media (min-resolution: 390dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.06250;
+  }
+}
+@media (min-resolution: 391dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.07291;
+  }
+}
+@media (min-resolution: 392dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.08333;
+  }
+}
+@media (min-resolution: 393dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.09375;
+  }
+}
+@media (min-resolution: 394dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.10416;
+  }
+}
+@media (min-resolution: 395dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.11458;
+  }
+}
+@media (min-resolution: 396dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.12500;
+  }
+}
+@media (min-resolution: 397dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.13541;
+  }
+}
+@media (min-resolution: 398dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.14583;
+  }
+}
+@media (min-resolution: 399dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.15625;
+  }
+}
+@media (min-resolution: 400dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.16666;
+  }
+}
+@media (min-resolution: 401dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.17708;
+  }
+}
+@media (min-resolution: 402dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.18750;
+  }
+}
+@media (min-resolution: 403dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.19791;
+  }
+}
+@media (min-resolution: 404dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.20833;
+  }
+}
+@media (min-resolution: 405dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.21875;
+  }
+}
+@media (min-resolution: 406dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.22916;
+  }
+}
+@media (min-resolution: 407dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.23958;
+  }
+}
+@media (min-resolution: 408dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.25000;
+  }
+}
+@media (min-resolution: 409dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.26041;
+  }
+}
+@media (min-resolution: 410dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.27083;
+  }
+}
+@media (min-resolution: 411dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.28125;
+  }
+}
+@media (min-resolution: 412dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.29166;
+  }
+}
+@media (min-resolution: 413dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.30208;
+  }
+}
+@media (min-resolution: 414dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.31250;
+  }
+}
+@media (min-resolution: 415dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.32291;
+  }
+}
+@media (min-resolution: 416dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.33333;
+  }
+}
+@media (min-resolution: 417dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.34375;
+  }
+}
+@media (min-resolution: 418dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.35416;
+  }
+}
+@media (min-resolution: 419dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.36458;
+  }
+}
+@media (min-resolution: 420dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.37500;
+  }
+}
+@media (min-resolution: 421dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.38541;
+  }
+}
+@media (min-resolution: 422dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.39583;
+  }
+}
+@media (min-resolution: 423dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.40625;
+  }
+}
+@media (min-resolution: 424dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.41666;
+  }
+}
+@media (min-resolution: 425dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.42708;
+  }
+}
+@media (min-resolution: 426dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.43750;
+  }
+}
+@media (min-resolution: 427dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.44791;
+  }
+}
+@media (min-resolution: 428dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.45833;
+  }
+}
+@media (min-resolution: 429dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.46875;
+  }
+}
+@media (min-resolution: 430dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.47916;
+  }
+}
+@media (min-resolution: 431dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.48958;
+  }
+}
+@media (min-resolution: 432dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.50000;
+  }
+}
+@media (min-resolution: 433dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.51041;
+  }
+}
+@media (min-resolution: 434dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.52083;
+  }
+}
+@media (min-resolution: 435dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.53125;
+  }
+}
+@media (min-resolution: 436dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.54166;
+  }
+}
+@media (min-resolution: 437dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.55208;
+  }
+}
+@media (min-resolution: 438dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.56250;
+  }
+}
+@media (min-resolution: 439dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.57291;
+  }
+}
+@media (min-resolution: 440dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.58333;
+  }
+}
+@media (min-resolution: 441dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.59375;
+  }
+}
+@media (min-resolution: 442dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.60416;
+  }
+}
+@media (min-resolution: 443dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.61458;
+  }
+}
+@media (min-resolution: 444dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.62500;
+  }
+}
+@media (min-resolution: 445dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.63541;
+  }
+}
+@media (min-resolution: 446dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.64583;
+  }
+}
+@media (min-resolution: 447dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.65625;
+  }
+}
+@media (min-resolution: 448dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.66666;
+  }
+}
+@media (min-resolution: 449dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.67708;
+  }
+}
+@media (min-resolution: 450dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.68750;
+  }
+}
+@media (min-resolution: 451dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.69791;
+  }
+}
+@media (min-resolution: 452dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.70833;
+  }
+}
+@media (min-resolution: 453dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.71875;
+  }
+}
+@media (min-resolution: 454dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.72916;
+  }
+}
+@media (min-resolution: 455dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.73958;
+  }
+}
+@media (min-resolution: 456dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.75000;
+  }
+}
+@media (min-resolution: 457dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.76041;
+  }
+}
+@media (min-resolution: 458dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.77083;
+  }
+}
+@media (min-resolution: 459dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.78125;
+  }
+}
+@media (min-resolution: 460dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.79166;
+  }
+}
+@media (min-resolution: 461dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.80208;
+  }
+}
+@media (min-resolution: 462dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.81250;
+  }
+}
+@media (min-resolution: 463dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.82291;
+  }
+}
+@media (min-resolution: 464dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.83333;
+  }
+}
+@media (min-resolution: 465dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.84375;
+  }
+}
+@media (min-resolution: 466dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.85416;
+  }
+}
+@media (min-resolution: 467dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.86458;
+  }
+}
+@media (min-resolution: 468dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.87500;
+  }
+}
+@media (min-resolution: 469dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.88541;
+  }
+}
+@media (min-resolution: 470dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.89583;
+  }
+}
+@media (min-resolution: 471dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.90625;
+  }
+}
+@media (min-resolution: 472dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.91666;
+  }
+}
+@media (min-resolution: 473dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.92708;
+  }
+}
+@media (min-resolution: 474dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.93750;
+  }
+}
+@media (min-resolution: 475dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.94791;
+  }
+}
+@media (min-resolution: 476dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.95833;
+  }
+}
+@media (min-resolution: 477dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.96875;
+  }
+}
+@media (min-resolution: 478dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.97916;
+  }
+}
+@media (min-resolution: 479dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 4.98958;
+  }
+}
+@media (min-resolution: 480dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.00000;
+  }
+}
+@media (min-resolution: 481dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.01041;
+  }
+}
+@media (min-resolution: 482dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.02083;
+  }
+}
+@media (min-resolution: 483dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.03125;
+  }
+}
+@media (min-resolution: 484dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.04166;
+  }
+}
+@media (min-resolution: 485dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.05208;
+  }
+}
+@media (min-resolution: 486dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.06250;
+  }
+}
+@media (min-resolution: 487dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.07291;
+  }
+}
+@media (min-resolution: 488dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.08333;
+  }
+}
+@media (min-resolution: 489dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.09375;
+  }
+}
+@media (min-resolution: 490dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.10416;
+  }
+}
+@media (min-resolution: 491dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.11458;
+  }
+}
+@media (min-resolution: 492dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.12500;
+  }
+}
+@media (min-resolution: 493dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.13541;
+  }
+}
+@media (min-resolution: 494dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.14583;
+  }
+}
+@media (min-resolution: 495dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.15625;
+  }
+}
+@media (min-resolution: 496dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.16666;
+  }
+}
+@media (min-resolution: 497dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.17708;
+  }
+}
+@media (min-resolution: 498dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.18750;
+  }
+}
+@media (min-resolution: 499dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.19791;
+  }
+}
+@media (min-resolution: 500dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.20833;
+  }
+}
+@media (min-resolution: 501dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.21875;
+  }
+}
+@media (min-resolution: 502dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.22916;
+  }
+}
+@media (min-resolution: 503dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.23958;
+  }
+}
+@media (min-resolution: 504dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.25000;
+  }
+}
+@media (min-resolution: 505dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.26041;
+  }
+}
+@media (min-resolution: 506dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.27083;
+  }
+}
+@media (min-resolution: 507dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.28125;
+  }
+}
+@media (min-resolution: 508dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.29166;
+  }
+}
+@media (min-resolution: 509dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.30208;
+  }
+}
+@media (min-resolution: 510dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.31250;
+  }
+}
+@media (min-resolution: 511dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.32291;
+  }
+}
+@media (min-resolution: 512dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.33333;
+  }
+}
+@media (min-resolution: 513dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.34375;
+  }
+}
+@media (min-resolution: 514dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.35416;
+  }
+}
+@media (min-resolution: 515dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.36458;
+  }
+}
+@media (min-resolution: 516dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.37500;
+  }
+}
+@media (min-resolution: 517dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.38541;
+  }
+}
+@media (min-resolution: 518dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.39583;
+  }
+}
+@media (min-resolution: 519dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.40625;
+  }
+}
+@media (min-resolution: 520dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.41666;
+  }
+}
+@media (min-resolution: 521dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.42708;
+  }
+}
+@media (min-resolution: 522dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.43750;
+  }
+}
+@media (min-resolution: 523dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.44791;
+  }
+}
+@media (min-resolution: 524dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.45833;
+  }
+}
+@media (min-resolution: 525dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.46875;
+  }
+}
+@media (min-resolution: 526dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.47916;
+  }
+}
+@media (min-resolution: 527dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.48958;
+  }
+}
+@media (min-resolution: 528dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.50000;
+  }
+}
+@media (min-resolution: 529dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.51041;
+  }
+}
+@media (min-resolution: 530dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.52083;
+  }
+}
+@media (min-resolution: 531dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.53125;
+  }
+}
+@media (min-resolution: 532dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.54166;
+  }
+}
+@media (min-resolution: 533dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.55208;
+  }
+}
+@media (min-resolution: 534dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.56250;
+  }
+}
+@media (min-resolution: 535dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.57291;
+  }
+}
+@media (min-resolution: 536dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.58333;
+  }
+}
+@media (min-resolution: 537dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.59375;
+  }
+}
+@media (min-resolution: 538dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.60416;
+  }
+}
+@media (min-resolution: 539dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.61458;
+  }
+}
+@media (min-resolution: 540dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.62500;
+  }
+}
+@media (min-resolution: 541dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.63541;
+  }
+}
+@media (min-resolution: 542dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.64583;
+  }
+}
+@media (min-resolution: 543dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.65625;
+  }
+}
+@media (min-resolution: 544dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.66666;
+  }
+}
+@media (min-resolution: 545dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.67708;
+  }
+}
+@media (min-resolution: 546dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.68750;
+  }
+}
+@media (min-resolution: 547dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.69791;
+  }
+}
+@media (min-resolution: 548dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.70833;
+  }
+}
+@media (min-resolution: 549dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.71875;
+  }
+}
+@media (min-resolution: 550dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.72916;
+  }
+}
+@media (min-resolution: 551dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.73958;
+  }
+}
+@media (min-resolution: 552dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.75000;
+  }
+}
+@media (min-resolution: 553dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.76041;
+  }
+}
+@media (min-resolution: 554dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.77083;
+  }
+}
+@media (min-resolution: 555dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.78125;
+  }
+}
+@media (min-resolution: 556dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.79166;
+  }
+}
+@media (min-resolution: 557dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.80208;
+  }
+}
+@media (min-resolution: 558dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.81250;
+  }
+}
+@media (min-resolution: 559dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.82291;
+  }
+}
+@media (min-resolution: 560dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.83333;
+  }
+}
+@media (min-resolution: 561dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.84375;
+  }
+}
+@media (min-resolution: 562dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.85416;
+  }
+}
+@media (min-resolution: 563dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.86458;
+  }
+}
+@media (min-resolution: 564dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.87500;
+  }
+}
+@media (min-resolution: 565dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.88541;
+  }
+}
+@media (min-resolution: 566dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.89583;
+  }
+}
+@media (min-resolution: 567dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.90625;
+  }
+}
+@media (min-resolution: 568dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.91666;
+  }
+}
+@media (min-resolution: 569dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.92708;
+  }
+}
+@media (min-resolution: 570dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.93750;
+  }
+}
+@media (min-resolution: 571dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.94791;
+  }
+}
+@media (min-resolution: 572dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.95833;
+  }
+}
+@media (min-resolution: 573dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.96875;
+  }
+}
+@media (min-resolution: 574dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.97916;
+  }
+}
+@media (min-resolution: 575dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 5.98958;
+  }
+}
+@media (min-resolution: 576dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.00000;
+  }
+}
+@media (min-resolution: 577dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.01041;
+  }
+}
+@media (min-resolution: 578dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.02083;
+  }
+}
+@media (min-resolution: 579dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.03125;
+  }
+}
+@media (min-resolution: 580dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.04166;
+  }
+}
+@media (min-resolution: 581dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.05208;
+  }
+}
+@media (min-resolution: 582dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.06250;
+  }
+}
+@media (min-resolution: 583dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.07291;
+  }
+}
+@media (min-resolution: 584dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.08333;
+  }
+}
+@media (min-resolution: 585dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.09375;
+  }
+}
+@media (min-resolution: 586dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.10416;
+  }
+}
+@media (min-resolution: 587dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.11458;
+  }
+}
+@media (min-resolution: 588dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.12500;
+  }
+}
+@media (min-resolution: 589dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.13541;
+  }
+}
+@media (min-resolution: 590dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.14583;
+  }
+}
+@media (min-resolution: 591dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.15625;
+  }
+}
+@media (min-resolution: 592dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.16666;
+  }
+}
+@media (min-resolution: 593dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.17708;
+  }
+}
+@media (min-resolution: 594dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.18750;
+  }
+}
+@media (min-resolution: 595dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.19791;
+  }
+}
+@media (min-resolution: 596dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.20833;
+  }
+}
+@media (min-resolution: 597dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.21875;
+  }
+}
+@media (min-resolution: 598dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.22916;
+  }
+}
+@media (min-resolution: 599dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.23958;
+  }
+}
+@media (min-resolution: 600dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.25000;
+  }
+}
+@media (min-resolution: 601dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.26041;
+  }
+}
+@media (min-resolution: 602dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.27083;
+  }
+}
+@media (min-resolution: 603dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.28125;
+  }
+}
+@media (min-resolution: 604dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.29166;
+  }
+}
+@media (min-resolution: 605dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.30208;
+  }
+}
+@media (min-resolution: 606dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.31250;
+  }
+}
+@media (min-resolution: 607dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.32291;
+  }
+}
+@media (min-resolution: 608dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.33333;
+  }
+}
+@media (min-resolution: 609dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.34375;
+  }
+}
+@media (min-resolution: 610dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.35416;
+  }
+}
+@media (min-resolution: 611dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.36458;
+  }
+}
+@media (min-resolution: 612dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.37500;
+  }
+}
+@media (min-resolution: 613dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.38541;
+  }
+}
+@media (min-resolution: 614dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.39583;
+  }
+}
+@media (min-resolution: 615dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.40625;
+  }
+}
+@media (min-resolution: 616dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.41666;
+  }
+}
+@media (min-resolution: 617dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.42708;
+  }
+}
+@media (min-resolution: 618dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.43750;
+  }
+}
+@media (min-resolution: 619dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.44791;
+  }
+}
+@media (min-resolution: 620dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.45833;
+  }
+}
+@media (min-resolution: 621dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.46875;
+  }
+}
+@media (min-resolution: 622dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.47916;
+  }
+}
+@media (min-resolution: 623dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.48958;
+  }
+}
+@media (min-resolution: 624dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.50000;
+  }
+}
+@media (min-resolution: 625dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.51041;
+  }
+}
+@media (min-resolution: 626dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.52083;
+  }
+}
+@media (min-resolution: 627dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.53125;
+  }
+}
+@media (min-resolution: 628dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.54166;
+  }
+}
+@media (min-resolution: 629dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.55208;
+  }
+}
+@media (min-resolution: 630dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.56250;
+  }
+}
+@media (min-resolution: 631dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.57291;
+  }
+}
+@media (min-resolution: 632dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.58333;
+  }
+}
+@media (min-resolution: 633dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.59375;
+  }
+}
+@media (min-resolution: 634dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.60416;
+  }
+}
+@media (min-resolution: 635dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.61458;
+  }
+}
+@media (min-resolution: 636dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.62500;
+  }
+}
+@media (min-resolution: 637dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.63541;
+  }
+}
+@media (min-resolution: 638dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.64583;
+  }
+}
+@media (min-resolution: 639dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.65625;
+  }
+}
+@media (min-resolution: 640dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.66666;
+  }
+}
+@media (min-resolution: 641dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.67708;
+  }
+}
+@media (min-resolution: 642dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.68750;
+  }
+}
+@media (min-resolution: 643dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.69791;
+  }
+}
+@media (min-resolution: 644dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.70833;
+  }
+}
+@media (min-resolution: 645dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.71875;
+  }
+}
+@media (min-resolution: 646dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.72916;
+  }
+}
+@media (min-resolution: 647dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.73958;
+  }
+}
+@media (min-resolution: 648dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.75000;
+  }
+}
+@media (min-resolution: 649dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.76041;
+  }
+}
+@media (min-resolution: 650dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.77083;
+  }
+}
+@media (min-resolution: 651dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.78125;
+  }
+}
+@media (min-resolution: 652dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.79166;
+  }
+}
+@media (min-resolution: 653dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.80208;
+  }
+}
+@media (min-resolution: 654dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.81250;
+  }
+}
+@media (min-resolution: 655dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.82291;
+  }
+}
+@media (min-resolution: 656dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.83333;
+  }
+}
+@media (min-resolution: 657dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.84375;
+  }
+}
+@media (min-resolution: 658dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.85416;
+  }
+}
+@media (min-resolution: 659dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.86458;
+  }
+}
+@media (min-resolution: 660dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.87500;
+  }
+}
+@media (min-resolution: 661dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.88541;
+  }
+}
+@media (min-resolution: 662dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.89583;
+  }
+}
+@media (min-resolution: 663dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.90625;
+  }
+}
+@media (min-resolution: 664dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.91666;
+  }
+}
+@media (min-resolution: 665dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.92708;
+  }
+}
+@media (min-resolution: 666dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.93750;
+  }
+}
+@media (min-resolution: 667dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.94791;
+  }
+}
+@media (min-resolution: 668dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.95833;
+  }
+}
+@media (min-resolution: 669dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.96875;
+  }
+}
+@media (min-resolution: 670dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.97916;
+  }
+}
+@media (min-resolution: 671dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 6.98958;
+  }
+}
+@media (min-resolution: 672dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.00000;
+  }
+}
+@media (min-resolution: 673dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.01041;
+  }
+}
+@media (min-resolution: 674dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.02083;
+  }
+}
+@media (min-resolution: 675dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.03125;
+  }
+}
+@media (min-resolution: 676dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.04166;
+  }
+}
+@media (min-resolution: 677dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.05208;
+  }
+}
+@media (min-resolution: 678dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.06250;
+  }
+}
+@media (min-resolution: 679dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.07291;
+  }
+}
+@media (min-resolution: 680dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.08333;
+  }
+}
+@media (min-resolution: 681dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.09375;
+  }
+}
+@media (min-resolution: 682dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.10416;
+  }
+}
+@media (min-resolution: 683dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.11458;
+  }
+}
+@media (min-resolution: 684dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.12500;
+  }
+}
+@media (min-resolution: 685dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.13541;
+  }
+}
+@media (min-resolution: 686dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.14583;
+  }
+}
+@media (min-resolution: 687dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.15625;
+  }
+}
+@media (min-resolution: 688dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.16666;
+  }
+}
+@media (min-resolution: 689dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.17708;
+  }
+}
+@media (min-resolution: 690dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.18750;
+  }
+}
+@media (min-resolution: 691dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.19791;
+  }
+}
+@media (min-resolution: 692dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.20833;
+  }
+}
+@media (min-resolution: 693dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.21875;
+  }
+}
+@media (min-resolution: 694dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.22916;
+  }
+}
+@media (min-resolution: 695dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.23958;
+  }
+}
+@media (min-resolution: 696dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.25000;
+  }
+}
+@media (min-resolution: 697dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.26041;
+  }
+}
+@media (min-resolution: 698dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.27083;
+  }
+}
+@media (min-resolution: 699dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.28125;
+  }
+}
+@media (min-resolution: 700dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.29166;
+  }
+}
+@media (min-resolution: 701dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.30208;
+  }
+}
+@media (min-resolution: 702dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.31250;
+  }
+}
+@media (min-resolution: 703dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.32291;
+  }
+}
+@media (min-resolution: 704dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.33333;
+  }
+}
+@media (min-resolution: 705dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.34375;
+  }
+}
+@media (min-resolution: 706dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.35416;
+  }
+}
+@media (min-resolution: 707dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.36458;
+  }
+}
+@media (min-resolution: 708dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.37500;
+  }
+}
+@media (min-resolution: 709dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.38541;
+  }
+}
+@media (min-resolution: 710dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.39583;
+  }
+}
+@media (min-resolution: 711dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.40625;
+  }
+}
+@media (min-resolution: 712dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.41666;
+  }
+}
+@media (min-resolution: 713dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.42708;
+  }
+}
+@media (min-resolution: 714dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.43750;
+  }
+}
+@media (min-resolution: 715dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.44791;
+  }
+}
+@media (min-resolution: 716dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.45833;
+  }
+}
+@media (min-resolution: 717dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.46875;
+  }
+}
+@media (min-resolution: 718dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.47916;
+  }
+}
+@media (min-resolution: 719dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.48958;
+  }
+}
+@media (min-resolution: 720dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.50000;
+  }
+}
+@media (min-resolution: 721dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.51041;
+  }
+}
+@media (min-resolution: 722dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.52083;
+  }
+}
+@media (min-resolution: 723dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.53125;
+  }
+}
+@media (min-resolution: 724dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.54166;
+  }
+}
+@media (min-resolution: 725dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.55208;
+  }
+}
+@media (min-resolution: 726dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.56250;
+  }
+}
+@media (min-resolution: 727dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.57291;
+  }
+}
+@media (min-resolution: 728dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.58333;
+  }
+}
+@media (min-resolution: 729dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.59375;
+  }
+}
+@media (min-resolution: 730dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.60416;
+  }
+}
+@media (min-resolution: 731dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.61458;
+  }
+}
+@media (min-resolution: 732dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.62500;
+  }
+}
+@media (min-resolution: 733dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.63541;
+  }
+}
+@media (min-resolution: 734dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.64583;
+  }
+}
+@media (min-resolution: 735dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.65625;
+  }
+}
+@media (min-resolution: 736dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.66666;
+  }
+}
+@media (min-resolution: 737dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.67708;
+  }
+}
+@media (min-resolution: 738dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.68750;
+  }
+}
+@media (min-resolution: 739dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.69791;
+  }
+}
+@media (min-resolution: 740dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.70833;
+  }
+}
+@media (min-resolution: 741dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.71875;
+  }
+}
+@media (min-resolution: 742dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.72916;
+  }
+}
+@media (min-resolution: 743dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.73958;
+  }
+}
+@media (min-resolution: 744dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.75000;
+  }
+}
+@media (min-resolution: 745dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.76041;
+  }
+}
+@media (min-resolution: 746dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.77083;
+  }
+}
+@media (min-resolution: 747dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.78125;
+  }
+}
+@media (min-resolution: 748dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.79166;
+  }
+}
+@media (min-resolution: 749dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.80208;
+  }
+}
+@media (min-resolution: 750dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.81250;
+  }
+}
+@media (min-resolution: 751dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.82291;
+  }
+}
+@media (min-resolution: 752dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.83333;
+  }
+}
+@media (min-resolution: 753dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.84375;
+  }
+}
+@media (min-resolution: 754dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.85416;
+  }
+}
+@media (min-resolution: 755dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.86458;
+  }
+}
+@media (min-resolution: 756dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.87500;
+  }
+}
+@media (min-resolution: 757dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.88541;
+  }
+}
+@media (min-resolution: 758dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.89583;
+  }
+}
+@media (min-resolution: 759dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.90625;
+  }
+}
+@media (min-resolution: 760dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.91666;
+  }
+}
+@media (min-resolution: 761dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.92708;
+  }
+}
+@media (min-resolution: 762dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.93750;
+  }
+}
+@media (min-resolution: 763dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.94791;
+  }
+}
+@media (min-resolution: 764dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.95833;
+  }
+}
+@media (min-resolution: 765dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.96875;
+  }
+}
+@media (min-resolution: 766dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.97916;
+  }
+}
+@media (min-resolution: 767dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 7.98958;
+  }
+}
+@media (min-resolution: 768dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-scale: 8.00000;
+  }
+}
+@media not (-moz-bool-pref: "aero-userchrome.alternative"), not (-moz-pref("aero-userchrome.alternative")) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    /*
+     * 1.25x/125%/120dpi | 0.96 * 125 = 120
+     */
+    /* use crisp-edges only for the resolution the assets are sized for */
+    /*
+     * 1.5x/150%/144dpi | 0.96 * 150 = 144
+     */
+    /* use crisp-edges only for the resolution the assets are sized for */
+    /*
+     * 2x/200%/192dpi | 0.96 * 200 = 192
+     */
+    /* use crisp-edges only for the resolution the assets are sized for */
+  }
+}
+@media (not (-moz-bool-pref: "aero-userchrome.alternative")) and (resolution: 120dpi), (not (-moz-pref("aero-userchrome.alternative"))) and (resolution: 120dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-image-rendering: crisp-edges;
+  }
+}
+@media (not (-moz-bool-pref: "aero-userchrome.alternative")) and (min-resolution: 120dpi), (not (-moz-pref("aero-userchrome.alternative"))) and (min-resolution: 120dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-titlebuttons-bitmap-minimize: url("Assets/minimize@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-hover: url("Assets/minimize-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-active: url("Assets/minimize-active@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize: url("Assets/maximize@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-hover: url("Assets/maximize-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-active: url("Assets/maximize-active@1.25x.png");
+    --aero-titlebuttons-bitmap-restore: url("Assets/restore@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-hover: url("Assets/restore-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-active: url("Assets/restore-active@1.25x.png");
+    --aero-titlebuttons-bitmap-close: url("Assets/close@1.25x.png");
+    --aero-titlebuttons-bitmap-close-hover: url("Assets/close-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-close-active: url("Assets/close-active@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus: url("Assets/minimize-unfocus@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-hover: url("Assets/minimize-unfocus-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-active: url("Assets/minimize-unfocus-active@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus: url("Assets/maximize-unfocus@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-hover: url("Assets/maximize-unfocus-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-active: url("Assets/maximize-unfocus-active@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus: url("Assets/restore-unfocus@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-hover: url("Assets/restore-unfocus-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-active: url("Assets/restore-unfocus-active@1.25x.png");
+    --aero-titlebuttons-bitmap-close-unfocus: url("Assets/close-unfocus@1.25x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-hover: url("Assets/close-unfocus-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-active: url("Assets/close-unfocus-active@1.25x.png");
+    --aero-titlebuttons-glow-min: url("Assets/minimize-glow@1.25x.png");
+    --aero-titlebuttons-glow-max: url("Assets/maximize-glow@1.25x.png");
+    --aero-titlebuttons-glow-close: url("Assets/close-glow@1.25x.png");
+    --aero-titlebuttons-global-height: 25px;
+    --aero-titlebuttons-minimize-width: 36px;
+    --aero-titlebuttons-minimize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-maximize-width: 33px;
+    --aero-titlebuttons-maximize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-restore-width: 33px;
+    --aero-titlebuttons-restore-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-close-width: 61px;
+    --aero-titlebuttons-close-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-glow-minimize-w: 54px;
+    --aero-titlebuttons-glow-minimize-h: 40px;
+    --aero-titlebuttons-glow-maximize-w: 51px;
+    --aero-titlebuttons-glow-maximize-h: 40px;
+    --aero-titlebuttons-glow-close-w: 78px;
+    --aero-titlebuttons-glow-close-h: 40px;
+  }
+}
+@media (not (-moz-bool-pref: "aero-userchrome.alternative")) and (resolution: 144dpi), (not (-moz-pref("aero-userchrome.alternative"))) and (resolution: 144dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-image-rendering: crisp-edges;
+  }
+}
+@media (not (-moz-bool-pref: "aero-userchrome.alternative")) and (min-resolution: 144dpi), (not (-moz-pref("aero-userchrome.alternative"))) and (min-resolution: 144dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-titlebuttons-bitmap-minimize: url("Assets/minimize@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-hover: url("Assets/minimize-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-active: url("Assets/minimize-active@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize: url("Assets/maximize@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-hover: url("Assets/maximize-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-active: url("Assets/maximize-active@1.5x.png");
+    --aero-titlebuttons-bitmap-restore: url("Assets/restore@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-hover: url("Assets/restore-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-active: url("Assets/restore-active@1.5x.png");
+    --aero-titlebuttons-bitmap-close: url("Assets/close@1.5x.png");
+    --aero-titlebuttons-bitmap-close-hover: url("Assets/close-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-close-active: url("Assets/close-active@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus: url("Assets/minimize-unfocus@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-hover: url("Assets/minimize-unfocus-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-active: url("Assets/minimize-unfocus-active@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus: url("Assets/maximize-unfocus@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-hover: url("Assets/maximize-unfocus-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-active: url("Assets/maximize-unfocus-active@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus: url("Assets/restore-unfocus@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-hover: url("Assets/restore-unfocus-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-active: url("Assets/restore-unfocus-active@1.5x.png");
+    --aero-titlebuttons-bitmap-close-unfocus: url("Assets/close-unfocus@1.5x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-hover: url("Assets/close-unfocus-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-active: url("Assets/close-unfocus-active@1.5x.png");
+    --aero-titlebuttons-glow-min: url("Assets/minimize-glow@1.5x.png");
+    --aero-titlebuttons-glow-max: url("Assets/maximize-glow@1.5x.png");
+    --aero-titlebuttons-glow-close: url("Assets/close-glow@1.5x.png");
+    --aero-titlebuttons-global-height: 30px;
+    --aero-titlebuttons-minimize-width: 44px;
+    --aero-titlebuttons-minimize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-maximize-width: 41px;
+    --aero-titlebuttons-maximize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-restore-width: 41px;
+    --aero-titlebuttons-restore-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-close-width: 75px;
+    --aero-titlebuttons-close-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-glow-minimize-w: 62px;
+    --aero-titlebuttons-glow-minimize-h: 45px;
+    --aero-titlebuttons-glow-maximize-w: 59px;
+    --aero-titlebuttons-glow-maximize-h: 45px;
+    --aero-titlebuttons-glow-close-w: 92px;
+    --aero-titlebuttons-glow-close-h: 45px;
+  }
+}
+@media (not (-moz-bool-pref: "aero-userchrome.alternative")) and (resolution: 192dpi), (not (-moz-pref("aero-userchrome.alternative"))) and (resolution: 192dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-image-rendering: crisp-edges;
+  }
+}
+@media (not (-moz-bool-pref: "aero-userchrome.alternative")) and (min-resolution: 192dpi), (not (-moz-pref("aero-userchrome.alternative"))) and (min-resolution: 192dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-titlebuttons-bitmap-minimize: url("Assets/minimize@2x.png");
+    --aero-titlebuttons-bitmap-minimize-hover: url("Assets/minimize-hover@2x.png");
+    --aero-titlebuttons-bitmap-minimize-active: url("Assets/minimize-active@2x.png");
+    --aero-titlebuttons-bitmap-maximize: url("Assets/maximize@2x.png");
+    --aero-titlebuttons-bitmap-maximize-hover: url("Assets/maximize-hover@2x.png");
+    --aero-titlebuttons-bitmap-maximize-active: url("Assets/maximize-active@2x.png");
+    --aero-titlebuttons-bitmap-restore: url("Assets/restore@2x.png");
+    --aero-titlebuttons-bitmap-restore-hover: url("Assets/restore-hover@2x.png");
+    --aero-titlebuttons-bitmap-restore-active: url("Assets/restore-active@2x.png");
+    --aero-titlebuttons-bitmap-close: url("Assets/close@2x.png");
+    --aero-titlebuttons-bitmap-close-hover: url("Assets/close-hover@2x.png");
+    --aero-titlebuttons-bitmap-close-active: url("Assets/close-active@2x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus: url("Assets/minimize-unfocus@2x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-hover: url("Assets/minimize-unfocus-hover@2x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-active: url("Assets/minimize-unfocus-active@2x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus: url("Assets/maximize-unfocus@2x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-hover: url("Assets/maximize-unfocus-hover@2x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-active: url("Assets/maximize-unfocus-active@2x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus: url("Assets/restore-unfocus@2x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-hover: url("Assets/restore-unfocus-hover@2x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-active: url("Assets/restore-unfocus-active@2x.png");
+    --aero-titlebuttons-bitmap-close-unfocus: url("Assets/close-unfocus@2x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-hover: url("Assets/close-unfocus-hover@2x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-active: url("Assets/close-unfocus-active@2x.png");
+    --aero-titlebuttons-glow-min: url("Assets/minimize-glow@2x.png");
+    --aero-titlebuttons-glow-max: url("Assets/maximize-glow@2x.png");
+    --aero-titlebuttons-glow-close: url("Assets/close-glow@2x.png");
+    --aero-titlebuttons-global-height: 40px;
+    --aero-titlebuttons-minimize-width: 58px;
+    --aero-titlebuttons-minimize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-maximize-width: 54px;
+    --aero-titlebuttons-maximize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-restore-width: 54px;
+    --aero-titlebuttons-restore-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-close-width: 98px;
+    --aero-titlebuttons-close-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-glow-minimize-w: 76px;
+    --aero-titlebuttons-glow-minimize-h: 55px;
+    --aero-titlebuttons-glow-maximize-w: 72px;
+    --aero-titlebuttons-glow-maximize-h: 55px;
+    --aero-titlebuttons-glow-close-w: 115px;
+    --aero-titlebuttons-glow-close-h: 55px;
+  }
+}
+@media (-moz-bool-pref: "aero-userchrome.alternative"), (-moz-pref("aero-userchrome.alternative")) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    /*
+     * 1.25x/125%/120dpi | 0.96 * 125 = 120
+     */
+    /* use crisp-edges only for the resolution the assets are sized for */
+    /*
+     * 1.5x/150%/144dpi | 0.96 * 150 = 144
+     */
+    /* use crisp-edges only for the resolution the assets are sized for */
+    /*
+     * 2x/200%/192dpi | 0.96 * 200 = 192
+     */
+    /* use crisp-edges only for the resolution the assets are sized for */
+  }
+}
+@media (-moz-bool-pref: "aero-userchrome.alternative") and (resolution: 120dpi), (-moz-pref("aero-userchrome.alternative")) and (resolution: 120dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-image-rendering: crisp-edges;
+  }
+}
+@media (-moz-bool-pref: "aero-userchrome.alternative") and (min-resolution: 120dpi), (-moz-pref("aero-userchrome.alternative")) and (min-resolution: 120dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-titlebuttons-bitmap-minimize: url("AssetsAlt/minimize@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-hover: url("AssetsAlt/minimize-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-active: url("AssetsAlt/minimize-active@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize: url("AssetsAlt/maximize@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-hover: url("AssetsAlt/maximize-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-active: url("AssetsAlt/maximize-active@1.25x.png");
+    --aero-titlebuttons-bitmap-restore: url("AssetsAlt/restore@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-hover: url("AssetsAlt/restore-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-active: url("AssetsAlt/restore-active@1.25x.png");
+    --aero-titlebuttons-bitmap-close: url("AssetsAlt/close@1.25x.png");
+    --aero-titlebuttons-bitmap-close-hover: url("AssetsAlt/close-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-close-active: url("AssetsAlt/close-active@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus: url("AssetsAlt/minimize-unfocus@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-hover: url("AssetsAlt/minimize-unfocus-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-active: url("AssetsAlt/minimize-unfocus-active@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus: url("AssetsAlt/maximize-unfocus@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-hover: url("AssetsAlt/maximize-unfocus-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-active: url("AssetsAlt/maximize-unfocus-active@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus: url("AssetsAlt/restore-unfocus@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-hover: url("AssetsAlt/restore-unfocus-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-active: url("AssetsAlt/restore-unfocus-active@1.25x.png");
+    --aero-titlebuttons-bitmap-close-unfocus: url("AssetsAlt/close-unfocus@1.25x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-hover: url("AssetsAlt/close-unfocus-hover@1.25x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-active: url("AssetsAlt/close-unfocus-active@1.25x.png");
+    --aero-titlebuttons-glow-min: url("AssetsAlt/minimize-glow@1.25x.png");
+    --aero-titlebuttons-glow-max: url("AssetsAlt/maximize-glow@1.25x.png");
+    --aero-titlebuttons-glow-close: url("AssetsAlt/close-glow@1.25x.png");
+    --aero-titlebuttons-global-height: 23px;
+    --aero-titlebuttons-minimize-width: 33px;
+    --aero-titlebuttons-minimize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-maximize-width: 32px;
+    --aero-titlebuttons-maximize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-restore-width: 32px;
+    --aero-titlebuttons-restore-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-close-width: 56px;
+    --aero-titlebuttons-close-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-glow-minimize-w: 51px;
+    --aero-titlebuttons-glow-minimize-h: 38px;
+    --aero-titlebuttons-glow-maximize-w: 50px;
+    --aero-titlebuttons-glow-maximize-h: 38px;
+    --aero-titlebuttons-glow-close-w: 74px;
+    --aero-titlebuttons-glow-close-h: 38px;
+  }
+}
+@media (-moz-bool-pref: "aero-userchrome.alternative") and (resolution: 144dpi), (-moz-pref("aero-userchrome.alternative")) and (resolution: 144dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-image-rendering: crisp-edges;
+  }
+}
+@media (-moz-bool-pref: "aero-userchrome.alternative") and (min-resolution: 144dpi), (-moz-pref("aero-userchrome.alternative")) and (min-resolution: 144dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-titlebuttons-bitmap-minimize: url("AssetsAlt/minimize@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-hover: url("AssetsAlt/minimize-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-active: url("AssetsAlt/minimize-active@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize: url("AssetsAlt/maximize@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-hover: url("AssetsAlt/maximize-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-active: url("AssetsAlt/maximize-active@1.5x.png");
+    --aero-titlebuttons-bitmap-restore: url("AssetsAlt/restore@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-hover: url("AssetsAlt/restore-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-active: url("AssetsAlt/restore-active@1.5x.png");
+    --aero-titlebuttons-bitmap-close: url("AssetsAlt/close@1.5x.png");
+    --aero-titlebuttons-bitmap-close-hover: url("AssetsAlt/close-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-close-active: url("AssetsAlt/close-active@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus: url("AssetsAlt/minimize-unfocus@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-hover: url("AssetsAlt/minimize-unfocus-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-active: url("AssetsAlt/minimize-unfocus-active@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus: url("AssetsAlt/maximize-unfocus@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-hover: url("AssetsAlt/maximize-unfocus-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-active: url("AssetsAlt/maximize-unfocus-active@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus: url("AssetsAlt/restore-unfocus@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-hover: url("AssetsAlt/restore-unfocus-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-active: url("AssetsAlt/restore-unfocus-active@1.5x.png");
+    --aero-titlebuttons-bitmap-close-unfocus: url("AssetsAlt/close-unfocus@1.5x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-hover: url("AssetsAlt/close-unfocus-hover@1.5x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-active: url("AssetsAlt/close-unfocus-active@1.5x.png");
+    --aero-titlebuttons-glow-min: url("AssetsAlt/minimize-glow@1.5x.png");
+    --aero-titlebuttons-glow-max: url("AssetsAlt/maximize-glow@1.5x.png");
+    --aero-titlebuttons-glow-close: url("AssetsAlt/close-glow@1.5x.png");
+    --aero-titlebuttons-global-height: 27px;
+    --aero-titlebuttons-minimize-width: 40px;
+    --aero-titlebuttons-minimize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-maximize-width: 38px;
+    --aero-titlebuttons-maximize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-restore-width: 38px;
+    --aero-titlebuttons-restore-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-close-width: 67px;
+    --aero-titlebuttons-close-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-glow-minimize-w: 58px;
+    --aero-titlebuttons-glow-minimize-h: 42px;
+    --aero-titlebuttons-glow-maximize-w: 56px;
+    --aero-titlebuttons-glow-maximize-h: 42px;
+    --aero-titlebuttons-glow-close-w: 85px;
+    --aero-titlebuttons-glow-close-h: 42px;
+  }
+}
+@media (-moz-bool-pref: "aero-userchrome.alternative") and (resolution: 192dpi), (-moz-pref("aero-userchrome.alternative")) and (resolution: 192dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-hidpi-image-rendering: crisp-edges;
+  }
+}
+@media (-moz-bool-pref: "aero-userchrome.alternative") and (min-resolution: 192dpi), (-moz-pref("aero-userchrome.alternative")) and (min-resolution: 192dpi) {
+  :root:is([tabsintitlebar]), :root:is([customtitlebar]) {
+    --aero-titlebuttons-bitmap-minimize: url("AssetsAlt/minimize@2x.png");
+    --aero-titlebuttons-bitmap-minimize-hover: url("AssetsAlt/minimize-hover@2x.png");
+    --aero-titlebuttons-bitmap-minimize-active: url("AssetsAlt/minimize-active@2x.png");
+    --aero-titlebuttons-bitmap-maximize: url("AssetsAlt/maximize@2x.png");
+    --aero-titlebuttons-bitmap-maximize-hover: url("AssetsAlt/maximize-hover@2x.png");
+    --aero-titlebuttons-bitmap-maximize-active: url("AssetsAlt/maximize-active@2x.png");
+    --aero-titlebuttons-bitmap-restore: url("AssetsAlt/restore@2x.png");
+    --aero-titlebuttons-bitmap-restore-hover: url("AssetsAlt/restore-hover@2x.png");
+    --aero-titlebuttons-bitmap-restore-active: url("AssetsAlt/restore-active@2x.png");
+    --aero-titlebuttons-bitmap-close: url("AssetsAlt/close@2x.png");
+    --aero-titlebuttons-bitmap-close-hover: url("AssetsAlt/close-hover@2x.png");
+    --aero-titlebuttons-bitmap-close-active: url("AssetsAlt/close-active@2x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus: url("AssetsAlt/minimize-unfocus@2x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-hover: url("AssetsAlt/minimize-unfocus-hover@2x.png");
+    --aero-titlebuttons-bitmap-minimize-unfocus-active: url("AssetsAlt/minimize-unfocus-active@2x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus: url("AssetsAlt/maximize-unfocus@2x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-hover: url("AssetsAlt/maximize-unfocus-hover@2x.png");
+    --aero-titlebuttons-bitmap-maximize-unfocus-active: url("AssetsAlt/maximize-unfocus-active@2x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus: url("AssetsAlt/restore-unfocus@2x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-hover: url("AssetsAlt/restore-unfocus-hover@2x.png");
+    --aero-titlebuttons-bitmap-restore-unfocus-active: url("AssetsAlt/restore-unfocus-active@2x.png");
+    --aero-titlebuttons-bitmap-close-unfocus: url("AssetsAlt/close-unfocus@2x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-hover: url("AssetsAlt/close-unfocus-hover@2x.png");
+    --aero-titlebuttons-bitmap-close-unfocus-active: url("AssetsAlt/close-unfocus-active@2x.png");
+    --aero-titlebuttons-glow-min: url("AssetsAlt/minimize-glow@2x.png");
+    --aero-titlebuttons-glow-max: url("AssetsAlt/maximize-glow@2x.png");
+    --aero-titlebuttons-glow-close: url("AssetsAlt/close-glow@2x.png");
+    --aero-titlebuttons-global-height: 36px;
+    --aero-titlebuttons-minimize-width: 52px;
+    --aero-titlebuttons-minimize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-maximize-width: 50px;
+    --aero-titlebuttons-maximize-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-restore-width: 50px;
+    --aero-titlebuttons-restore-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-close-width: 88px;
+    --aero-titlebuttons-close-height: var(--aero-titlebuttons-global-height);
+    --aero-titlebuttons-glow-minimize-w: 70px;
+    --aero-titlebuttons-glow-minimize-h: 51px;
+    --aero-titlebuttons-glow-maximize-w: 68px;
+    --aero-titlebuttons-glow-maximize-h: 51px;
+    --aero-titlebuttons-glow-close-w: 106px;
+    --aero-titlebuttons-glow-close-h: 51px;
+  }
+}
+:root:is([tabsintitlebar]):is([tabsintitlebar]) body, :root:is([tabsintitlebar]):is([customtitlebar]) body, :root:is([customtitlebar]):is([tabsintitlebar]) body, :root:is([customtitlebar]):is([customtitlebar]) body {
+  background-color: color-mix(in srgb, var(--aero-color) var(--aero-color-strength, 0%), transparent) !important;
+}
+:root:is([tabsintitlebar]):is([tabsintitlebar]) #navigator-toolbox, :root:is([tabsintitlebar]):is([customtitlebar]) #navigator-toolbox, :root:is([customtitlebar]):is([tabsintitlebar]) #navigator-toolbox, :root:is([customtitlebar]):is([customtitlebar]) #navigator-toolbox {
+  background-color: transparent !important;
+}
+:root:is([tabsintitlebar]):is([tabsintitlebar]) #navigator-toolbox-background, :root:is([tabsintitlebar]):is([customtitlebar]) #navigator-toolbox-background, :root:is([customtitlebar]):is([tabsintitlebar]) #navigator-toolbox-background, :root:is([customtitlebar]):is([customtitlebar]) #navigator-toolbox-background {
+  appearance: none !important;
+}
+:root:is([tabsintitlebar]) #main-window[tabsintitlebar][sizemode=maximized], :root:is([tabsintitlebar]) #main-window[customtitlebar][sizemode=maximized], :root:is([customtitlebar]) #main-window[tabsintitlebar][sizemode=maximized], :root:is([customtitlebar]) #main-window[customtitlebar][sizemode=maximized] {
+  background: none !important;
+}
+:root:is([tabsintitlebar])[tabsintitlebar] body::before, :root:is([tabsintitlebar])[customtitlebar] body::before, :root:is([customtitlebar])[tabsintitlebar] body::before, :root:is([customtitlebar])[customtitlebar] body::before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none !important;
+  top: 0px !important;
+  left: 0px !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  background-image: var(--aero-glow-left), var(--aero-glow-right), var(--aero-shadow-adjust-nw), var(--aero-shadow-adjust-ne), var(--aero-shadow-adjust-sw), var(--aero-shadow-adjust-se) !important;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat !important;
+  background-position: top calc(50px / var(--aero-hidpi-scale)) left 0px, top calc(50px / var(--aero-hidpi-scale)) right 0px, top 0px left 0px, top 0px right 0px, bottom 0px left 0px, bottom 0px right 0px !important;
+  background-size: calc((var(--aero-padding) + 2px) / var(--aero-hidpi-scale)) 18vh, calc((var(--aero-padding) + 2px) / var(--aero-hidpi-scale)) 18vh, calc(9px / var(--aero-hidpi-scale)) calc(9px / var(--aero-hidpi-scale)), calc(9px / var(--aero-hidpi-scale)) calc(9px / var(--aero-hidpi-scale)), calc(9px / var(--aero-hidpi-scale)) calc(9px / var(--aero-hidpi-scale)), calc(9px / var(--aero-hidpi-scale)) calc(9px / var(--aero-hidpi-scale)) !important;
+  image-rendering: crisp-edges !important;
+}
+:root:is([tabsintitlebar]) #jsMinimizeButtonGlow, :root:is([customtitlebar]) #jsMinimizeButtonGlow {
+  background-image: var(--aero-titlebuttons-glow-min) !important;
+}
+:root:is([tabsintitlebar]) #jsMaximizeButtonGlow, :root:is([customtitlebar]) #jsMaximizeButtonGlow {
+  background-image: var(--aero-titlebuttons-glow-max) !important;
+}
+:root:is([tabsintitlebar]) #jsCloseButtonGlow, :root:is([customtitlebar]) #jsCloseButtonGlow {
+  background-image: var(--aero-titlebuttons-glow-close) !important;
+}
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-min:hover > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-max:hover > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-restore:hover > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-close:hover > .toolbarbutton-icon, :root:is([tabsintitlebar])[customtitlebar] .titlebar-min:hover > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[customtitlebar] .titlebar-max:hover > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[customtitlebar] .titlebar-restore:hover > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[customtitlebar] .titlebar-close:hover > .toolbarbutton-icon, :root:is([customtitlebar])[tabsintitlebar] .titlebar-min:hover > .toolbarbutton-icon,
+:root:is([customtitlebar])[tabsintitlebar] .titlebar-max:hover > .toolbarbutton-icon,
+:root:is([customtitlebar])[tabsintitlebar] .titlebar-restore:hover > .toolbarbutton-icon,
+:root:is([customtitlebar])[tabsintitlebar] .titlebar-close:hover > .toolbarbutton-icon, :root:is([customtitlebar])[customtitlebar] .titlebar-min:hover > .toolbarbutton-icon,
+:root:is([customtitlebar])[customtitlebar] .titlebar-max:hover > .toolbarbutton-icon,
+:root:is([customtitlebar])[customtitlebar] .titlebar-restore:hover > .toolbarbutton-icon,
+:root:is([customtitlebar])[customtitlebar] .titlebar-close:hover > .toolbarbutton-icon {
+  opacity: 1;
+}
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-min > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-max > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-restore > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-close > .toolbarbutton-icon, :root:is([tabsintitlebar])[customtitlebar] .titlebar-min > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[customtitlebar] .titlebar-max > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[customtitlebar] .titlebar-restore > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[customtitlebar] .titlebar-close > .toolbarbutton-icon, :root:is([customtitlebar])[tabsintitlebar] .titlebar-min > .toolbarbutton-icon,
+:root:is([customtitlebar])[tabsintitlebar] .titlebar-max > .toolbarbutton-icon,
+:root:is([customtitlebar])[tabsintitlebar] .titlebar-restore > .toolbarbutton-icon,
+:root:is([customtitlebar])[tabsintitlebar] .titlebar-close > .toolbarbutton-icon, :root:is([customtitlebar])[customtitlebar] .titlebar-min > .toolbarbutton-icon,
+:root:is([customtitlebar])[customtitlebar] .titlebar-max > .toolbarbutton-icon,
+:root:is([customtitlebar])[customtitlebar] .titlebar-restore > .toolbarbutton-icon,
+:root:is([customtitlebar])[customtitlebar] .titlebar-close > .toolbarbutton-icon {
+  z-index: 1000;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.05s linear;
+  background-repeat: no-repeat !important;
+  visibility: var(--aero-titlebuttons-glow-visibility) !important;
+}
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-min > .toolbarbutton-icon, :root:is([tabsintitlebar])[customtitlebar] .titlebar-min > .toolbarbutton-icon, :root:is([customtitlebar])[tabsintitlebar] .titlebar-min > .toolbarbutton-icon, :root:is([customtitlebar])[customtitlebar] .titlebar-min > .toolbarbutton-icon {
+  --w: calc(var(--aero-titlebuttons-glow-minimize-w) / var(--aero-hidpi-scale)) !important;
+  --h: calc(var(--aero-titlebuttons-glow-minimize-h) / var(--aero-hidpi-scale)) !important;
+  --ml: calc(-1px / var(--aero-hidpi-scale)) !important;
+  --mt: calc(-1px / var(--aero-hidpi-scale)) !important;
+  background-image: var(--aero-titlebuttons-glow-min) !important;
+  background-size: var(--w) var(--h) !important;
+  width: var(--w) !important;
+  min-width: var(--w) !important;
+  max-width: var(--w) !important;
+  height: var(--h) !important;
+  min-height: var(--h) !important;
+  max-height: var(--h) !important;
+  margin-left: var(--ml) !important;
+  margin-top: var(--mt) !important;
+}
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-max > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-restore > .toolbarbutton-icon, :root:is([tabsintitlebar])[customtitlebar] .titlebar-max > .toolbarbutton-icon,
+:root:is([tabsintitlebar])[customtitlebar] .titlebar-restore > .toolbarbutton-icon, :root:is([customtitlebar])[tabsintitlebar] .titlebar-max > .toolbarbutton-icon,
+:root:is([customtitlebar])[tabsintitlebar] .titlebar-restore > .toolbarbutton-icon, :root:is([customtitlebar])[customtitlebar] .titlebar-max > .toolbarbutton-icon,
+:root:is([customtitlebar])[customtitlebar] .titlebar-restore > .toolbarbutton-icon {
+  --w: calc(var(--aero-titlebuttons-glow-maximize-w) / var(--aero-hidpi-scale)) !important;
+  --h: calc(var(--aero-titlebuttons-glow-maximize-h) / var(--aero-hidpi-scale)) !important;
+  --ml: calc(-1px / var(--aero-hidpi-scale)) !important;
+  --mt: calc(-1px / var(--aero-hidpi-scale)) !important;
+  background-image: var(--aero-titlebuttons-glow-max) !important;
+  background-size: var(--w) var(--h) !important;
+  width: var(--w) !important;
+  min-width: var(--w) !important;
+  max-width: var(--w) !important;
+  height: var(--h) !important;
+  min-height: var(--h) !important;
+  max-height: var(--h) !important;
+  margin-left: var(--ml) !important;
+  margin-top: var(--mt) !important;
+}
+:root:is([tabsintitlebar])[tabsintitlebar] .titlebar-close > .toolbarbutton-icon, :root:is([tabsintitlebar])[customtitlebar] .titlebar-close > .toolbarbutton-icon, :root:is([customtitlebar])[tabsintitlebar] .titlebar-close > .toolbarbutton-icon, :root:is([customtitlebar])[customtitlebar] .titlebar-close > .toolbarbutton-icon {
+  --w: calc(var(--aero-titlebuttons-glow-close-w) / var(--aero-hidpi-scale)) !important;
+  --h: calc(var(--aero-titlebuttons-glow-close-h) / var(--aero-hidpi-scale)) !important;
+  --ml: calc(-1px / var(--aero-hidpi-scale)) !important;
+  --mt: calc(-1px / var(--aero-hidpi-scale)) !important;
+  background-image: var(--aero-titlebuttons-glow-close) !important;
+  background-size: var(--w) var(--h) !important;
+  width: var(--w) !important;
+  min-width: var(--w) !important;
+  max-width: var(--w) !important;
+  height: var(--h) !important;
+  min-height: var(--h) !important;
+  max-height: var(--h) !important;
+  margin-left: var(--ml) !important;
+  margin-top: var(--mt) !important;
+}
+:root:is([tabsintitlebar]) #toolbar-menubar .titlebar-buttonbox-container, :root:is([customtitlebar]) #toolbar-menubar .titlebar-buttonbox-container {
+  display: none !important;
+}
+:root:is([tabsintitlebar]) .titlebar-buttonbox, :root:is([customtitlebar]) .titlebar-buttonbox {
+  appearance: inherit !important; /* Removes weird right border */
+}
+:root:is([tabsintitlebar]) #TabsToolbar .titlebar-buttonbox-container[skipintoolbarset=true], :root:is([customtitlebar]) #TabsToolbar .titlebar-buttonbox-container[skipintoolbarset=true] {
+  position: fixed !important;
+  display: block !important;
+}
+:root:is([tabsintitlebar]) #toolbar-menubar[autohide=true]:not([inactive]) + #TabsToolbar > .titlebar-buttonbox-container, :root:is([customtitlebar]) #toolbar-menubar[autohide=true]:not([inactive]) + #TabsToolbar > .titlebar-buttonbox-container {
+  visibility: visible !important;
+}
+:root:is([tabsintitlebar]) .titlebar-buttonbox-container, :root:is([customtitlebar]) .titlebar-buttonbox-container {
+  right: calc(var(--aero-titlebuttons-right-offset) / var(--aero-hidpi-scale)) !important;
+  top: calc(var(--aero-titlebuttons-top-offset) / var(--aero-hidpi-scale)) !important;
+  z-index: 999 !important;
+  background-image: var(--aero-titlebuttons-bitmap-minimize), var(--aero-titlebuttons-bitmap-minimize-hover), var(--aero-titlebuttons-bitmap-minimize-active), var(--aero-titlebuttons-bitmap-maximize), var(--aero-titlebuttons-bitmap-maximize-hover), var(--aero-titlebuttons-bitmap-maximize-active), var(--aero-titlebuttons-bitmap-restore), var(--aero-titlebuttons-bitmap-restore-hover), var(--aero-titlebuttons-bitmap-restore-active), var(--aero-titlebuttons-bitmap-close), var(--aero-titlebuttons-bitmap-close-hover), var(--aero-titlebuttons-bitmap-close-active), var(--aero-titlebuttons-bitmap-minimize-unfocus), var(--aero-titlebuttons-bitmap-minimize-unfocus-hover), var(--aero-titlebuttons-bitmap-minimize-unfocus-active), var(--aero-titlebuttons-bitmap-maximize-unfocus), var(--aero-titlebuttons-bitmap-maximize-unfocus-hover), var(--aero-titlebuttons-bitmap-maximize-unfocus-active), var(--aero-titlebuttons-bitmap-restore-unfocus), var(--aero-titlebuttons-bitmap-restore-unfocus-hover), var(--aero-titlebuttons-bitmap-restore-unfocus-active), var(--aero-titlebuttons-bitmap-close-unfocus), var(--aero-titlebuttons-bitmap-close-unfocus-hover), var(--aero-titlebuttons-bitmap-close-unfocus-active), var(--aero-titlebuttons-glow-min), var(--aero-titlebuttons-glow-max), var(--aero-titlebuttons-glow-close) !important;
+  background-position: -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px, -9999px -9999px !important;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat !important;
+}
+:root:is([tabsintitlebar]) .titlebar-button .toolbarbutton-icon, :root:is([customtitlebar]) .titlebar-button .toolbarbutton-icon {
+  padding: 0px !important;
+  appearance: none !important;
+  color: transparent !important;
+  background: transparent !important;
+}
+:root:is([tabsintitlebar]) .titlebar-button:-moz-lwtheme, :root:is([customtitlebar]) .titlebar-button:-moz-lwtheme {
+  border-radius: 0px !important;
+}
+:root:is([tabsintitlebar]) .titlebar-min:-moz-lwtheme,
+:root:is([tabsintitlebar]) .titlebar-max:-moz-lwtheme,
+:root:is([tabsintitlebar]) .titlebar-restore:-moz-lwtheme,
+:root:is([tabsintitlebar]) .titlebar-close:-moz-lwtheme, :root:is([customtitlebar]) .titlebar-min:-moz-lwtheme,
+:root:is([customtitlebar]) .titlebar-max:-moz-lwtheme,
+:root:is([customtitlebar]) .titlebar-restore:-moz-lwtheme,
+:root:is([customtitlebar]) .titlebar-close:-moz-lwtheme {
+  list-style-image: none !important;
+}
+:root:is([tabsintitlebar]):is([tabsintitlebar]) .titlebar-min, :root:is([tabsintitlebar]):is([tabsintitlebar]) .titlebar-max, :root:is([tabsintitlebar]):is([tabsintitlebar]) .titlebar-restore, :root:is([tabsintitlebar]):is([tabsintitlebar]) .titlebar-close, :root:is([tabsintitlebar]):is([customtitlebar]) .titlebar-min, :root:is([tabsintitlebar]):is([customtitlebar]) .titlebar-max, :root:is([tabsintitlebar]):is([customtitlebar]) .titlebar-restore, :root:is([tabsintitlebar]):is([customtitlebar]) .titlebar-close, :root:is([customtitlebar]):is([tabsintitlebar]) .titlebar-min, :root:is([customtitlebar]):is([tabsintitlebar]) .titlebar-max, :root:is([customtitlebar]):is([tabsintitlebar]) .titlebar-restore, :root:is([customtitlebar]):is([tabsintitlebar]) .titlebar-close, :root:is([customtitlebar]):is([customtitlebar]) .titlebar-min, :root:is([customtitlebar]):is([customtitlebar]) .titlebar-max, :root:is([customtitlebar]):is([customtitlebar]) .titlebar-restore, :root:is([customtitlebar]):is([customtitlebar]) .titlebar-close {
+  -moz-default-appearance: none !important;
+  padding: 0px !important;
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-min::before, :root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-min:hover::before, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-min::before, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-min:hover::before {
+  --icon-titlebar-min: var(--aero-titlebuttons-bitmap-minimize);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-min::after, :root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-min:hover::after, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-min::after, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-min:hover::after {
+  --icon-titlebar-min-hover: var(--aero-titlebuttons-bitmap-minimize-hover);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-min:active, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-min:active {
+  --icon-titlebar-min-active: var(--aero-titlebuttons-bitmap-minimize-active);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-max::before, :root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-max:hover::before, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-max::before, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-max:hover::before {
+  --icon-titlebar-max: var(--aero-titlebuttons-bitmap-maximize);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-max::after, :root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-max:hover::after, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-max::after, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-max:hover::after {
+  --icon-titlebar-max-hover: var(--aero-titlebuttons-bitmap-maximize-hover);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-max:active, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-max:active {
+  --icon-titlebar-max-active: var(--aero-titlebuttons-bitmap-maximize-active);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-restore::before, :root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-restore:hover::before, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-restore::before, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-restore:hover::before {
+  --icon-titlebar-restore: var(--aero-titlebuttons-bitmap-restore);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-restore::after, :root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-restore:hover::after, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-restore::after, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-restore:hover::after {
+  --icon-titlebar-restore-hover: var(--aero-titlebuttons-bitmap-restore-hover);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-restore:active, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-restore:active {
+  --icon-titlebar-restore-active: var(--aero-titlebuttons-bitmap-restore-active);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-close::before, :root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-close:hover::before, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-close::before, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-close:hover::before {
+  --icon-titlebar-close: var(--aero-titlebuttons-bitmap-close);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-close::after, :root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-close:hover::after, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-close::after, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-close:hover::after {
+  --icon-titlebar-close-hover: var(--aero-titlebuttons-bitmap-close-hover);
+}
+:root:is([tabsintitlebar]):not(:-moz-window-inactive) .titlebar-close:active, :root:is([customtitlebar]):not(:-moz-window-inactive) .titlebar-close:active {
+  --icon-titlebar-close-active: var(--aero-titlebuttons-bitmap-close-active);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-min::before, :root:is([tabsintitlebar]):-moz-window-inactive .titlebar-min:hover::before, :root:is([customtitlebar]):-moz-window-inactive .titlebar-min::before, :root:is([customtitlebar]):-moz-window-inactive .titlebar-min:hover::before {
+  --icon-titlebar-min: var(--aero-titlebuttons-bitmap-minimize-unfocus);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-min::after, :root:is([tabsintitlebar]):-moz-window-inactive .titlebar-min:hover::after, :root:is([customtitlebar]):-moz-window-inactive .titlebar-min::after, :root:is([customtitlebar]):-moz-window-inactive .titlebar-min:hover::after {
+  --icon-titlebar-min-hover: var(--aero-titlebuttons-bitmap-minimize-unfocus-hover);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-min:active, :root:is([customtitlebar]):-moz-window-inactive .titlebar-min:active {
+  --icon-titlebar-min-active: var(--aero-titlebuttons-bitmap-minimize-unfocus-active);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-max::before, :root:is([tabsintitlebar]):-moz-window-inactive .titlebar-max:hover::before, :root:is([customtitlebar]):-moz-window-inactive .titlebar-max::before, :root:is([customtitlebar]):-moz-window-inactive .titlebar-max:hover::before {
+  --icon-titlebar-max: var(--aero-titlebuttons-bitmap-maximize-unfocus);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-max::after, :root:is([tabsintitlebar]):-moz-window-inactive .titlebar-max:hover::after, :root:is([customtitlebar]):-moz-window-inactive .titlebar-max::after, :root:is([customtitlebar]):-moz-window-inactive .titlebar-max:hover::after {
+  --icon-titlebar-max-hover: var(--aero-titlebuttons-bitmap-maximize-unfocus-hover);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-max:active, :root:is([customtitlebar]):-moz-window-inactive .titlebar-max:active {
+  --icon-titlebar-max-active: var(--aero-titlebuttons-bitmap-maximize-unfocus-active);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-restore::before, :root:is([tabsintitlebar]):-moz-window-inactive .titlebar-restore:hover::before, :root:is([customtitlebar]):-moz-window-inactive .titlebar-restore::before, :root:is([customtitlebar]):-moz-window-inactive .titlebar-restore:hover::before {
+  --icon-titlebar-restore: var(--aero-titlebuttons-bitmap-restore-unfocus);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-restore::after, :root:is([tabsintitlebar]):-moz-window-inactive .titlebar-restore:hover::after, :root:is([customtitlebar]):-moz-window-inactive .titlebar-restore::after, :root:is([customtitlebar]):-moz-window-inactive .titlebar-restore:hover::after {
+  --icon-titlebar-restore-hover: var(--aero-titlebuttons-bitmap-restore-unfocus-hover);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-restore:active, :root:is([customtitlebar]):-moz-window-inactive .titlebar-restore:active {
+  --icon-titlebar-restore-active: var(--aero-titlebuttons-bitmap-restore-unfocus-active);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-close::before, :root:is([tabsintitlebar]):-moz-window-inactive .titlebar-close:hover::before, :root:is([customtitlebar]):-moz-window-inactive .titlebar-close::before, :root:is([customtitlebar]):-moz-window-inactive .titlebar-close:hover::before {
+  --icon-titlebar-close: var(--aero-titlebuttons-bitmap-close-unfocus);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-close::after, :root:is([tabsintitlebar]):-moz-window-inactive .titlebar-close:hover::after, :root:is([customtitlebar]):-moz-window-inactive .titlebar-close::after, :root:is([customtitlebar]):-moz-window-inactive .titlebar-close:hover::after {
+  --icon-titlebar-close-hover: var(--aero-titlebuttons-bitmap-close-unfocus-hover);
+}
+:root:is([tabsintitlebar]):-moz-window-inactive .titlebar-close:active, :root:is([customtitlebar]):-moz-window-inactive .titlebar-close:active {
+  --icon-titlebar-close-active: var(--aero-titlebuttons-bitmap-close-unfocus-active);
+}
+:root:is([tabsintitlebar]) .titlebar-min,
+:root:is([tabsintitlebar]) .titlebar-min:hover,
+:root:is([tabsintitlebar]) .titlebar-min::before,
+:root:is([tabsintitlebar]) .titlebar-min:hover::before,
+:root:is([tabsintitlebar]) .titlebar-min::after,
+:root:is([tabsintitlebar]) .titlebar-min:hover::after,
+:root:is([tabsintitlebar]) .titlebar-max,
+:root:is([tabsintitlebar]) .titlebar-max:hover,
+:root:is([tabsintitlebar]) .titlebar-max::before,
+:root:is([tabsintitlebar]) .titlebar-max:hover::before,
+:root:is([tabsintitlebar]) .titlebar-max::after,
+:root:is([tabsintitlebar]) .titlebar-max:hover::after,
+:root:is([tabsintitlebar]) .titlebar-restore,
+:root:is([tabsintitlebar]) .titlebar-restore:hover,
+:root:is([tabsintitlebar]) .titlebar-restore::before,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::before,
+:root:is([tabsintitlebar]) .titlebar-restore::after,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::after,
+:root:is([tabsintitlebar]) .titlebar-close,
+:root:is([tabsintitlebar]) .titlebar-close:hover,
+:root:is([tabsintitlebar]) .titlebar-close::before,
+:root:is([tabsintitlebar]) .titlebar-close:hover::before,
+:root:is([tabsintitlebar]) .titlebar-close::after,
+:root:is([tabsintitlebar]) .titlebar-close:hover::after, :root:is([customtitlebar]) .titlebar-min,
+:root:is([customtitlebar]) .titlebar-min:hover,
+:root:is([customtitlebar]) .titlebar-min::before,
+:root:is([customtitlebar]) .titlebar-min:hover::before,
+:root:is([customtitlebar]) .titlebar-min::after,
+:root:is([customtitlebar]) .titlebar-min:hover::after,
+:root:is([customtitlebar]) .titlebar-max,
+:root:is([customtitlebar]) .titlebar-max:hover,
+:root:is([customtitlebar]) .titlebar-max::before,
+:root:is([customtitlebar]) .titlebar-max:hover::before,
+:root:is([customtitlebar]) .titlebar-max::after,
+:root:is([customtitlebar]) .titlebar-max:hover::after,
+:root:is([customtitlebar]) .titlebar-restore,
+:root:is([customtitlebar]) .titlebar-restore:hover,
+:root:is([customtitlebar]) .titlebar-restore::before,
+:root:is([customtitlebar]) .titlebar-restore:hover::before,
+:root:is([customtitlebar]) .titlebar-restore::after,
+:root:is([customtitlebar]) .titlebar-restore:hover::after,
+:root:is([customtitlebar]) .titlebar-close,
+:root:is([customtitlebar]) .titlebar-close:hover,
+:root:is([customtitlebar]) .titlebar-close::before,
+:root:is([customtitlebar]) .titlebar-close:hover::before,
+:root:is([customtitlebar]) .titlebar-close::after,
+:root:is([customtitlebar]) .titlebar-close:hover::after {
+  width: var(--w) !important;
+  min-width: var(--w) !important;
+  max-width: var(--w) !important;
+  height: var(--h) !important;
+  min-height: var(--h) !important;
+  max-height: var(--h) !important;
+  background-size: var(--w) var(--h) !important;
+  image-rendering: var(--aero-hidpi-image-rendering) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-min,
+:root:is([tabsintitlebar]) .titlebar-min:hover,
+:root:is([tabsintitlebar]) .titlebar-min::before,
+:root:is([tabsintitlebar]) .titlebar-min:hover::before,
+:root:is([tabsintitlebar]) .titlebar-min::after,
+:root:is([tabsintitlebar]) .titlebar-min:hover::after, :root:is([customtitlebar]) .titlebar-min,
+:root:is([customtitlebar]) .titlebar-min:hover,
+:root:is([customtitlebar]) .titlebar-min::before,
+:root:is([customtitlebar]) .titlebar-min:hover::before,
+:root:is([customtitlebar]) .titlebar-min::after,
+:root:is([customtitlebar]) .titlebar-min:hover::after {
+  --w: calc(var(--aero-titlebuttons-minimize-width) / var(--aero-hidpi-scale)) !important;
+  --h: calc(var(--aero-titlebuttons-minimize-height) / var(--aero-hidpi-scale)) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-max,
+:root:is([tabsintitlebar]) .titlebar-max:hover,
+:root:is([tabsintitlebar]) .titlebar-max::before,
+:root:is([tabsintitlebar]) .titlebar-max:hover::before,
+:root:is([tabsintitlebar]) .titlebar-max::after,
+:root:is([tabsintitlebar]) .titlebar-max:hover::after, :root:is([customtitlebar]) .titlebar-max,
+:root:is([customtitlebar]) .titlebar-max:hover,
+:root:is([customtitlebar]) .titlebar-max::before,
+:root:is([customtitlebar]) .titlebar-max:hover::before,
+:root:is([customtitlebar]) .titlebar-max::after,
+:root:is([customtitlebar]) .titlebar-max:hover::after {
+  --w: calc(var(--aero-titlebuttons-maximize-width) / var(--aero-hidpi-scale)) !important;
+  --h: calc(var(--aero-titlebuttons-maximize-height) / var(--aero-hidpi-scale)) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-restore,
+:root:is([tabsintitlebar]) .titlebar-restore:hover,
+:root:is([tabsintitlebar]) .titlebar-restore::before,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::before,
+:root:is([tabsintitlebar]) .titlebar-restore::after,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::after, :root:is([customtitlebar]) .titlebar-restore,
+:root:is([customtitlebar]) .titlebar-restore:hover,
+:root:is([customtitlebar]) .titlebar-restore::before,
+:root:is([customtitlebar]) .titlebar-restore:hover::before,
+:root:is([customtitlebar]) .titlebar-restore::after,
+:root:is([customtitlebar]) .titlebar-restore:hover::after {
+  --w: calc(var(--aero-titlebuttons-restore-width) / var(--aero-hidpi-scale)) !important;
+  --h: calc(var(--aero-titlebuttons-restore-height) / var(--aero-hidpi-scale)) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-close,
+:root:is([tabsintitlebar]) .titlebar-close:hover,
+:root:is([tabsintitlebar]) .titlebar-close::before,
+:root:is([tabsintitlebar]) .titlebar-close:hover::before,
+:root:is([tabsintitlebar]) .titlebar-close::after,
+:root:is([tabsintitlebar]) .titlebar-close:hover::after, :root:is([customtitlebar]) .titlebar-close,
+:root:is([customtitlebar]) .titlebar-close:hover,
+:root:is([customtitlebar]) .titlebar-close::before,
+:root:is([customtitlebar]) .titlebar-close:hover::before,
+:root:is([customtitlebar]) .titlebar-close::after,
+:root:is([customtitlebar]) .titlebar-close:hover::after {
+  --w: calc(var(--aero-titlebuttons-close-width) / var(--aero-hidpi-scale)) !important;
+  --h: calc(var(--aero-titlebuttons-close-height) / var(--aero-hidpi-scale)) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-min, :root:is([tabsintitlebar]) .titlebar-min:hover, :root:is([customtitlebar]) .titlebar-min, :root:is([customtitlebar]) .titlebar-min:hover {
+  background-image: none !important;
+}
+:root:is([tabsintitlebar]) .titlebar-min:active, :root:is([tabsintitlebar]) .titlebar-min:hover:active, :root:is([customtitlebar]) .titlebar-min:active, :root:is([customtitlebar]) .titlebar-min:hover:active {
+  background-image: var(--icon-titlebar-min-active) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-min::before, :root:is([tabsintitlebar]) .titlebar-min:hover::before, :root:is([customtitlebar]) .titlebar-min::before, :root:is([customtitlebar]) .titlebar-min:hover::before {
+  background-image: var(--icon-titlebar-min) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-min::after, :root:is([tabsintitlebar]) .titlebar-min:hover::after, :root:is([customtitlebar]) .titlebar-min::after, :root:is([customtitlebar]) .titlebar-min:hover::after {
+  background-image: var(--icon-titlebar-min-hover) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-max, :root:is([tabsintitlebar]) .titlebar-max:hover, :root:is([customtitlebar]) .titlebar-max, :root:is([customtitlebar]) .titlebar-max:hover {
+  background-image: none !important;
+}
+:root:is([tabsintitlebar]) .titlebar-max:active, :root:is([tabsintitlebar]) .titlebar-max:hover:active, :root:is([customtitlebar]) .titlebar-max:active, :root:is([customtitlebar]) .titlebar-max:hover:active {
+  background-image: var(--icon-titlebar-max-active) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-max::before, :root:is([tabsintitlebar]) .titlebar-max:hover::before, :root:is([customtitlebar]) .titlebar-max::before, :root:is([customtitlebar]) .titlebar-max:hover::before {
+  background-image: var(--icon-titlebar-max) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-max::after, :root:is([tabsintitlebar]) .titlebar-max:hover::after, :root:is([customtitlebar]) .titlebar-max::after, :root:is([customtitlebar]) .titlebar-max:hover::after {
+  background-image: var(--icon-titlebar-max-hover) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-restore, :root:is([tabsintitlebar]) .titlebar-restore:hover, :root:is([customtitlebar]) .titlebar-restore, :root:is([customtitlebar]) .titlebar-restore:hover {
+  background-image: none !important;
+}
+:root:is([tabsintitlebar]) .titlebar-restore:active, :root:is([tabsintitlebar]) .titlebar-restore:hover:active, :root:is([customtitlebar]) .titlebar-restore:active, :root:is([customtitlebar]) .titlebar-restore:hover:active {
+  background-image: var(--icon-titlebar-restore-active) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-restore::before, :root:is([tabsintitlebar]) .titlebar-restore:hover::before, :root:is([customtitlebar]) .titlebar-restore::before, :root:is([customtitlebar]) .titlebar-restore:hover::before {
+  background-image: var(--icon-titlebar-restore) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-restore::after, :root:is([tabsintitlebar]) .titlebar-restore:hover::after, :root:is([customtitlebar]) .titlebar-restore::after, :root:is([customtitlebar]) .titlebar-restore:hover::after {
+  background-image: var(--icon-titlebar-restore-hover) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-close, :root:is([tabsintitlebar]) .titlebar-close:hover, :root:is([customtitlebar]) .titlebar-close, :root:is([customtitlebar]) .titlebar-close:hover {
+  background-image: none !important;
+}
+:root:is([tabsintitlebar]) .titlebar-close:active, :root:is([tabsintitlebar]) .titlebar-close:hover:active, :root:is([customtitlebar]) .titlebar-close:active, :root:is([customtitlebar]) .titlebar-close:hover:active {
+  background-image: var(--icon-titlebar-close-active) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-close::before, :root:is([tabsintitlebar]) .titlebar-close:hover::before, :root:is([customtitlebar]) .titlebar-close::before, :root:is([customtitlebar]) .titlebar-close:hover::before {
+  background-image: var(--icon-titlebar-close) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-close::after, :root:is([tabsintitlebar]) .titlebar-close:hover::after, :root:is([customtitlebar]) .titlebar-close::after, :root:is([customtitlebar]) .titlebar-close:hover::after {
+  background-image: var(--icon-titlebar-close-hover) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-min:active::after,
+:root:is([tabsintitlebar]) .titlebar-min:active::before,
+:root:is([tabsintitlebar]) .titlebar-max:active::after,
+:root:is([tabsintitlebar]) .titlebar-max:active::before,
+:root:is([tabsintitlebar]) .titlebar-restore:active::after,
+:root:is([tabsintitlebar]) .titlebar-restore:active::before,
+:root:is([tabsintitlebar]) .titlebar-close:active::after,
+:root:is([tabsintitlebar]) .titlebar-close:active::before, :root:is([customtitlebar]) .titlebar-min:active::after,
+:root:is([customtitlebar]) .titlebar-min:active::before,
+:root:is([customtitlebar]) .titlebar-max:active::after,
+:root:is([customtitlebar]) .titlebar-max:active::before,
+:root:is([customtitlebar]) .titlebar-restore:active::after,
+:root:is([customtitlebar]) .titlebar-restore:active::before,
+:root:is([customtitlebar]) .titlebar-close:active::after,
+:root:is([customtitlebar]) .titlebar-close:active::before {
+  content: none;
+  visibility: hidden;
+}
+:root:is([tabsintitlebar]) .titlebar-min::before,
+:root:is([tabsintitlebar]) .titlebar-min:hover::before,
+:root:is([tabsintitlebar]) .titlebar-min::after,
+:root:is([tabsintitlebar]) .titlebar-min:hover::after,
+:root:is([tabsintitlebar]) .titlebar-max::before,
+:root:is([tabsintitlebar]) .titlebar-max:hover::before,
+:root:is([tabsintitlebar]) .titlebar-max::after,
+:root:is([tabsintitlebar]) .titlebar-max:hover::after,
+:root:is([tabsintitlebar]) .titlebar-restore::before,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::before,
+:root:is([tabsintitlebar]) .titlebar-restore::after,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::after,
+:root:is([tabsintitlebar]) .titlebar-close::before,
+:root:is([tabsintitlebar]) .titlebar-close:hover::before,
+:root:is([tabsintitlebar]) .titlebar-close::after,
+:root:is([tabsintitlebar]) .titlebar-close:hover::after, :root:is([customtitlebar]) .titlebar-min::before,
+:root:is([customtitlebar]) .titlebar-min:hover::before,
+:root:is([customtitlebar]) .titlebar-min::after,
+:root:is([customtitlebar]) .titlebar-min:hover::after,
+:root:is([customtitlebar]) .titlebar-max::before,
+:root:is([customtitlebar]) .titlebar-max:hover::before,
+:root:is([customtitlebar]) .titlebar-max::after,
+:root:is([customtitlebar]) .titlebar-max:hover::after,
+:root:is([customtitlebar]) .titlebar-restore::before,
+:root:is([customtitlebar]) .titlebar-restore:hover::before,
+:root:is([customtitlebar]) .titlebar-restore::after,
+:root:is([customtitlebar]) .titlebar-restore:hover::after,
+:root:is([customtitlebar]) .titlebar-close::before,
+:root:is([customtitlebar]) .titlebar-close:hover::before,
+:root:is([customtitlebar]) .titlebar-close::after,
+:root:is([customtitlebar]) .titlebar-close:hover::after {
+  position: fixed;
+  content: "";
+}
+:root:is([tabsintitlebar]) .titlebar-min:hover::before,
+:root:is([tabsintitlebar]) .titlebar-max:hover::before,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::before,
+:root:is([tabsintitlebar]) .titlebar-close:hover::before,
+:root:is([tabsintitlebar]) .titlebar-min::after,
+:root:is([tabsintitlebar]) .titlebar-max::after,
+:root:is([tabsintitlebar]) .titlebar-restore::after,
+:root:is([tabsintitlebar]) .titlebar-close::after, :root:is([customtitlebar]) .titlebar-min:hover::before,
+:root:is([customtitlebar]) .titlebar-max:hover::before,
+:root:is([customtitlebar]) .titlebar-restore:hover::before,
+:root:is([customtitlebar]) .titlebar-close:hover::before,
+:root:is([customtitlebar]) .titlebar-min::after,
+:root:is([customtitlebar]) .titlebar-max::after,
+:root:is([customtitlebar]) .titlebar-restore::after,
+:root:is([customtitlebar]) .titlebar-close::after {
+  opacity: 0;
+}
+:root:is([tabsintitlebar]) .titlebar-min::before,
+:root:is([tabsintitlebar]) .titlebar-max::before,
+:root:is([tabsintitlebar]) .titlebar-restore::before,
+:root:is([tabsintitlebar]) .titlebar-close::before,
+:root:is([tabsintitlebar]) .titlebar-min:hover::after,
+:root:is([tabsintitlebar]) .titlebar-max:hover::after,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::after,
+:root:is([tabsintitlebar]) .titlebar-close:hover::after, :root:is([customtitlebar]) .titlebar-min::before,
+:root:is([customtitlebar]) .titlebar-max::before,
+:root:is([customtitlebar]) .titlebar-restore::before,
+:root:is([customtitlebar]) .titlebar-close::before,
+:root:is([customtitlebar]) .titlebar-min:hover::after,
+:root:is([customtitlebar]) .titlebar-max:hover::after,
+:root:is([customtitlebar]) .titlebar-restore:hover::after,
+:root:is([customtitlebar]) .titlebar-close:hover::after {
+  opacity: 1;
+}
+:root:is([tabsintitlebar]) .titlebar-min::before,
+:root:is([tabsintitlebar]) .titlebar-min:hover::after,
+:root:is([tabsintitlebar]) .titlebar-max::before,
+:root:is([tabsintitlebar]) .titlebar-max:hover::after,
+:root:is([tabsintitlebar]) .titlebar-restore::before,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::after,
+:root:is([tabsintitlebar]) .titlebar-close::before,
+:root:is([tabsintitlebar]) .titlebar-close:hover::after, :root:is([customtitlebar]) .titlebar-min::before,
+:root:is([customtitlebar]) .titlebar-min:hover::after,
+:root:is([customtitlebar]) .titlebar-max::before,
+:root:is([customtitlebar]) .titlebar-max:hover::after,
+:root:is([customtitlebar]) .titlebar-restore::before,
+:root:is([customtitlebar]) .titlebar-restore:hover::after,
+:root:is([customtitlebar]) .titlebar-close::before,
+:root:is([customtitlebar]) .titlebar-close:hover::after {
+  transition: opacity 0.025s linear;
+}
+:root:is([tabsintitlebar]) .titlebar-min:hover::before,
+:root:is([tabsintitlebar]) .titlebar-min::after,
+:root:is([tabsintitlebar]) .titlebar-max:hover::before,
+:root:is([tabsintitlebar]) .titlebar-max::after,
+:root:is([tabsintitlebar]) .titlebar-restore:hover::before,
+:root:is([tabsintitlebar]) .titlebar-restore::after,
+:root:is([tabsintitlebar]) .titlebar-close:hover::before,
+:root:is([tabsintitlebar]) .titlebar-close::after, :root:is([customtitlebar]) .titlebar-min:hover::before,
+:root:is([customtitlebar]) .titlebar-min::after,
+:root:is([customtitlebar]) .titlebar-max:hover::before,
+:root:is([customtitlebar]) .titlebar-max::after,
+:root:is([customtitlebar]) .titlebar-restore:hover::before,
+:root:is([customtitlebar]) .titlebar-restore::after,
+:root:is([customtitlebar]) .titlebar-close:hover::before,
+:root:is([customtitlebar]) .titlebar-close::after {
+  transition: opacity 0.1s linear;
+}
+:root:is([tabsintitlebar])[sizemode=normal][tabsintitlebar] body::after, :root:is([tabsintitlebar])[sizemode=normal][customtitlebar] body::after, :root:is([customtitlebar])[sizemode=normal][tabsintitlebar] body::after, :root:is([customtitlebar])[sizemode=normal][customtitlebar] body::after {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none !important;
+  top: 0px !important;
+  left: 0px !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  border-image-slice: 25 9 9 9 !important;
+  border-image-width: calc(25px / var(--aero-hidpi-scale)) calc(9px / var(--aero-hidpi-scale)) calc(9px / var(--aero-hidpi-scale)) calc(9px / var(--aero-hidpi-scale)) !important;
+  border-image-outset: 0px 0px 0px 0px !important;
+  border-image-repeat: repeat repeat !important;
+  border-image-source: var(--aero-frame-border-image) !important;
+  image-rendering: crisp-edges !important;
+}
+:root:is([tabsintitlebar]) tooltip, :root:is([customtitlebar]) tooltip {
+  --tooltip-text-color: #000;
+  --tooltip-bg: linear-gradient(#fafafa,#eeeeff);
+  --tooltip-border-color: #555;
+  -moz-appearance: none !important;
+  color: var(--tooltip-text-color) !important;
+  background: var(--tooltip-bg) !important;
+  border: var(--tooltip-border-color) solid 1px !important;
+  border-radius: 3px !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+  opacity: 1 !important;
+}
+:root:is([tabsintitlebar])[sizemode=normal][tabsintitlebar] body, :root:is([tabsintitlebar])[sizemode=normal][customtitlebar] body, :root:is([customtitlebar])[sizemode=normal][tabsintitlebar] body, :root:is([customtitlebar])[sizemode=normal][customtitlebar] body {
+  padding-left: calc(var(--aero-padding) / var(--aero-hidpi-scale)) !important;
+  padding-right: calc(var(--aero-padding) / var(--aero-hidpi-scale)) !important;
+  padding-bottom: calc(var(--aero-padding) / var(--aero-hidpi-scale)) !important;
+  padding-top: 0px !important;
+  width: calc(100% - var(--aero-padding) / var(--aero-hidpi-scale) - var(--aero-padding) / var(--aero-hidpi-scale)) !important;
+  height: calc(100% - var(--aero-padding) / var(--aero-hidpi-scale)) !important;
+}
+:root:is([tabsintitlebar]) #main-window[tabsintitlebar][sizemode=normal] #toolbar-menubar[autohide=true][inactive=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([tabsintitlebar]) #main-window[customtitlebar][sizemode=normal] #toolbar-menubar[autohide=true][inactive=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([customtitlebar]) #main-window[tabsintitlebar][sizemode=normal] #toolbar-menubar[autohide=true][inactive=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([customtitlebar]) #main-window[customtitlebar][sizemode=normal] #toolbar-menubar[autohide=true][inactive=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar] {
+  padding-top: 0px !important;
+  padding-block-start: var(--aero-top-padding-windowed) !important;
+}
+:root:is([tabsintitlebar]) #main-window[tabsintitlebar][sizemode=normal] #toolbar-menubar[autohide=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([tabsintitlebar]) #main-window[customtitlebar][sizemode=normal] #toolbar-menubar[autohide=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([customtitlebar]) #main-window[tabsintitlebar][sizemode=normal] #toolbar-menubar[autohide=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([customtitlebar]) #main-window[customtitlebar][sizemode=normal] #toolbar-menubar[autohide=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar] {
+  padding-top: 0px !important;
+  padding-block-start: calc(var(--aero-top-padding-windowed) + var(--aero-top-padding-windowed-menu-add)) !important;
+}
+:root:is([tabsintitlebar]) #main-window[tabsintitlebar][sizemode=maximized] #toolbar-menubar[autohide=true][inactive=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([tabsintitlebar]) #main-window[customtitlebar][sizemode=maximized] #toolbar-menubar[autohide=true][inactive=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([customtitlebar]) #main-window[tabsintitlebar][sizemode=maximized] #toolbar-menubar[autohide=true][inactive=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([customtitlebar]) #main-window[customtitlebar][sizemode=maximized] #toolbar-menubar[autohide=true][inactive=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar] {
+  padding-top: 0px !important;
+  padding-block-start: var(--aero-top-padding-maximized) !important;
+}
+:root:is([tabsintitlebar]) #main-window[tabsintitlebar][sizemode=maximized] #toolbar-menubar[autohide=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([tabsintitlebar]) #main-window[customtitlebar][sizemode=maximized] #toolbar-menubar[autohide=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([customtitlebar]) #main-window[tabsintitlebar][sizemode=maximized] #toolbar-menubar[autohide=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar], :root:is([customtitlebar]) #main-window[customtitlebar][sizemode=maximized] #toolbar-menubar[autohide=true]:not([customizing=true]) + #TabsToolbar.browser-toolbar[data-l10n-id=tabs-toolbar] {
+  padding-top: 0px !important;
+  padding-block-start: calc(var(--aero-top-padding-maximized) + var(--aero-top-padding-maximized-menu-add)) !important;
+}
+:root:is([tabsintitlebar]) #main-menubar, :root:is([customtitlebar]) #main-menubar {
+  color: white !important;
+  text-shadow: black 0px 0px 8px !important;
+}
+:root:is([tabsintitlebar]) .menubar-text, :root:is([customtitlebar]) .menubar-text {
+  font-size: var(--font-size-root) !important;
+}
+:root:is([tabsintitlebar]) .titlebar-spacer[type=post-tabs], :root:is([customtitlebar]) .titlebar-spacer[type=post-tabs] {
+  width: var(--aero-tab-maximized-offset) !important;
+}

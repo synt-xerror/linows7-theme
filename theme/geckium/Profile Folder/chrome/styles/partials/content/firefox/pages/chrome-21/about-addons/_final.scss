@@ -1,0 +1,40 @@
+@-moz-document url-prefix(about:addons) {
+	.theme-disabled-section {
+		display: flex;
+		flex-direction: column;
+
+		.list-section-heading {
+			order: -4;
+		}
+
+		[addon-id="default-theme@mozilla.org"] {
+			order: -3;
+		}
+
+		[addon-id="firefox-compact-light@mozilla.org"] {
+			order: -2;
+		}
+
+		[addon-id="firefox-compact-dark@mozilla.org"] {
+			order: -1;
+		}
+	}
+
+	.sticky-container {
+		display: flex !important;
+	}
+
+	search-addons {
+		margin-inline-end: 34px !important;
+		z-index: 1;
+	}
+
+	#updates-message {
+		margin-inline-end: 160px !important;
+		margin-top: 5px !important;
+	}
+
+	.main-heading {
+		pointer-events: all !important;
+	}
+}

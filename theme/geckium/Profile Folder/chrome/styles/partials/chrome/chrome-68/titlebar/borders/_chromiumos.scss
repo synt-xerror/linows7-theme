@@ -1,0 +1,17 @@
+//NOTE: This border style ignores native titlebars
+
+& {
+    --titlebar-border-radius: 0;
+	--tab-distance-from-top: 8px;
+	&[sizemode="maximized"],
+	&[sizemode="fullscreen"] {
+		--tab-distance-from-top: 0px;
+	}
+	// Use Chromium OS optimised titlebar foreground colors
+	#titlebar {
+		color: var(--titlebar-foreground-cros, var(--default-titlebar-foreground-cros)) !important;
+		&:-moz-window-inactive {
+			color: var(--titlebar-foreground-cros-inactive, var(--titlebar-foreground-cros, var(--default-titlebar-foreground-cros-inactive))) !important;
+		}
+	}
+}

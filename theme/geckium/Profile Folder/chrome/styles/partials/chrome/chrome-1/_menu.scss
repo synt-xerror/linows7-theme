@@ -1,0 +1,538 @@
+// Custom menubar for non-native titlebars
+:root[gktitnative="false"] {
+	#main-menubar > menu {
+		&[_moz-menuactive] {
+			background-color: transparent !important;
+			color: inherit !important;
+		}
+		&[open] {
+			background-color: AccentColor !important;
+			color: AccentColorText !important;
+		}
+	}
+}
+
+
+// Hide menu items that weren't yet introduced
+#menu_find6,
+#menu_savePage6,
+#menu_print6,
+#tools6-menu,
+#menu_settings6,
+#bookmarks-menu {
+	display: none;
+}
+
+// Hide "Update Geckium" placeholder menu item unless Geckium's outdated
+:root:not([gkcanupdate]) {
+	#menu_newVersion {
+		display: none;
+	}
+}
+
+menupopup {
+	@media not (-moz-windows-non-native-menus) {
+		appearance: auto !important;
+	}
+
+	// Hide menu items' buttons as they weren't yet introduced
+	> .menuitemitems,
+	> .menuitemitems + menuseparator {
+		display: none !important;
+	}
+
+
+	// Standard menus (right-click, menubar, etc.)
+	button {
+		min-width: 0 !important;
+		filter: unset !important;
+	}
+
+
+	> menu,
+	> menuitem {
+		&[disabled="true"] {
+			pointer-events: none;
+		}
+
+		.menu-text {
+			margin-inline-end: 48px !important;
+		}
+	}
+	
+	#context-sep-navigation {
+		margin-left: 0 !important;
+	}
+
+
+	// Force top menu items to show as regular menu items, and hide their icons
+	&#contentAreaContextMenu {
+		#context-navigation {
+			background-color: transparent !important;
+			flex-direction: column !important;
+
+			.menu-iconic-left {
+				display: none !important;
+			}
+
+			> menuitem {
+				justify-content: unset !important;
+				
+				&::after {
+					content: attr(aria-label);
+					appearance: menuitemtext !important;
+					white-space: nowrap;
+
+					@media (-moz-windows-classic) {
+						padding-inline-start: 1.45em !important;
+					}
+				}
+				
+				@media (-moz-windows-classic) {
+					min-height: 19px !important;
+					height: 19px !important;
+					min-height: 19px !important;
+				}
+			}
+		}
+	}
+}
+
+
+// Menu appearance
+//  NOTE: In Material Design 3, the brunt of the styling of menus would become generic - namely Native would become a mere texture pack, with the background
+//   a solid colour now and only menuitem highlight being native, literally nothing else.
+
+menupopup,
+toolbarbutton menupopup[placespopup] {
+	--menu-icon-opacity: 1 !important;
+	--panel-separator-margin-horizontal: 0 !important;
+
+	menuseparator {
+		margin-block: 2px !important;
+		&::before {
+			content: unset !important; // Disable the extra border
+		}
+	}
+}
+
+
+// Hardcoded menu skin
+//  Hardcoded menu style construction variables
+:root {
+	--gk-menu-radii: 0px;
+	--gk-menu-background: linear-gradient(to bottom, #FFFFFF, #EEEEEE);
+	--gk-menu-border-color: rgba(0, 0, 0, 0.34);
+	--gk-menu-foreground: black;
+	--gk-menu-foreground-disabled: rgba(0, 0, 0, 0.3);
+	--gk-menu-foreground-keys: rgba(0, 0, 0, 0.3);
+	--gk-menu-padding: 1px;
+	--gk-menu-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+	--gk-menu-shadow-margin: 8px;
+	
+	--gk-menuitem-radii: 0;
+	--gk-menuitem-padding: unset;
+	--gk-menuitem-background: #DCE5FA;
+	--gk-menuitem-border-color: unset;
+	--gk-menuitem-foreground: black;
+	--gk-menuitem-foreground-keys: rgba(0, 0, 0, 0.3);
+	--gk-menuitem-minheight: 18px;
+
+	--gk-menusep-color: rgba(0, 0, 0, 0.1);
+	--gk-menuright-texture: url("chrome://userchrome/content/assets/img/chrome-11/menu/right.svg");
+	--gk-menuchecked-texture: url("chrome://userchrome/content/assets/img/chrome-11/menu/check.svg");
+	--gk-menuradioff-texture: url("chrome://userchrome/content/assets/img/chrome-11/menu/radio.svg");
+	--gk-menuradion-texture: url("chrome://userchrome/content/assets/img/chrome-11/menu/radio-sel.svg");
+
+	@media (prefers-color-scheme: dark) {
+		--gk-menu-background: linear-gradient(to bottom, #242424, #121212);
+		--gk-menu-foreground: white;
+		--gk-menu-foreground-disabled: rgba(255, 255, 255, 0.3);
+		--gk-menu-foreground-keys: rgba(255, 255, 255, 0.3);
+		
+		--gk-menuitem-background: #0A1B47;
+		--gk-menuitem-foreground: white;
+		--gk-menuitem-foreground-keys: rgba(255, 255, 255, 0.3);
+	}
+}
+:root[gkmenunative="2"],
+:root[gkmenunative="1"]:not([gksystheme="gtk"]),
+:root[gkmenunative="1"][gkthemed="true"] {
+	menupopup,
+	toolbarbutton menupopup[placespopup] {
+		--panel-background: var(--gk-menu-background) !important;
+		--panel-color: var(--gk-menu-foreground) !important;
+		--panel-border-color: var(--gk-menu-border-color) !important;
+		--panel-border-radius: var(--gk-menu-radii) !important;
+		--panel-padding-block: 2px !important;
+		--panel-padding: calc(var(--gk-menu-padding) + var(--panel-padding-block)) var(--gk-menu-padding) !important;
+		--panel-shadow: var(--gk-menu-shadow) !important;
+		--panel-shadow-margin: var(--gk-menu-shadow-margin) !important;
+		// New variables in 139+
+		--menuitem-border-radius: var(--gk-menu-radii) !important;
+
+		appearance: none !important;
+		
+		@media ((-moz-platform: windows) and (not (-moz-windows-non-native-menus))) or (-moz-platform: macos) {
+			// Native menus behave completely differently for some reason
+			--panel-shadow-margin: 0 !important;
+			border: unset !important;
+		}
+
+		> ::part(content) {
+			border: 1px solid var(--gk-menu-border-color) !important;
+		}
+
+		> :is(menu, menuitem),
+		#context-navigation > :is(menu, menuitem) {
+			appearance: none !important;
+			min-height: var(--gk-menuitem-minheight) !important;
+			height: unset !important;
+
+			padding-block: unset !important;
+			padding: 4px 6px !important;
+
+			&[disabled="true"] {
+				color: var(--gk-menu-foreground-disabled) !important;
+			}
+			&:not([disabled="true"])[_moz-menuactive="true"] {
+				background: var(--gk-menuitem-background) !important;
+				color: var(--gk-menuitem-foreground) !important;
+			}
+			fill: currentColor !important;
+
+			.menu-iconic-left {
+				appearance: none !important;
+				margin-inline-start: 3px !important;
+
+				padding-inline-end: unset !important;
+				margin-inline-end: 9px !important;
+			}
+
+			&[type="checkbox"] .menu-iconic-left,
+			&[type="radio"] .menu-iconic-left {
+				width: 16px !important;
+
+				.menu-iconic-icon {
+					appearance: none !important;
+					// I am also actually unironically disappointed in you for this.
+					-moz-context-properties: fill !important;
+					// For some reason, native Windows Firefox hides this
+					display: inline-flex !important;
+				}
+			}
+			&[type="checkbox"][checked="true"] .menu-iconic-left {
+				list-style-image: var(--gk-menuchecked-texture) !important;
+			}
+			&[type="radio"] .menu-iconic-left {
+				list-style-image: var(--gk-menuradioff-texture) !important;
+			}
+			&[type="radio"][checked="true"] .menu-iconic-left {
+				list-style-image: var(--gk-menuradion-texture) !important;
+			}
+
+			.menu-text {
+				margin: unset !important;
+				margin-inline-start: 28px !important;
+			}
+			.menu-iconic-text {
+				margin: unset !important;
+			}
+			.menu-iconic-text,
+			.menu-text {
+				appearance: none !important;
+				padding: unset !important;
+			}
+
+			.menu-accel-container {
+				color: var(--gk-menu-foreground-keys) !important;
+
+				.menu-accel {
+					color: currentColor !important;
+				}
+			}
+			&:not([disabled="true"])[_moz-menuactive="true"] .menu-accel-container {
+				color: var(--gk-menuitem-foreground-keys) !important;
+			}
+
+			.menu-right {
+				appearance: none !important;
+				margin-inline-end: 6px !important;
+				list-style-image: var(--gk-menuright-texture) !important;
+
+				width: 1ex !important;
+				height: 1ex !important;
+
+				image {
+					// Mozilla, I am actually unironically disappointed in you for this.
+					-moz-context-properties: fill !important;
+				}
+			}
+		}
+		// Context items need extra care
+		#context-navigation > :is(menu, menuitem)::after {
+			margin-inline-start: 28px !important;
+			
+			@media (-moz-platform: windows) and (not (-moz-windows-non-native-menus)) {
+				margin-inline-start: -2px !important;
+			}
+		}
+		// Same with custom menuitems
+		> .menuitemitems .menu-text {
+			margin-inline-start: 28px !important;
+
+			@media (-moz-platform: windows) and (not (-moz-windows-non-native-menus)) {
+				margin-inline-start: -2px !important;
+			}
+		}
+
+		menuseparator {
+			appearance: none !important;
+			padding-inline: unset !important;
+			padding-block: unset !important;
+			border-top: 1px solid var(--gk-menusep-color) !important;
+			border-bottom: unset !important;
+			
+			--panel-separator-color: var(--gk-menusep-color) !important;
+		}
+	}
+	toolbarbutton menupopup[placespopup] {
+		--panel-width: initial !important;
+		--nested-margin: -3px !important;
+
+		--arrowpanel-menuitem-margin: 0 !important;
+		--arrowpanel-menuitem-padding: var(--gk-menuitem-padding) !important;
+		--arrowpanel-menuitem-border-radius: var(--gk-menuitem-radii) !important;
+	}
+	
+	&[is139Plus] menupopup,
+	&[is139Plus] toolbarbutton menupopup[placespopup] {
+		// These also need extra care, starting Firefox 139
+		> :is(menu, menuitem),
+		#context-navigation > :is(menu, menuitem) {
+			.menu-text {
+				margin-inline-start: calc(28px - 16px - 0.5em) !important;
+			}
+		}
+	}
+}
+
+
+// Native menu skin
+:root[gkmenunative="0"],
+:root[gkmenunative="1"][gksystheme="gtk"]:not([gkthemed="true"]) {
+	// Linux
+	@media (-moz-platform: linux) {
+		menupopup,
+		toolbarbutton menupopup[placespopup] {
+			--panel-background: Field !important;
+			--panel-color: FieldText !important;
+			--panel-border-color: ThreeDShadow !important;
+			--panel-border-radius: 0 !important;
+			--panel-padding: 0 !important;
+			// New variables in 139+
+			--menuitem-border-radius: 0 !important;
+
+			&#contentAreaContextMenu #context-navigation > menuitem::after {
+				margin-inline-start: 21px !important; // 21px (menu.css:82, Firefox 115) - 16px
+			}
+		}
+		&[is139Plus] menupopup {
+			> .menuitemitems .menu-text { // Custom menuitems need extra care, starting Firefox 139
+				margin-inline-start: 23px !important;
+			}
+		}
+
+		toolbarbutton menupopup[placespopup] {
+			--panel-width: initial !important;
+			--nested-margin: -3px !important;
+			--panel-shadow-margin: 0px !important;
+		
+			--arrowpanel-menuitem-margin: 0 !important;
+			--arrowpanel-menuitem-padding: 4px 6px !important;
+			--arrowpanel-menuitem-border-radius: 0 !important;
+
+			> :is(menu, menuitem)[_moz-menuactive="true"] {
+				background-color: -moz-menuhover !important;
+				color: -moz-menuhovertext !important;
+			}
+		}
+	}
+
+	//  macOS
+	//  TODO: In the future, if using Mac OS X titlebar style then apply Mac OS X menu styling here
+	@media (-moz-platform: macos) {
+		menupopup,
+		toolbarbutton menupopup[placespopup] {
+			// Custom menuitems need extra care
+			> .menuitemitems .menu-text {
+				margin-inline-start: 4px !important;
+			}
+		}
+		toolbarbutton menupopup[placespopup] {
+			--panel-background: transparent !important;
+			--panel-color: MenuText !important;
+			--panel-padding: 4px !important;
+			--panel-border-color: transparent !important;
+			--panel-width: initial !important;
+			--nested-margin: -3px !important;
+			--panel-shadow-margin: 0px !important;
+		
+			--arrowpanel-menuitem-margin: 0 !important;
+			--arrowpanel-menuitem-padding: 2.5px 9px !important;
+			--arrowpanel-menuitem-border-radius: 3px !important;
+
+			appearance: menupopup !important;
+
+			> :is(menu, menuitem)[_moz-menuactive="true"] {
+				background-color: -moz-menuhover !important;
+				color: -moz-menuhovertext !important;
+			}
+
+			> :is(menu, menuitem) {
+				min-height: unset !important;
+			}
+		}
+	}
+
+	//  Windows
+	@media (-moz-platform: windows) {
+		//  Windows (non-native Firefox)
+		menupopup,
+		toolbarbutton menupopup[placespopup] {
+			--panel-background: Field !important;
+			--panel-color: FieldText !important;
+			--panel-border-color: rgba(0, 0, 0, 0.1) !important;
+			--panel-border-radius: 4px !important;
+			--panel-shadow-margin: 5px !important;
+			--panel-padding: 3px !important;
+			
+			// Move keyboard shortcuts to the left of the right-arrow
+			.menu-accel-container {
+				margin-inline-end: 12px !important;
+			}
+
+			> :is(menu, menuitem),
+			#context-navigation > :is(menu, menuitem) {
+				padding-block: 2px !important;
+
+				&:not([disabled="true"])[_moz-menuactive="true"] {
+					background-color: AccentColor !important;
+					color: AccentColorText !important;
+				}
+				&[disabled="true"][_moz-menuactive="true"] {
+					background-color: unset !important;
+				}
+			}
+
+			// Context items need extra care
+			#context-navigation > :is(menu, menuitem) {
+				padding-inline-start: 1em !important;
+
+				::after {
+					padding: 1px 0;
+				}
+			}
+			// Same with custom menuitems
+			> .menuitemitems .menu-text {
+				margin-inline-start: 30px !important;
+			}
+		}
+		toolbarbutton menupopup[placespopup] {
+			--panel-width: initial !important;
+			--nested-margin: -3px !important;
+		
+			--arrowpanel-menuitem-margin: 0 !important;
+			--arrowpanel-menuitem-padding: 4px 6px !important;
+			--arrowpanel-menuitem-border-radius: 3px !important;
+		}
+
+		//  Leverage a bug with Firefox's CSS logic to only apply native menus if the @media that 115- had exists, thus is 115 or patched Firefox
+		@media not (-moz-windows-non-native-menus) {
+			menupopup,
+			toolbarbutton menupopup[placespopup] {
+				--panel-background: transparent !important;
+				--panel-color: MenuText !important;
+				--panel-border-color: transparent !important;
+				--panel-border-radius: 0 !important;
+				--panel-shadow-margin: 0px !important;
+				--panel-padding: 0 !important;
+
+				> :is(menu, menuitem),
+				#context-navigation > :is(menu, menuitem) {
+					padding-block: unset !important;
+					&:not([disabled="true"])[_moz-menuactive="true"] {
+						background-color: -moz-menuhover !important;
+						color: -moz-menuhovertext !important;
+					}
+				}
+
+				#context-navigation > :is(menu, menuitem) {
+					padding-inline-start: 2px !important;
+				}
+
+				> .menuitemitems .menu-text {
+					margin-inline-start: unset !important;
+				}
+			}
+			toolbarbutton menupopup[placespopup] {
+				--panel-width: initial !important;
+				--nested-margin: -3px !important;
+				appearance: menupopup !important;
+			
+				--arrowpanel-menuitem-margin: 0 !important;
+				--arrowpanel-menuitem-padding: initial !important;
+
+				> :is(menu, menuitem) {
+					appearance: menuitem !important;
+					min-height: unset !important;
+
+					&[_moz-menuactive="true"] {
+						color: -moz-menuhovertext !important;
+					}
+					
+					&[disabled="true"] {
+						color: GreyText !important;
+					}
+			
+					.menu-iconic-left {
+						margin-inline-start: 3px !important;
+					}
+			
+					.menu-iconic-text {
+						padding-top: 1px !important;
+						padding-bottom: 1px !important;
+						margin-left: 2px !important;
+					}
+			
+					.menu-text {
+						padding-inline-start: 28px !important;
+					}
+			
+					.menu-text, .menu-iconic-text {
+						margin-inline-start: 2px !important;
+						padding-inline-end: 2px !important;
+					}
+			
+					.menu-accel {
+						margin-inline-end: 1.35em !important;
+					} //16.2
+				}
+			
+				> menuseparator { // menu.css:360, Firefox 118
+					position: initial !important;
+					appearance: auto !important;
+					border: unset !important;
+					min-height: unset !important;
+					margin: unset !important;
+					padding-inline: unset !important;
+					padding-top: unset !important;
+					padding-bottom: unset !important;
+			
+					border-top: 1px solid ThreeDShadow !important;
+					border-bottom: 1px solid ThreeDHighlight !important;
+				}
+			}
+		}
+	}
+}

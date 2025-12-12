@@ -1,0 +1,110 @@
+@keyframes spin {
+	to {
+		transform: rotate(-10turn);
+	}
+}
+
+&[gkbranding="geckium"]
+&[gkbranding="chromium"] {
+	#aboutCategory {
+		#chrButtons .accessory-button:last-of-type,
+		#chrUpdate,
+		#chrCredits p:last-of-type {
+			display: none !important;
+		}
+	}
+}
+
+&[gkbranding="geckium"] {
+	#aboutCategory {
+		#chrLogo {
+			background-image: url("chrome://userchrome/content/windows/gsettings/imgs/logo.svg");
+		}
+
+		#chrButtons .accessory-button:last-of-type,
+		#chrUpdate,
+		#chrCredits p:last-of-type {
+			display: none !important;
+		}
+	}
+}
+
+&[gkbranding="chromium"] {
+	#aboutCategory {
+		#chrLogo {
+			background-image: url("chrome://userchrome/content/styles/partials/content/firefox/pages/chrome-25/about-preferences/assets/chromium/IDR_PRODUCT_LOGO_32.png");
+		}
+	}
+}
+&[gkbranding="chrome"] {
+	#aboutCategory {
+		#chrLogo {
+			background-image: url("chrome://userchrome/content/styles/partials/content/firefox/pages/chrome-25/about-preferences/assets/chrome/IDR_PRODUCT_LOGO_32.png");
+		}
+	}
+}
+&[gkbranding="firefox"] {
+	#aboutCategory {
+		#chrLogo {
+			background-image: url("chrome://userchrome/content/styles/partials/content/firefox/pages/chrome-25/about-preferences/assets/firefox/IDR_PRODUCT_LOGO_32.png");
+		}
+	}
+}
+
+#aboutCategory {
+	color: var(--header-color) !important;
+
+	h2,
+	p {
+		margin: 0 !important;
+	}
+
+	#chrInfo {
+		align-items: center;
+		line-height: 18px;
+		margin-block-start: 7px;
+		margin-block-end: 12px;
+	}
+
+	#chrLogo {
+		width: 32px;
+		height: 32px;
+		background-repeat: no-repeat;
+		background-position: center;
+		margin-inline-end: 10px;
+		fill: #209f43;
+		-moz-context-properties: fill, fill-opacity;
+
+		&.spin {
+			animation: spin 500ms cubic-bezier(1, 0, 0, 1) forwards;
+		}
+	}
+
+	#chrButtons {
+		gap: 7px;
+	}
+
+	#chrVersion {
+		margin-block-start: 25px !important;
+	}
+
+	#chrUpdate {
+		margin-block-start: 12px;
+
+		> div {
+			width: 16px;
+			height: 16px;
+			margin-inline-end: 6px;
+			background: url("chrome://windows/content/about/assets/chrome-1/imgs/IDR_UPDATE_FAIL.png") no-repeat center;
+		}
+	}
+	
+	#chrCredits {
+		margin-block-start: 200px;
+		line-height: 21px;
+
+		[is="text-link"] {
+			color: rgb(17, 85, 204) !important;
+		}
+	}
+}

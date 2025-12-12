@@ -1,0 +1,17 @@
+// Remove the Google logo, as it's no longer present
+#gkpeople-button-container,
+.titlebar-buttonbox-container {
+	&::before,
+	&::after {
+		content: unset !important;
+	}
+}
+
+//Updated titlebar styles
+&[chromemargin]:not([macOSNativeFullscreen]),
+&[customtitlebar]:not([macOSNativeFullscreen]) {
+	// Chromium OS
+	&[gktitstyle="chromiumos"] {
+		@import "titlebar/borders/chromiumos";
+	}
+}

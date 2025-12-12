@@ -1,0 +1,26 @@
+@-moz-document url-prefix(about:preferences),
+			   	   url-prefix(about:addons) {
+	:root {
+		&:not([geckium-one]) body > * {
+			visibility: hidden;
+		}
+
+		&[geckium-one] {
+			@import "styles/partials/content/chrome-1/controls/button";
+			@import "styles/partials/content/chrome-1/controls/modal-button";
+			@import "styles/partials/content/chrome-1/controls/menulist";
+			@import "styles/partials/content/chrome-1/controls/modal-menulist";
+			@import "styles/partials/content/chrome-1/controls/radio";
+		}
+	
+		&[geckium-one][geckium-twentyone] {
+			@import "styles/partials/content/chrome-21/controls/radio";
+		}
+
+		@import "styles/partials/content/firefox/modal/modal";
+		@import "styles/partials/content/firefox/pages/eras";
+	}
+}
+
+/* Websites */
+@import "styles/partials/content/website/tools.google.com-chrome";

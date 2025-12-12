@@ -1,0 +1,23 @@
+& {
+	--toolbar-background-y-pos: -3px;
+}
+
+// Updated titlebar styles
+&[chromemargin]:not([macOSNativeFullscreen]),
+&[customtitlebar]:not([macOSNativeFullscreen]) {
+	// Chromium OS
+	&[gktitstyle="chromiumos"] {
+		@import "titlebar/borders/chromiumos";
+	}
+}
+
+// New and updated titlebutton styles
+// Chromium OS
+&[gktitbuttons="chromiumos"] {
+    @import "titlebar/buttons/chromiumos";
+	@import "titlebar/people/chromiumos";
+}
+// Mac OS X
+&[gktitbuttons="macosx"] {
+    @import "titlebar/buttons/macosx";
+}

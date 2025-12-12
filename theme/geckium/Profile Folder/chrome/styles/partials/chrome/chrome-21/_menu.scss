@@ -1,0 +1,35 @@
+// Hardcoded menu skin
+//  Hardcoded menu style construction variables
+& {
+	--gk-menu-background: white;
+	--gk-menu-border-color: transparent;
+	--gk-menu-padding: 2px;
+	--gk-menu-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+	
+	--gk-menuitem-background: #EFEFEF;
+	--gk-menuitem-minheight: 22px;
+
+	--gk-menusep-color: rgba(0, 0, 0, 0.2);
+	--gk-menuright-texture: url("chrome://userchrome/content/assets/img/chrome-21/menu/right.svg");
+
+	@media (prefers-color-scheme: dark) {
+		--gk-menu-background: #242424;
+		
+		--gk-menuitem-background: #333333;
+	}
+}
+:root[gkmenunative="2"],
+:root[gkmenunative="1"]:not([gksystheme="gtk"]),
+:root[gkmenunative="1"][gkthemed="true"] {
+	menupopup,
+	toolbarbutton menupopup[placespopup] {
+		> :is(menu, menuitem) {
+			.menu-iconic-left {
+				margin-inline-start: unset !important;
+			}
+			.menu-text {
+				margin-inline-start: 25px !important;
+			}
+		}
+	}
+}
